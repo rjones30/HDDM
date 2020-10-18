@@ -1,2 +1,2 @@
 # HDDM
-Hierarchical Document Data Model
+## Hierarchical Document Data Model
