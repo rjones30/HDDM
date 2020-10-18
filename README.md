@@ -15,7 +15,7 @@ HDDM is a tool for automatic building of a full-featured C++ library for represe
 - automatic detection and conversion between standard and native formats
 - multi-threaded, multi-buffered i/o for high throughput with compression
 
-In addition to the above, this package combines the following features in a unique way.
+In addition to meeting the above requirements, this package combines the following features in a unique way.
 
 - automatic user library code generated using the user's own terminology for class and member names
 - user's data model document can be validated against xml schema using standard open-source tools
