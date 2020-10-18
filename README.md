@@ -8,8 +8,8 @@ HDDM is a tool for automatic building of a full-featured C++ library for represe
 - stl list container iteration semantics in C++ for repeated data
 - standard python list iteration semantics for repeated data
 - efficient handling of sparse lists and tables
-- on-the-fly compression / decompression during i/o
-- built-in data integrity validation during i/o
+- configurable on-the-fly compression / decompression during i/o
+- configurable on-the-fly data integrity validation during i/o
 - browsable data representation on disk, choice between HDF5 or native formats
 - standard byte-ordered formats of int, IEEE float on disk
 - automatic detection and conversion between standard and native formats
