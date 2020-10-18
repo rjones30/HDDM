@@ -10,7 +10,7 @@ HDDM is a tool for automatic building of a full-featured C++ library for represe
 - efficient handling of sparse lists and tables
 - configurable on-the-fly compression / decompression during i/o
 - configurable on-the-fly data integrity validation during i/o
-- browsable data representation on disk, choice between HDF5 or native formats
+- browsable data representation on disk, choice between HDF5 or native stream formats
 - standard byte-ordered formats of int, IEEE float in streams and on disk
 - automatic detection and conversion between standard and native formats
 - multi-threaded, multi-buffered i/o for high throughput with compression
