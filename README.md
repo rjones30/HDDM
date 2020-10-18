@@ -32,3 +32,15 @@ An xml document provides a flexible means to represent such a hierarchical graph
 
 ## Documentation
 The documentation for HDDM consists of three parts: a description of the data modeling language used by the xml record template and the associated schema, a description of the user application interface in C++ and python that gives access to the generated data and i/o classes provided by the library, and instructions on how to use the tools through the examples provided with the package as a guide to users writing their own custom applications. All three of these have now been combined into The HDDM User's Guide. Instructions for building the HDDM tools from sources are found in the INSTALL file distributed with the sources.
+
+## Dependencies
+HDDM relies on the following external open-source packages. Some must be installed on the user platform before HDDM can be built, and others are optional.
+- gcc/g++ compiler version 4.8.5 or above : compiler must support -std=c++11 standard language features
+- python 2.7 or above : standard python installation, including shutil, distutils modules and dependencies
+- apache xerces-c version 3 : standard implementation of the xerces xml library in C++, required
+- apache xalan-c version 1 : standard tools for schema-based xml validation and translation, optional
+- HDF5 version 1.12+ : public-domain library for standard disk representation of structured data, optional
+Uncountable other dependencies exist for other features of a standard unix/linux platform environment, such as the ld link loader, standard glibc and system libraries, compression libraries libz, libbz2, etc.
+
+## Acknowledgements
+HDDM contains as a part of its source codebase a sub-package named xstream, which is a fork of an earlier open-source package that was released as xstream version 2.1 by its author Claudio Valente in 1999 under the GNU LESSER GENERAL PUBLIC LICENSE. The original author and license is included unchanged under xstream/AUTHOR and xstream/COPYING. The original README is also included. The HDDM fork of xstream version 2.1 was made in 2004 in order to correct some bugs in the original v2.1 code and add new features related to stream repositioning and multi-threaded compression/decompression. These changes made the HDDM fork of xstream no longer backward-compatible with version 2.1. This author deems this release of the modified xstream code under an Apache open-source license to be consistent with the terms of the original LGPL license that accompanied Valente's release of xstream 2.1.
