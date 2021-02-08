@@ -1,17 +1,17 @@
 # HDDM
 ## Hierarchical Document Data Model
 
-HDDM is a tool for automatic building of a full-featured C++ library for representation of highly structured scientific data in memory, complete with a performant i/o library for integrated storage and retrieval of unlimited amounts of repetitive data with associated metadata. Starting from a plain text file where the user describes that data values and relationships to be expressed, the HDDM tools automatically generate C++ header and source files that define the C++ classes for building the model in memory, storing it in a standard format in disk files for retrieval later, and efficient browsing/manipulation of the data in memory using familiar object-oriented semantics. All of the following features that a user expects for a data modeling and i/o library are supported by HDDM.
+HDDM is a tool for automatic building of a full-featured C++ library for representation of highly structured scientific data in memory, complete with a performant i/o library for integrated storage and retrieval of unlimited amounts of repetitive data with associated metadata. Starting from a structured document written in plain text, where the user describes the data values and relationships to be expressed, the HDDM tools automatically generate custom C++ header and source files that define new user classes for building an object-oriented representation of the data in memory, storing them in a standard format in disk files for retrieval later, and efficient means for browsing/manipulation of the data using familiar OO semantics in the user's C++ or python analysis application. All of the following features that a user expects fromd a big-data modeling and i/o library are supported by HDDM.
 
 - uses standard c++11 language features, compiles with g++ 4.8.5 -std-c++11
-- python support through automatic generation of a C++ extension module
+- python support through automatic generation of custom C++ extension modules
 - stl list container iteration semantics in C++ for repeated data
 - standard python list iteration semantics for repeated data
-- efficient handling of sparse lists and tables
+- efficient handling of sparse lists and tables through nested variable-length lists
 - configurable on-the-fly compression / decompression during i/o
 - configurable on-the-fly data integrity validation during i/o
-- browsable data representation on disk, choice between HDF5 or native stream formats
-- standard byte-ordered formats of int, IEEE float in streams and on disk
+- browsable data representation on disk, choice at run-time between **HDF5** and native stream formats
+- platform-independence through standard byte-ordered formats of int, IEEE float in streams and on disk
 - automatic detection and conversion between standard and native formats
 - multi-threaded, multi-buffered i/o for high throughput with compression
 
@@ -44,3 +44,8 @@ Uncountable other dependencies exist for other features of a standard unix/linux
 
 ## Acknowledgements
 HDDM contains as a part of its source codebase a sub-package named xstream, which is a fork of an earlier open-source package that was released as xstream 2.1 by its author Claudio Valente in 1999 under the GNU LESSER GENERAL PUBLIC LICENSE. The original author and license is included unchanged under xstream/AUTHOR and xstream/COPYING. The original README written by Claudio Valente is also included. The HDDM fork of xstream 2.1 was made in 2004 in order to correct some bugs in the original v2.1 code and to add new features related to stream repositioning and multi-threaded compression/decompression. These changes made the HDDM fork of xstream no longer backward-compatible with xstream 2.1. With open acknowledgement of the important contribution of xstream 2.1 by Claudio Valente to this project, the release here of the modified xstream code under an Apache open-source license is deemed consistent with the terms of the original LGPL license that accompanied Valente's release of xstream 2.1. The original C++ xstream 2.1 package released in 1999 is apparently unrelated to a number of other currently active open-source projects named xstream, including the java project XStream by Joe Walnes et al, the javascript project xstream by Andre Staltz, among others.
+
+The author acknowledges support from the United States National Science Foundation that has enabled the development of this package within the context of the University of Connecticut nuclear physics research group, where the author serves as a professor.
+
+## Contact
+HDDM is released as a public github project under an Apache Open-Source license by its designer and developer, Richard Jones, richard.t.jones(at)uconn.edu. On-going development of HDDM and user support is provided by the author to the GlueX Collaboration as a part of his contribution to the GlueX Experiment at Jefferson Lab in Newport News, Virginia. Support for other users of HDDM will be provided by the author on an as-able basis.
