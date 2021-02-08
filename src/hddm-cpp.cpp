@@ -70,6 +70,7 @@
  *       contents which appear in both models will be unpacked, however.
  */
 
+#include "VersionConfig.hpp"
 #include "XString.hpp"
 #include "XParsers.hpp"
 #include <xercesc/util/XMLUri.hpp>
@@ -97,6 +98,7 @@ void usage()
         << "Options:\n"
         <<  "    -v			validate only\n"
         <<  "    -o <filename>	write to <filename>.hpp, <filename>.cpp"
+        << "Version: " << HDDM_VERSION_MAJOR << "." << HDDM_VERSION_MINOR
         << std::endl;
 }
 

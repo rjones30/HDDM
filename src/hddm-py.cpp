@@ -11,6 +11,7 @@
  *
  */
 
+#include "VersionConfig.hpp"
 #include "XString.hpp"
 #include "XParsers.hpp"
 #include <xercesc/util/XMLUri.hpp>
@@ -38,6 +39,7 @@ void usage()
         << "Options:\n"
         <<  "    -v            validate only\n"
         <<  "    -o <filename>    write to <filename>.cpy"
+        << "Version: " << HDDM_VERSION_MAJOR << "." << HDDM_VERSION_MINOR
         << std::endl;
 }
 

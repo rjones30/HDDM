@@ -49,6 +49,7 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
 
+#include "VersionConfig.hpp"
 #include "XParsers.hpp"
 #include "XString.hpp"
 
@@ -157,6 +158,7 @@ void usage()
         << "Options:\n"
         <<  "    -o <filename>  write to <filename>.xml"
         <<  "    -n <count>	    limit output to <count> records"
+        << "Version: " << HDDM_VERSION_MAJOR << "." << HDDM_VERSION_MINOR
         << std::endl;
 }
 

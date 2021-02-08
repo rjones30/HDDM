@@ -10,6 +10,7 @@
 #include <xercesc/util/PlatformUtils.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
 
+#include "VersionConfig.hpp"
 #include "XParsers.hpp"
 #include "XString.hpp"
 
@@ -53,6 +54,7 @@ void usage()
         <<  "    -n <count>     limit output to <count> rows\n"
         <<  "    -x             write xml to stdout"
         << " (in addition to root file output)\n"
+        << "Version: " << HDDM_VERSION_MAJOR << "." << HDDM_VERSION_MINOR
         << std::endl;
 }
 
