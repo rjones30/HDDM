@@ -1,0 +1,88 @@
+
+			Build Notes for HDDM Tools
+	    		    Richard Jones
+	    		  February 7, 2021
+
+This document is intended as a quick-start guide for building and using the
+hddm i/o library.
+
+1) Check out the latest source from github.
+
+   $ git clone https://github.com/rjones30/HDDM.git
+   
+2) Download the xerces-c xml library from xml.apache.org and unpack
+   it somewhere on your system.
+
+3) Install the xerces-c xml library for your system.
+   Version 3 of xerces-c has been stable for a number of years now, and 
+   binary install packages are available for most platforms, including
+   Redhat. Make sure that you install both the binary package and header
+   packages (xerces-c and xerces-c-devel on RHEL) to support linking of
+   the HDDM modules against the xerces-c libraries. If you need to install
+   the package from sources, go to https://xerces.apache.org/xerces-c and
+   follow the instructions posted there for downloading and building.
+
+4) Install the Xalan xml toolkit for your system.
+   HDDM was originally developed using the tools in the Xalan java version
+   1 toolkit.  The project has evolved since then, and there now both C++
+   and java versions available from xalan.apache.org. Any release of this
+   toolkit since 2015 is compatible with HDDM, as long as it continues to
+   support XSLT and XPATH verson 1.
+
+4) Install the HDF5 libraries for your system.
+   HDF5 is supported by HDDM as a public standards-based disk file format,
+   in addition to the native xstreams-based format of the original HDDM
+   implementation. The xstreams library is no longer supported, so it is
+   built into the HDDM distribution, with attribution. The HDF5 format
+   option for HDDM streams is somewhat less compact than the native one
+   based on xstreams, but it has the advantage of compatibility with a
+   range of software and file inspection tools that exist for HDF5 data.
+   Build options exist both with and without HDF5 support. HDF5 install
+   packages exist for most major platforms, both binaries and headers.
+   If you prefer to download and build HDF5 from sources, the web site
+   https://hdfgroup.org is the place to go.
+
+5) Build the HDDM code generators and tools.
+   Cmake version 3 is required to build the HDDM utilities from sources.
+
+   $ cd HDDM
+   $ mkdir build
+   $ cd build
+   $ cmake -DCMAKE_INSTALL_PREFIX=<your_installation_area> \
+           [ other cmake option ] \
+           ..
+   $ make
+   $ make install
+
+6) Some example HDDM data model templates are included in the directory
+   templates. The following commands illustrate how to turn user data 
+   model templates into i/o library modules that can be called by user
+   applications to read and write data model records.
+
+   $ hddm-cpp templates/simple.xml        # c++ library
+   $ hddm-c templates/intermdiate.xml     # c library
+   $ hddm-py templates/complicated.xml    # python bindings
+
+7) The examples directory contains examples of user code in c, c++, and
+   python that illustrate how to write user applications that read and
+   write HDDM data streams. They are packaged for immediate building
+   against the provided templates, and generate human-readable output.
+
+8) Several ready-made utilities are provided for inspecting the contents
+   of HDDM files or constructing HDDM files out of xml text without having
+   to write any user code.
+
+   $ hddm-xml mydata.hddm    # translates mydata.hddm to plain-text xml
+   $ xml-hddm -t mymodel.xml < mydata.hddm  # inverse of hddm-xml
+   $ hddm-root mydata.hddm   # translates mydata.hddm to root trees
+
+8) The tools hddm-schema, schema-hddm and xml-xml are written in perl and
+   require Xerces-Perl from xml.apache.org to be installed if you want to
+   use them.  Installation instructions are found at xml.apache.org.  By
+   default these tools use the Xalan-j package.  If you installed the c++
+   version of Xalan instead, go into hddm-schema and schema-hddm and
+   comment out the line where xalan is started under java and remove the
+   comment from the line where xalan-c is invoked.
+
+9) For information about the design and use of the hddm tools, see the
+   documentation in the HDDM User's Guide.
