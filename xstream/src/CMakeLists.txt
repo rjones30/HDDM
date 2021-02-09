@@ -12,3 +12,9 @@ add_library(xstream base64.cpp
                     z.cpp
                     z_digest.cpp
            )
+
+# add to the include list
+target_include_directories(xstream PUBLIC
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../include
+                          )
+

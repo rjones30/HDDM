@@ -3,44 +3,43 @@ cmake_minimum_required(VERSION 3.10)
 # set the project name and version
 project(HDDM VERSION 1.0)
 
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack)
+
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# ROOT support
-if(NOT DEFINED ROOT_SUPPORT)
-    set(ROOT_SUPPORT OFF CACHE BOOL "include support for ROOT data files")
-endif()
+# check for presence of compression libraries
+find_package(BZip2 REQUIRED)
+find_package(ZLIB REQUIRED)
 
-# default ROOTSYS
-if(NOT DEFINED ROOTSYS)
-    set(ROOTSYS /usr CACHE PATH "root directory of local ROOT installation")
+# Xerces-C support
+if(DEFINED XERCESCROOT)
+    message("Looking in ${XERCESCROOT} for local Xerces-C installation")
+    find_package(XercesC PATHS ${XERCESCROOT} NO_DEFAULT_PATH REQUIRED)
 endif()
+find_package(XercesC REQUIRED)
+
+# ROOT support
+if(DEFINED ROOTSYS)
+    message("Looking in ${ROOTSYS} for local ROOT installation")
+    find_package(ROOT PATHS ${ROOTSYS} REQUIRED NO_DEFAULT_PATH)
+endif()
+find_package(ROOT)
 
 # HDF5 support
-if(NOT DEFINED HDF5_SUPPORT)
-    set(HDF5_SUPPORT OFF CACHE BOOL "include support for hdf5 data files")
+if(DEFINED HDF5_ROOT)
+    message("Looking in ${HDF5_ROOT} for local HDF5 installation")
+    find_package(HDF5 PATHS ${HDF5_ROOT} REQUIRED NO_DEFAULT_PATH)
 endif()
-
-# default HDF5_ROOT
-if(NOT DEFINED HDF5_ROOT)
-    set(HDF5_ROOT /usr CACHE PATH "root directory of local hdf5 installation")
-endif()
-
-# default XERCSCROOT
-if(NOT DEFINED XERCESCROOT)
-    set(XERCESCROOT /usr CACHE PATH "root directory of local xerces-c installation")
-endif()
-
-# add directories to the include list
-list(APPEND EXTRA_INCLUDES ${PROJECT_SOURCE_DIR}/xstream/include)
-include_directories(PUBLIC ${EXTRA_INCLUDES})
+find_package(HDF5)
 
 # add the xstream library
 add_subdirectory(xstream)
-
-# add the libraries to the link list
-list(APPEND EXTRA_LIBS xstream)
 
 # build the executables
 add_subdirectory(src)
