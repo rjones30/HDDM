@@ -75,6 +75,7 @@ hddm i/o library.
    $ hddm-xml mydata.hddm    # translates mydata.hddm to plain-text xml
    $ xml-hddm -t mymodel.xml < mydata.hddm  # inverse of hddm-xml
    $ hddm-root mydata.hddm   # translates mydata.hddm to root trees
+   $ xml-xml mydata.xml      # xml pretty printer / entity expander
 
 8) The tools hddm-schema, schema-hddm and xml-xml are written in perl and
    require Xerces-Perl from xml.apache.org to be installed if you want to
