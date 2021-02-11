@@ -296,23 +296,23 @@ provides two tools that can be used to read and write HDDM files directly from
 the command line. The following command accepts any valid HDDM file as input
 and prints the contents of the file in plain-{}text xml to standard output.
 
-\vspace{1cm}
-\begin{minipage}{1cm}
+\vspace{0.5cm}
+\begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-xml [-n <count>] [-o <output.xml>] <datafile.hddm> [...]
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The reverse action is provided by the \texttt{xml-{}hddm} tool.
 
-\vspace{1cm}
-\begin{minipage}{1cm}
+\vspace{0.5cm}
+\begin{minipage}{12cm}
 \begin{verbatim}
 $ xml-hddm [-n <count>] -t template.xml <input.xml> [...]
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The full XML rendition of a data file with many records is highly verbose,
 which makes the plain-text xml rendering of a HDDM stream of limited practical
@@ -333,7 +333,7 @@ a simple example in \texttt{models/exam1x.hddm} that you can use for this purpos
 Use the following commands to build the python module corresponding to your HDDM
 template.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm  # builds the underlying C++ library
@@ -341,7 +341,7 @@ $ hddm-py exam1x.hddm   # builds the python interface
 $ python setup_hddm_x.py build -b build_hddm_x # creates the module hddm_x
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 In this example, I assigned `x' as the HDDM {\em class} letter (see the HDDM tag
 in the template header). You should change it to whatever the class abbreviation
@@ -352,7 +352,7 @@ directory in your PYTHONPATH where you usually place your private python modules
 Execute the following interactive python script to print the contents of the
 example HDDM file in plain text.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 import hddm_x
@@ -360,7 +360,7 @@ for rec in hddm_x.istream("exam1x.hddm"):
    print(rec)
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 To see the same data printed out as a properly formatted xml document, replace
 the \texttt{print(rec)} in the above python HDDM reader with 
@@ -375,7 +375,7 @@ steps listed above. Execute the following in a fresh interactive python session
 to write a new output HDDM file from scratch, starting only from the template
 and some fake user data.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 import hddm_x
@@ -405,12 +405,12 @@ result[0].Pass = True
 ofs.write(xrec)
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 This generates a new HDDM file called exam2x.hddm. Now running the above 3-{}line
 python HDDM reader on exam2x.hddm should yield the following output.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 HDDM
@@ -424,7 +424,7 @@ HDDM
         result Pass=false grade="B+"
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The structure of the output record you are writing is already known to
 the python module because it is configured with your template. All that
@@ -455,7 +455,7 @@ writing a summary report at the end. Of course, in actual practice, a HDDM
 file would contain many records and the analysis would loop over many instances
 of student.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 import hddm_x
@@ -477,18 +477,18 @@ print(course.name, "enrolled in", total_courses, " courses",
        "earning a total of", total_credits, "credits.\n")
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Running the above code should produce output like the following:
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 Humphrey Gaston enrolled in 3 courses and passed 3 of them,
 earning a total of 8 credits.
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 In addition to each tag supporting the lookup (via getXXXs methods) of the
 tags immediately appearing under it in the template hierarchy, the 
@@ -522,7 +522,7 @@ directory contains a simple example in \texttt{models/exam1x.hddm} that you
 can use for this purpose. The following commands build the C++ library
 corresponding to your HDDM model.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm
@@ -534,7 +534,7 @@ $ g++ -c  hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 If the environment variables in this command are not defined in your shell
 environment, define them or replace them with the appropriate values.
@@ -551,7 +551,7 @@ against this template, now it is time to write a user application that uses the
 library to create HDDM output according to the template. Open a new C++ source
 file in an editor and cut/paste the contents of the box below into it, then save it.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 #include <fstream>
@@ -590,12 +590,12 @@ int main()
 }
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Save this C++ program to a file named \texttt{write\_exam.cpp} and compile it 
 into an executable using a command like the following.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ g++ -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
@@ -605,7 +605,7 @@ $ g++ -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The paths listed in the compilation command line may need to be customized
 for your own build environment. Once it completes successfully, will find
@@ -614,7 +614,7 @@ the executable \texttt{write\_exam} in the working directory. Run it as
 \texttt{exam2x.hddm}. Running \texttt{hddm-{}xml write\_exam2x.hddm}
 should produce output like the following.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 HDDM
@@ -628,7 +628,7 @@ HDDM
         result Pass=false grade="B+"
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The structure of the output record you are writing is already known to
 the program because it has been built against the `x' template. All that
@@ -661,7 +661,7 @@ and writes a summary report. Of course, in actual practice such a data
 file would probably contain many records, and the analysis would loop
 over many instances of student.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 #include <fstream>
@@ -695,19 +695,18 @@ int main()
 }
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Running the above code should produce output like the following:
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-\subsection{advanced features of the C++ API}
 Humphrey Gaston enrolled in 3 courses and passed 3 of them,
 earning a total of 8 credits.
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 See section \ref{Advanced_features} {Advanced features} below.
 
@@ -720,7 +719,7 @@ contains a simple example in \texttt{models/exam1x.hddm} that you can use for
 this purpose. The following commands build the c library that you will need
 to read and write HDDM streams that conform to this template.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-c exam1x.xml
@@ -729,7 +728,7 @@ $ gcc -c hddm_x.c $HDDM_SOURCE_DIR/md5.c \
   -L$HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 \subsection{writing HDDM files in c}
 
@@ -738,7 +737,7 @@ with the source distribution. Use the instructions in the previous section to bu
 the \texttt{hddm\_x} c API librar, then create a new main program source file and
 cut/paste the code below into it, then save it.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 nclude "hddm_x.h"
@@ -800,12 +799,12 @@ int main()
 }
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Save this c program to a file called \texttt{write\_exam2.c} and compile it
 into an executable using a command like the following.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ gcc -o write_exam2 write_exam2.c hddm_x.o -I. -I $HDDM_INSTALL_DIR/include \
@@ -813,7 +812,7 @@ $ gcc -o write_exam2 write_exam2.c hddm_x.o -I. -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib -l xstream -lbz2 -lz
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 The shell environment variables containing the package installation paths in
 the above compile command may need to be customized for your own environment.
@@ -822,7 +821,7 @@ in the working directory. Run it as \texttt{./write\_exam2} and it should create
 a new hddm file called \texttt{exam2.hddm}. Running
 \texttt{hddm-{}xml write\_exam2.hddm} should produce output like the following.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 HDDM
@@ -836,7 +835,7 @@ HDDM
         result Pass=false grade="B+"
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 This example explains most of what you need to know to set up HDDM c-structs
 in memory, and write them to an output file. All storage for hddm data is
@@ -886,7 +885,7 @@ and extracts bits of information from the first record, writing a summary
 report at the end. Of course, in actual practice a HDDM file would probably
 contain many records, and the analysis would loop over many instances student.
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 #include "hddm_x.h"
@@ -943,18 +942,18 @@ int main()
 }
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Running the above code should produce output like the following:
 
-\vspace{1cm}
+\vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
 Humphrey Gaston enrolled in 3 courses and passed 3 of them,
 earning a total of 8 credits.
 \end{verbatim}
 \end{minipage}
-\vspace{1cm}
+\vspace{0.5cm}
 
 Having read the section above on how to write HDDM records using the c
 interface, it should be easy to understand the meaning of the above code.
@@ -979,7 +978,7 @@ you need to consult when writing code that interacts with HDDM data.
 \subsection{advanced features of the c API}
 
 The c API is no longer in active development. It is supported only for legacy
-applications that rely on it. The features described in the \ref{Advanced_Features}
+applications that rely on it. The features described in the \ref{Advanced_features}
 {Advanced Features} section below are not available using the c API. The only things
 that are ensured with regard to ongoing support of the c API is that it can read
 the streams that it writes based on any valid HDDM template, and that HDDM files
