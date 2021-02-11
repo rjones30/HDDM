@@ -904,13 +904,13 @@ int main()
  // read a record from the file
    fp = open_x_HDDM("exam2.hddm");
    if (fp == NULL) {
-	  printf("Error - could not open input file exam2.hddm\n");
-	  exit(1);
+      printf("Error - could not open input file exam2.hddm\n");
+      exit(1);
    }
    exam2 = read_x_HDDM(fp);
    if (exam2 == NULL) {
-	  printf("End of file encountered in hddm file exam2.hddm, quitting!\n");
-	  exit(2);
+      printf("End of file encountered in hddm file exam2.hddm, quitting!\n");
+      exit(2);
    }
 
    // examine the data in this record and print a summary
@@ -922,16 +922,16 @@ int main()
    enrolleds = student->enrolleds;
    total_enrolled = enrolleds->mult;
    for (enrolled=0; enrolled<total_enrolled; ++enrolled) {
-	  courses = enrolleds->in[enrolled].courses;
-	  total_courses += courses->mult;
-	  for (course=0; course<courses->mult; course++) {
-	     if (courses->in[course].result->Pass) {
- 	       if (enrolleds->in[enrolled].year > 1992) {
-	           total_credits += courses->in[course].credits;
-	        }
-	        ++total_passed;
-	     }
-	  }
+      courses = enrolleds->in[enrolled].courses;
+      total_courses += courses->mult;
+      for (course=0; course<courses->mult; course++) {
+         if (courses->in[course].result->Pass) {
+            if (enrolleds->in[enrolled].year > 1992) {
+               total_credits += courses->in[course].credits;
+            }
+            ++total_passed;
+         }
+      }
    }
    printf("%s enrolled in %d courses.\n",student->name,total_courses);
    printf("He passed %d of them, earning a total of %d credits.\n",total_passed,total_credits);
