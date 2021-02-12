@@ -5,6 +5,14 @@
  * author: richard.t.jones at uconn.edu
  * version: january 2, 2017
  *
+ *  Version 1.1 - Richard Jones, February 10, 2021.
+ *  - Modified to be able to read a hddm template (xml data model) as
+ *    a valid hddm file with 0 records. This simplifies the documentation
+ *    by eliminating the false distinction between the hddm template and
+ *    the text header that appears at the top of every hddm file. It also
+ *    gets rid of the unnecessary step of needing to remove binary data 
+ *    following the header in a hddm file before it can be used as a
+ *    template in other utilities.
  */
 
 #include <xercesc/util/PlatformUtils.hpp>
@@ -578,7 +586,7 @@ class istreambuffer : public std::streambuf {
 
 int main(int argC, char* argV[])
 {
-   XString rootFilename;
+   XString rootFilename("hddm-root.root");
 
    try
    {
@@ -657,7 +665,7 @@ int main(int argC, char* argV[])
       exit(2);
    }
 
-   ofs << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+   XString xmlPreamble("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
    doc << std::endl;
    XString xmlHeader;
    XString line;
@@ -665,18 +673,13 @@ int main(int argC, char* argV[])
    {
       if (line.substr(0,5) == "<?xml")
       {
-         std::cerr
-              << "hddm-root: Error reading input stream " << hddmFile
-              << std::endl;
-         std::cerr
-              << "Input file appears to be an xml document!" << std::endl;
-         exit(1);
+         xmlPreamble = line + "\n";
       }
       else if (line.substr(0,5) == "<HDDM")
       {
          xmlHeader = line + "\n";
-         ofs << line << std::endl;
-         doc << line << std::endl;
+         ofs << xmlPreamble << xmlHeader;
+         doc << xmlHeader;
       }
       else
       {

@@ -9,6 +9,13 @@
  *  author: richard.t.jones at uconn.edu
  *  version: june 24, 2016 - original release.
  *
+ *  Version 1.1 - Richard Jones, February 10, 2021.
+ *  - Modified to be able to accept a hddm file as a valid hddm template.
+ *    This simplifies the documentation by eliminating the false distinction
+ *    between a hddm template and the text header that appears at the top of
+ *    every hddm file. It also gets rid of the unnecessary step of having
+ *    to delete the binary data following the header in a hddm file before
+ *    it can be used as a template.
  */
 
 #include "VersionConfig.hpp"
@@ -18,11 +25,13 @@
 
 #include <particleType.h>
 #include <errno.h>
+#include <unistd.h>
 
 #include <string>
 #include <vector>
 #include <map>
 #include <fstream>
+#include <sstream>
 
 #define X(str) XString(str).unicode_str()
 #define S(str) str.c_str()
@@ -164,11 +173,68 @@ int main(int argC, char* argV[])
       return 1;
    }
    xmlFile = XtString(argV[argInd]);
+   std::ifstream ifs(xmlFile.c_str());
+   if (!ifs.good())
+   {
+      std::cerr
+           << "hddm-py: Error opening hddm template " << xmlFile << std::endl;
+      exit(1);
+   }
+   std::ostringstream tmpFileStr;
+   tmpFileStr << "tmp" << getpid();
+   std::ofstream ofs(tmpFileStr.str().c_str());
+   if (! ofs.is_open())
+   {
+      std::cerr
+           << "hddm-py: Error opening temp file " << tmpFileStr.str() << std::endl;
+      exit(2);
+   }
+
+   XString xmlPreamble("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+   XString xmlHeader;
+   XString line;
+   while (getline(ifs,line))
+   {
+      if (line.substr(0,5) == "<?xml")
+      {
+         xmlPreamble = line + "\n";
+      }
+      else if (line.substr(0,5) == "<HDDM")
+      {
+         xmlHeader = line + "\n";
+         ofs << xmlPreamble << line;
+         break;
+      }
+      else
+      {
+         std::cerr
+              << "hddm-py: Template does not contain valid hddm header"
+              << std::endl;
+         exit(1);
+      }
+   }
+   if (xmlHeader.size() == 0)
+   {
+      std::cerr
+           << "hddm-py: Error reading from hddm template " << xmlFile 
+           << std::endl;
+      exit(1);
+   }
+   while (getline(ifs,line))
+   {
+      ofs << line;
+      if (line == "</HDDM>")
+      {
+         break;
+      }
+   }
+   ofs.close();
+   ifs.close();
 
 #if defined OLD_STYLE_XERCES_PARSER
-   DOMDocument* document = parseInputDocument(xmlFile.c_str(),false);
+   DOMDocument* document = parseInputDocument(tmpFileStr.str().c_str(),false);
 #else
-   DOMDocument* document = buildDOMDocument(xmlFile.c_str(),false);
+   DOMDocument* document = buildDOMDocument(tmpFileStr.str().c_str(),false);
 #endif
    if (document == 0)
    {
@@ -177,6 +243,7 @@ int main(int argC, char* argV[])
            << "cannot continue" << std::endl;
       return 1;
    }
+   unlink(tmpFileStr.str().c_str());
 
    DOMElement* rootEl = document->getDocumentElement();
    XtString rootS(rootEl->getTagName());
