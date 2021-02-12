@@ -27,7 +27,7 @@ list(APPEND EXTRA_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
 add_executable(hddm-xml hddm-xml.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(xml-hddm xml-hddm.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddm-cpp hddm-cpp.cpp XString.cpp XParsers.cpp md5.c)
-add_executable(hddm-c hddm-cpp.cpp XString.cpp XParsers.cpp md5.c)
+add_executable(hddm-c hddm-c.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddm-py hddm-py.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddmcat hddmcat.cpp)
 if(${ROOT_FOUND})
