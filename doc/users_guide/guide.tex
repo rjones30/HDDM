@@ -239,7 +239,7 @@ be repeated any number of times (maxOccurs=``unbounded''), as in a standard
 xml schema. The top-{}level element is special in that it must always be named
 HDDM and have the attributes shown in Fig.~\ref{simple_template}. The class
 attribute of the \texttt{<HDDM>} element is any (preferably short) string that
-you chose for the family of data models you are creating. Choose a short, unique
+you choose for the family of data models you are creating. Choose a short, unique
 name for your class because it is used in the type names of user objects that are
 defined written by the HDDM user library. Its purpose is to prevents collisions
 between different HDDM stream types that may coexist in a single application.
@@ -348,9 +348,11 @@ $ python setup_hddm_x.py # creates the module hddm_x
 
 In this example, I assigned `x' as the HDDM {\em class} letter (see the HDDM tag
 in the template header). You should change it to whatever the class abbreviation
-you chose for your HDDM data model. The above steps should create a shared library
-that starts with \texttt{hddm\_x} in your work directory. Copy that module to a
-directory in your PYTHONPATH where you usually place your private python modules.
+you choose for your HDDM data model. The above steps should create a python module
+in the form of a shared library that starts with \texttt{hddm\_x} in your project
+directory. Copy that module to a directory in your PYTHONPATH where you usually
+place your private python modules, or add your project directory to your 
+PYTHONPATH.
 
 Execute the following interactive python script to print the contents of the
 example HDDM file in plain text.
@@ -368,6 +370,11 @@ for rec in hddm_x.istream("exam1x.hddm"):
 To see the same data printed out as a properly formatted xml document, replace
 the \texttt{print(rec)} in the above python HDDM reader with 
 \texttt{print(rec.toXML())}'. 
+If the above command generated no output then your input HDDM file is empty, as it
+would be if you used the example input file \texttt{models/exam1x.hddm}. Later on
+when you have written some data to the HDDM file, come back and try it again. The
+full set of methods and attributes supported by the python module is displayed by
+the command \texttt{pydoc hddm\_x}.
 
 \subsection{writing HDDM files in python}
 
