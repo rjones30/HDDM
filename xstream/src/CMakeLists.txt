@@ -12,6 +12,7 @@ add_library(xstream base64.cpp
                     z.cpp
                     z_digest.cpp
            )
+set_property(TARGET xstream PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 # add to the include list
 target_include_directories(xstream PUBLIC
