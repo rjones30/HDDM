@@ -542,10 +542,7 @@ corresponding to your HDDM model.
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm
 $ g++ -c  hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
-  $HDDM_SOURCE_DIR/XString.cpp $HDDM_SOURCE_DIR/XParsers.cpp \
-  $HDDM_SOURCE_DIR/md5.c -I$XERCESCROOT/include \
-  -L $XERCESCROOT/lib -l xerces-c \
-  -L $HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
+  -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -609,10 +606,7 @@ into an executable using a command like the following.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ g++ -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
-  $HDDM_SOURCE_DIR/XString.cpp $HDDM_SOURCE_DIR/XParsers.cpp \
-  $HDDM_SOURCE_DIR/md5.c -I$XERCESCROOT/include \
-  -L $XERCESCROOT/lib -l xerces-c \
-  -L $HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
+  -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -735,9 +729,8 @@ to read and write HDDM streams that conform to this template.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-c exam1x.xml
-$ gcc -c hddm_x.c $HDDM_SOURCE_DIR/md5.c \
-  -I$XERCESCROOT/include -L $XERCESCROOT/lib -l xerces-c \
-  -L$HDDM_INSTALL_DIR/lib -lxstream -lz -lbz2
+$ gcc -c hddm_x.c -L $XERCESCROOT/lib -l xerces-c \
+  -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
