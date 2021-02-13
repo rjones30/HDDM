@@ -1,0 +1,23 @@
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{1}{}
+\tocdepth@restore 
+\contentsline {section}{\numberline {I}Introduction}{1}{}
+\contentsline {section}{\numberline {II}Templates and schemas}{2}{}
+\contentsline {section}{\numberline {III}How to get started}{3}{}
+\contentsline {section}{\numberline {IV}HDDM in python}{3}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in python}{4}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in python}{5}{}
+\contentsline {subsection}{\numberline {C}advanced features of the python API}{6}{}
+\contentsline {section}{\numberline {V}HDDM in C++}{6}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in C++}{6}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{8}{}
+\contentsline {section}{\numberline {VI}HDDM in c}{9}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in c}{9}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in c}{11}{}
+\contentsline {subsection}{\numberline {C}advanced features of the c API}{13}{}
+\contentsline {section}{\numberline {VII}Advanced features}{13}{}
+\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{13}{}
+\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{14}{}
+\contentsline {subsection}{\numberline {C}random access to HDDM records}{15}{}
+\contentsline {section}{\numberline {VIII}Acknowledgments}{15}{}
+\contentsline {section}{\numberline {IX}References}{15}{}
