@@ -543,7 +543,7 @@ corresponding to your HDDM model.
 $ hddm-cpp exam1x.hddm
 $ g++ -std=c++11 -c hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
-$ ar -cr libhddm_x.a hddm_x++.o
+$ ar -r libhddm_x.a hddm_x++.o
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -728,9 +728,9 @@ to read and write HDDM streams that conform to this template.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-c exam1x.xml
-$ gcc -c hddm_x.c -L $XERCESCROOT/lib -l xerces-c \
+$ gcc -c hddm_x.c -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
-$ ar -cr libhddm_x.a hddm_x.o
+$ ar -r libhddm_x.a hddm_x.o
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -813,7 +813,7 @@ into an executable using a command like the following.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ gcc -o write_exam2 write_exam2.c hddm_x.o -I. -I $HDDM_INSTALL_DIR/include \
-  -L $HDDM_INSTALL_DIR/lib -l xstream -lbz2 -lz
+  -L $HDDM_INSTALL_DIR/lib64 -l xstream -lbz2 -lz
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -828,15 +828,22 @@ a new HDDM file called \texttt{exam2.hddm}. Running
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-HDDM
-  student name="Humphrey Gaston"
-    enrolled semester=2 year=2005
-      course credits=3 title="Beginning Russian"
-        result Pass=false grade="A-"
-      course credits=1 title="Bohemian Poetry"
-        result Pass=false grade="C"
-      course credits=4 title="Developmental Psychology"
-        result Pass=false grade="B+"
+<?xml version="1.0" encoding="UTF-8"?>
+<HDDM class="x" version="1.0" xmlns="http://www.gluex.org/hddm">
+  <student name="Humphrey Gaston">
+    <enrolled semester="2" year="2005">
+      <course credits="3" title="Beginning Russian">
+        <result Pass="1" grade="A-" />
+      </course>
+      <course credits="1" title="Bohemian Poetry">
+        <result Pass="1" grade="C" />
+      </course>
+      <course credits="4" title="Developmental Psychology">
+        <result Pass="1" grade="B+" />
+      </course>
+    </enrolled>
+  </student>
+</HDDM>
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -844,20 +851,20 @@ HDDM
 This example explains most of what you need to know to set up HDDM c-structs
 in memory, and write them to an output file. All storage for HDDM data is
 allocated on the heap. Most of this allocation is carried out automatically
-by the \texttt{make\_x\_XXXs()} functions, although for strings (char arrays)
+by the \texttt{make\_x\_}XXXs() functions, although for strings (char arrays)
 the user needs to allocate initial storage for the values. Memory pointed to
-by the pointers returned by the \texttt{make\_x\_XXXs()} functions is owned
+by the pointers returned by the \texttt{make\_x\_}XXXs() functions is owned
 by the user code until the pointer to it gets assigned to a HDDM struct member
 that is designated in the data model to hold it. After that, the memory is
 owned by the top-{}level HDDM container record object, and should only be
-freed by calling the \texttt{flush\_x\_HDDM()} method. Calling
+freed by calling the \texttt{flush\_x\_}HDDM() method. Calling
 \texttt{flush\_x\_HDDM(record, fp)} with its second argument (FILE*) open
 to an output file causes the record to be written to the output file.
 Calling it as \texttt{flush\_x\_HDDM(record,0)} causes it to bypass the
 output serialization step. Either way, \texttt{flush\_x\_HDDM()} frees all
 memory owned by the HDDM record, discarding its contents, before it returns.
 
-The example begins by creating an empty record by calling \texttt{make\_x\_HDDM()}.
+The example begins by creating an empty record by calling \texttt{make\_x\_}HDDM().
 Then it populates the structure top-{}down by calling \texttt{make\_x\_}XXXs()
 for each tag XXX and assigning pointers to each one into the appropriate 
 structure element of the parent element, where XXXs is the name of the tag
@@ -868,8 +875,8 @@ They return a pointer to an array of struct pointers which can be indexed in
 the usual c-{}fashion to access the individual members of the array. Each of
 the contained elements within a given host tag have a corresponding pointer
 in the host struct that must be assigned in the user code to the value returned
-by the \texttt{make\_x\_XXXs()} function, as illustrated. Any such pointers
-that are not assigned remain null (initialized by \texttt{make\_x\_XXXs}) and
+by the \texttt{make\_x\_}XXXs() function, as illustrated. Any such pointers
+that are not assigned remain null (initialized by \texttt{make\_x\_}XXXs) and
 represent parts of the template tree that are missing from the record. This
 is a perfectly valid HDDM record, but user code must check for the NULL
 pointer condition before trying to dereference it since c has no automatic
@@ -986,7 +993,7 @@ the streams that it writes based on any valid HDDM template, and that HDDM files
 written using the c-API can be read by applications built using any of the other
 API's. The converse of the last statement is not guaranteed to
 be true in all cases. If an input file is not readable by the c-{}API, it prints
-a polite error message reporting this fact and quietly exits.
+a polite error message reporting this fact and exits.
 
 \section{Advanced features}\label{Advanced_features}
 
