@@ -448,7 +448,7 @@ int main(int argC, char* argV[])
 #if BAD_CRC_IS_ONLY_WARNING
             static int bad_crc_warning_needed = true;
             char errmsg[] =
-                 "WARNING: data integrity crc check failed on input.\n"
+                 "WARNING: data integrity crc check failed on input.\n";
             if (bad_crc_warning_needed) {
                std::cerr << errmsg << std::endl;
                bad_crc_warning_needed = false;

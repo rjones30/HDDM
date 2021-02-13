@@ -1601,7 +1601,7 @@ int main(int argC, char* argV[])
    "         if (crc.digest() != recorded_crc) {\n"
    "            char errmsg[] = \n"
    "                 \"WARNING: crc data integrity check failed\"\n"
-   "                 \" on hddm_" << classPrefix << " input stream!\"\n"
+   "                 \" on hddm_" << classPrefix << " input stream!\";\n"
    "            if ((MY(status_bits) & 0x02) == 0) {\n"
    "               std::cerr << errmsg << std::endl;\n"
    "               MY(status_bits) |= 0x02;\n"
