@@ -346,8 +346,8 @@ $ python setup_hddm_x.py # creates the module hddm_x
 \end{minipage}
 \vspace{0.5cm}
 
-In this example, I assigned `x' as the HDDM {\em class} letter (see the HDDM tag
-in the template header). You should change it to whatever class abbreviation
+In this example, I assigned `x' as the HDDM {\em class} abbrivation (see the HDDM
+tag in the template header). You should change it to whatever class abbreviation
 you choose for your HDDM data model. The above steps should create a python module
 in the form of a shared library that starts with \texttt{hddm\_x} in your project
 directory. Copy that module to a directory in your PYTHONPATH where you usually
@@ -381,9 +381,9 @@ module is displayed by the command, ``\texttt{pydoc hddm\_x}''.
 For this example, let us continue using the same template as was used in the
 example python HDDM reader above. You should already have built and installed
 the hddm\_x python module and installed it in your PYTHONPATH, using the build
-steps listed above. Execute the following in a fresh interactive python session
-to write a new output HDDM file from scratch, starting only from the template
-and some fake user data.
+steps listed above. Execute the following python script to write a new output
+HDDM file from scratch, using and some test user data. This example is included
+in the distribution under \texttt{examples/exam2x\_writer.py}.
 
 \vspace{0.5cm}
 \begin{minipage}{12cm}
@@ -417,8 +417,9 @@ ofs.write(xrec)
 \end{minipage}
 \vspace{0.5cm}
 
-This generates a new HDDM file called exam2x.hddm. Now running the above 3-{}line
-python HDDM reader on exam2x.hddm should yield the following output.
+This script generates a new HDDM file called \texttt{exam2x.hddm}. Now
+running the 3-{}line python reader from the previous section on 
+\texttt{exam2x.hddm} should yield the following output.
 
 \vspace{0.5cm}
 \begin{minipage}{12cm}
@@ -436,22 +437,20 @@ HDDM
 \end{minipage}
 \vspace{0.5cm}
 
-The structure of the output record you are writing is already known to
-the python module because it is configured with your template. All that
-the writer needs to do is to fill in the elements and assign the values
-of the defined attributes. You begin by creating an empty record by calling
-the HDDM() default constructor. Then you populate the structure top-{}down
-by calling addXXXs() methods for each tag XXX under that. The name XXXs
-is the name of the tag element in the template in a capitalized-{}plural 
-form. The addXXXs() methods take a single optional int argument, which
+The example writer above began by creating a new record by calling
+the \texttt{HDDM()} record constructor. Then it populated the structure
+top-{}down, calling \texttt{add}XXXs() methods for each tag XXX under
+that, where XXXs refers to the name of the tag element in the template
+transformed into its capitalized-{}plural form. The \text{add}XXXs()
+methods take a single optional \texttt{int} argument, which
 is the number of copies of that element that need to be added (default 1).
 They return a list that can be indexed in the usual python fashion to give
-access to the individual members of the list. Each of these has addXXXs()
+access to the individual members of the list. Each of these has \texttt{add}XXXs()
 methods for each of its contents, and so on down the tree. You can omit
 whole branches of the tree by simply not calling the corresponding 
-addXXXs() method, although xml rules require that you specify minOccurs=``0''
-for the containing tag in the template if you plan to make that subtree
-optional. As soon as a new element list is created, you can fill in the
+\texttt{add}XXXs() method. Xml rules require that you specify
+minOccurs=``0'' in the template for the containing tag if you plan to make that
+subtree optional. As soon as a new element list is created, you can fill in the
 values of its attributes using simple assignment semantics, as illustrated
 in the example. The names of the python data members are the same as the
 names of the attributes in the template.
