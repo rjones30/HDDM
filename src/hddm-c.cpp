@@ -365,9 +365,8 @@ int main(int argC, char* argV[])
          << " * The hddm data model tool set was written by"    << std::endl
          << " * Richard Jones, University of Connecticut."      << std::endl
          << " *"                                                << std::endl
-         << " * For more information see the following web site"<< std::endl
-         << " *"                                                << std::endl
-         << " * http://zeus.phys.uconn.edu/halld/datamodel/doc" << std::endl
+         << " * For more information see the documentation at"  << std::endl
+         << " * http://github.com/rjones30/HDDM"                << std::endl
          << " *"                                                << std::endl
          << " */"                                               << std::endl
                                                                 << std::endl;
@@ -388,9 +387,8 @@ int main(int argC, char* argV[])
          << " * The hddm data model tool set was written by"    << std::endl
          << " * Richard Jones, University of Connecticut."      << std::endl
          << " *"                                                << std::endl
-         << " * For more information see the following web site"<< std::endl
-         << " *"                                                << std::endl
-         << " * http://zeus.phys.uconn.edu/halld/datamodel/doc" << std::endl
+         << " * For more information see the documentation at"  << std::endl
+         << " * http://github.com/rjones30/HDDM"                << std::endl
          << " */"                                               << std::endl
                                                                 << std::endl;
 
