@@ -69,3 +69,16 @@ add_subdirectory(scripts)
 
 # install the schemas
 add_subdirectory(schemas)
+
+# install the examples
+add_subdirectory(models)
+add_subdirectory(examples)
+
+# install the example python modules
+install(CODE
+  "execute_process(
+      COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_installer.sh
+              ${CMAKE_BINARY_DIR}/models 
+              ${CMAKE_INSTALL_PREFIX}
+   )"
+)
