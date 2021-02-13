@@ -449,7 +449,7 @@ access to the individual members of the list. Each of these has \texttt{add}XXXs
 methods for each of its contents, and so on down the tree. You can omit
 whole branches of the tree by simply not calling the corresponding 
 \texttt{add}XXXs() method. Xml rules require that you specify
-minOccurs=``0'' in the template for the containing tag if you plan to make that
+minOccurs=``0'' in the template for the container tag if you plan to make that
 subtree optional. As soon as a new element list is created, you can fill in the
 values of its attributes using simple assignment semantics, as illustrated
 in the example. The names of the python data members are the same as the
@@ -635,23 +635,21 @@ HDDM
 \end{minipage}
 \vspace{0.5cm}
 
-The structure of the output record you are writing is already known to
-the program because it has been built against the `x' template. All that
-the writer needs to do is to add the data elements and assign the values of
-the attributes. You begin by creating an empty record by calling the 
-\texttt{HDDM()} default constructor. Then you populate the structure
-top-{}down by calling \texttt{addXXXs()} methods for each tag \texttt{XXX}
-under that. The name \texttt{XXX}s is the name of the tag element in the
-template in a capitalized-{}plural form. The \texttt{addXXXs()} methods
-take a single optional int argument, which is the number of instances of
-that element to be added to the containing element (default is 1). They
+The example begins by creating an empty record by calling the 
+\texttt{HDDM()} default constructor. Then it populates the structure
+top-{}down by calling \texttt{add}XXXs() methods for each tag XXX
+under that, where XXXs represents the name of the tag element in the
+template transformed into a capitalized-{}plural form. The 
+\texttt{add}XXXs() methods take a single optional \texttt{int} argument,
+which is the number of instances of
+that element to be added to the container element (default is 1). They
 return a subclass of \texttt{std::list} that can be iterated over in the
 usual fashion, or indexed with \texttt{operator()(int)} to access the
 individual members of the list. Each of these has \texttt{addXXXs()}
 methods for each of its contents, and so on down the tree. You can omit
 whole branches of the tree by simply not calling the corresponding
 \texttt{addXXXs()} method, although xml rules require that you specify
-minOccurs=``0'' for the containing tag in the template if you plan to do
+minOccurs=``0'' for the container tag in the template if you plan to do
 that. As soon as a new element list is constructed, you can fill in the
 values of its object attributes using set{\mbox{$<$}}attname{\mbox{$>$}}
 methods, as illustrated in the example, where {\mbox{$<$}}attname{\mbox{$>$}}
@@ -851,7 +849,7 @@ the user needs to allocate initial storage for the values. Memory pointed to
 by the pointers returned by the \texttt{make\_x\_XXXs()} functions is owned
 by the user code until the pointer to it gets assigned to a HDDM struct member
 that is designated in the data model to hold it. After that, the memory is
-owned by the top-{}level HDDM containing record object, and should only be
+owned by the top-{}level HDDM container record object, and should only be
 freed by calling the \texttt{flush\_x\_HDDM()} method. Calling
 \texttt{flush\_x\_HDDM(record, fp)} with its second argument (FILE*) open
 to an output file causes the record to be written to the output file.
@@ -859,15 +857,12 @@ Calling it as \texttt{flush\_x\_HDDM(record,0)} causes it to bypass the
 output serialization step. Either way, \texttt{flush\_x\_HDDM()} frees all
 memory owned by the HDDM record, discarding its contents, before it returns.
 
-The structure of the output record you are writing is already known to the
-program because the struct is specified according to the template. All that
-you need to do is to fill in the elements and assign the values of the attributes.
-You begin by creating an empty record by calling \texttt{make\_x\_HDDM()}.
-Then you populate the structure top-{}down by calling \texttt{make\_x\_XXXs()}
-for each tag \texttt{XXX} and assigning pointers to each one into the 
-appropriate structure element of the parent element. The name \texttt{XXXs}
-is the name of the tag element in the template in a capitalized-{}plural form.
-The \texttt{addXXXs()} methods take a single optional int argument, which is
+The example begins by creating an empty record by calling \texttt{make\_x\_HDDM()}.
+Then it populates the structure top-{}down by calling \texttt{make\_x\_}XXXs()
+for each tag XXX and assigning pointers to each one into the appropriate 
+structure element of the parent element, where XXXs is the name of the tag
+element in the template transformed into a capitalized-{}plural form.
+The \texttt{add}XXXs() methods take a single optional int argument, which is
 the number of copies of that element that need to be added (default is 1). 
 They return a pointer to an array of struct pointers which can be indexed in
 the usual c-{}fashion to access the individual members of the array. Each of
