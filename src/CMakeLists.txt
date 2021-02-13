@@ -64,6 +64,7 @@ if(${ROOT_FOUND})
     set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
 
+install(FILES particleType.h DESTINATION include)
 install(TARGETS hddm-xml DESTINATION bin)
 install(TARGETS xml-hddm DESTINATION bin)
 install(TARGETS hddm-cpp DESTINATION bin)
