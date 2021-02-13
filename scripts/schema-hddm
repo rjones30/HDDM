@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/bin/bash
 #
 #  schema-hddm: create a hddm template based on a xml schema
 #
@@ -9,15 +9,15 @@
 #  just to check for well-formed xml and improve the readability of the
 #  of the template.
 #
-#  Richard T. Jones
-#  September 15, 2003
-#  ------------------
+#  author: richard.t.jones at uconn.edu
+#  version: original in perl, September 15, 2003
+#
+#  version 1.1, February 12, 2021
+#  - xerces-perl is no longer supported, convert to bash script
+#
 
-use XML::Xerces;
-
-sub Usage()
-{
-   print <<eoi;
+function usage() {
+   cat << eoi
 
 Usage: schema-hddm  myfile.xsd
 
@@ -27,54 +27,49 @@ template, which is just a xml file that shows the data structure.
 eoi
 }
 
-if (@ARGV != 1) {
-   Usage();
-   exit 1;
-}
-$infile = $ARGV[0];
-if (open(XSD,"<$infile") == 0) {
-   die "Unable to open input file $infile\n";
-}
-close(XSD);
-$base = `basename $infile`;
-chop $base;
-$tmpxml = ".tmp-$base.xml";
+if [ $# != 1 ]; then
+   usage
+   exit 1
+fi
+
+infile=$1
+if [ ! -r "$infile" ]; then
+   echo "schema-hddm error - Unable to open input file $infile"
+   exit 1
+fi
+
+base=$(basename $infile)
+tmpxml=".tmp-$base.xml"
+
+schema_hddm_xslt=$(dirname $0)/../schemas/schema-hddm.xsl
 
 # generate the basic schema using XSL transform:
 #
 #  two translators: xalan-j (java) or xalan-c (c++)
 #  chose one of the two following, comment the other
 #$cmd = "$ENV{XALANCROOT}/bin/Xalan -o $tmpxml $infile schema-hddm.xsl";
-$cmd = "$ENV{JAVAROOT}/bin/java org.apache.xalan.xslt.Process" .
-       " -IN $infile -OUT $tmpxml -XSL schema-hddm.xsl";
+xalanj2_classpath=/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar
+java -cp $xalanj2_classpath org.apache.xalan.xslt.Process \
+       -IN $infile -OUT $tmpxml -XSL $schema_hddm_xslt
 
-if (system($cmd)) {
-   print "command was:$cmd\n";
-   die "hddm-schema: errors returned by Xalan, quitting\n";
-}
+if [ $? != 0 ]; then
+   echo "hddm-schema: errors returned by Xalan, giving up"
+   exit 9
+fi
 
 # check the result for correctness and pretty-print it
+hddm_schema_xsd=$(dirname $0)/../schemas/XMLSchema.xsd
+xmllint --format $tmpxml 2> /dev/null
 
-$parser = XML::Xerces::XercesDOMParser->new();
-$parser->setValidationScheme (0);
-$parser->setDoNamespaces (1);
-$parser->setCreateEntityReferenceNodes(1);
-$parser->setDoSchema (1);
+if [ $? != 0 ]; then
+   if [ ! -x `which xmllint` ]; then
+      echo "Please check that xmllint exists in your path and try again"
+      exit 7
+   else
+      echo "schema-hddm: errors returned by xmllint, giving up"
+      exit 6
+   fi
+fi
 
-$ERROR_HANDLER = XML::Xerces::PerlErrorHandler->new();
-$parser->setErrorHandler($ERROR_HANDLER);
-eval {$parser->parse ($tmpxml)};
-XML::Xerces::error($@) if ($@);
-
-$doc = $parser->getDocument();
-
-$impl = XML::Xerces::DOMImplementationRegistry::getDOMImplementation('LS');
-$writer = $impl->createDOMWriter();
-if ($writer->canSetFeature('format-pretty-print',1)) {
-  $writer->setFeature('format-pretty-print',1);
-}
-$target = XML::Xerces::StdOutFormatTarget->new();
-$writer->writeNode($target,$doc);
-
-unlink $tmpxml;
-exit 0;
+rm $tmpxml
+exit 0

@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/bin/bash
 #
 #  hddm-schema: create a xml schema based on a hddm template
 #
@@ -8,15 +8,15 @@
 #  transformation.  The output from the transform is then validated by
 #  the XercesDOMParser before printing it on standard output.
 #
-#  Richard T. Jones
-#  September 15, 2003
-#  ------------------
+#  author: richard.t.jones at uconn.edu
+#  version: original in perl, September 15, 2003
+#
+#  version 1.1, February 12, 2021
+#  - xerces-perl is no longer supported, convert to bash script
+#
 
-use XML::Xerces;
-
-sub Usage()
-{
-   print <<eoi;
+function usage() {
+   cat << eoi
 
 Usage: hddm-schema myfile.hddm
 
@@ -26,72 +26,62 @@ a schema describing the contents.
 eoi
 }
 
-if (@ARGV != 1) {
-   Usage();
-   exit 1;
-}
-$infile = $ARGV[0];
-if (open(HDDM,"<$infile") == 0) {
-   die "Unable to open input file $infile\n";
-}
-$base = `basename $infile`;
-chop $base;
-$tmpxml = ".tmp-$base.xml";
-$tmpxsd = ".tmp-$base.xsd";
-if (open(TMP,">$tmpxml") == 0) {
-   die "Unable to open temp file $tmpxml\n";
-}
-while ($line = <HDDM>) {
-   if ($line =~ s/<\/HDDM>.*$/<\/HDDM>/) {
-      print TMP $line;
-      last;
-   }
-   print TMP $line;
-}
-close(HDDM);
-close(TMP);
+if [ $# != 1 ]; then
+   usage
+   exit 1
+fi
+
+infile=$1
+if [ ! -r "$infile" ]; then
+   echo "hddm-schema error - Unable to open input file $infile"
+   exit 1
+fi
+
+base=$(basename $infile)
+tmpxml=".tmp-$base.xml"
+tmpxsd=".tmp-$base.xsd"
+rm -f $tmpxml $tmpxsd
+while IFS= read -r line; do
+   echo $line >> $tmpxml
+   if echo $line | grep -q "</HDDM>"; then
+      break
+   fi
+done < $infile
+
+hddm_schema_xslt=$(dirname $0)/../schemas/hddm-schema.xsl
 
 # generate the basic schema using XSL transform:
 #
 #  two translators: xalan-j (java) or xalan-c (c++)
 #  chose one of the two following, comment the other
-#$cmd = "$ENV{XALANCROOT}/bin/Xalan -o $tmpxsd $tmpxml hddm-schema.xsl";
-$cmd = "$ENV{JAVAROOT}/bin/java org.apache.xalan.xslt.Process" .
-       " -IN $tmpxml -OUT $tmpxsd -XSL hddm-schema.xsl -L";
+#$XALANCROOT/bin/Xalan -o $tmpxsd $tmpxml $hddm_schema_xslt
+xalanj2_classpath=/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar
+java -cp $xalanj2_classpath org.apache.xalan.xslt.Process \
+       -IN $tmpxml -OUT $tmpxsd -XSL $hddm_schema_xslt -L
 
-if (system($cmd)) {
-   if (! -x "$ENV{JAVAROOT}/bin/java") {
-      die "Please check that $JAVAROOT/bin/java exists and try again.\n";
-   }
-   else {
-      print "command was:$cmd\n";
-      die "hddm-schema: errors returned by Xalan, quitting\n";
-   }
-}
+if [ $? != 0 ]; then
+   if [ ! -x `which java` ]; then
+      echo "Please check that java exists in your path and try again"
+      exit 9
+   else
+      echo "hddm-schema: errors returned by Xalan, giving up"
+      exit 8
+   fi
+fi
 
 # check the result for correctness and pretty-print it
+hddm_schema_xsd=$(dirname $0)/../schemas/XMLSchema.xsd
+xmllint --format --schema $hddm_schema_xsd $tmpxsd 2> /dev/null
 
-$parser = XML::Xerces::XercesDOMParser->new();
-$parser->setValidationScheme (0);
-$parser->setDoNamespaces (1);
-$parser->setCreateEntityReferenceNodes(1);
-$parser->setDoSchema (1);
+if [ $? != 0 ]; then
+   if [ ! -x `which xmllint` ]; then
+      echo "Please check that xmllint exists in your path and try again"
+      exit 7
+   else
+      echo "hddm-schema: errors returned by xmllint, giving up"
+      exit 6
+   fi
+fi
 
-$ERROR_HANDLER = XML::Xerces::PerlErrorHandler->new();
-$parser->setErrorHandler($ERROR_HANDLER);
-eval {$parser->parse ($tmpxsd)};
-XML::Xerces::error($@) if ($@);
-
-$doc = $parser->getDocument();
-
-$impl = XML::Xerces::DOMImplementationRegistry::getDOMImplementation('LS');
-$writer = $impl->createDOMWriter();
-if ($writer->canSetFeature('format-pretty-print',1)) {
-  $writer->setFeature('format-pretty-print',1);
-}
-$target = XML::Xerces::StdOutFormatTarget->new();
-$writer->writeNode($target,$doc);
-
-unlink $tmpxml;
-unlink $tmpxsd;
-exit 0;
+rm $tmpxml $tmpxsd
+exit 0
