@@ -541,8 +541,9 @@ corresponding to your HDDM model.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm
-$ g++ -c hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
+$ g++ -std=c++11 -c hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
+$ ar -cr libhddm_x.a hddm_x++.o
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -605,7 +606,7 @@ into an executable using a command like the following.
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-$ g++ -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
+$ g++ -std=c++11 -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
   -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
 \end{verbatim}
 \end{minipage}
@@ -731,6 +732,7 @@ to read and write HDDM streams that conform to this template.
 $ hddm-c exam1x.xml
 $ gcc -c hddm_x.c -L $XERCESCROOT/lib -l xerces-c \
   -L $HDDM_INSTALL_DIR/lib64 -lxstream -lz -lbz2
+$ ar -cr libhddm_x.a hddm_x.o
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -813,7 +815,6 @@ into an executable using a command like the following.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ gcc -o write_exam2 write_exam2.c hddm_x.o -I. -I $HDDM_INSTALL_DIR/include \
-  -I$XERCESCROOT/include -L $XERCESCROOT/lib -l xerces-c \
   -L $HDDM_INSTALL_DIR/lib -l xstream -lbz2 -lz
 \end{verbatim}
 \end{minipage}
