@@ -38,6 +38,26 @@ if(DEFINED HDF5_ROOT)
 endif()
 find_package(HDF5)
 
+# xalan-j2 package
+if(NOT DEFINED XALANJ2_PATH)
+    set(XALANJ2_PATH /usr/share/java)
+endif()
+if(EXISTS ${XALANJ2_PATH}/xalan-j2.jar AND EXISTS ${XALANJ2_PATH}/xalan-j2-serializer.jar)
+    message("-- Found xalan-j2 at ${XALANJ2_PATH}/xalan-j2.jar")
+else()
+    message("Cannot find xalan-j2 at ${XALANJ2_PATH}/xalan-j2.jar, some schema utilities will fail!")
+endif()
+   
+# xmllint command
+if(NOT DEFINED XMLLINT_PATH)
+    set(XMLLINT_PATH /usr/bin)
+endif()
+if(EXISTS ${XMLLINT_PATH}/xmllint)
+    message("-- Found xmllint at ${XMLLINT_PATH}/xmllint")
+else()
+    message("Cannot find xmllint at ${XMLLINT_PATH}/xmllint, some schema utilities will fail!")
+endif()
+
 # add the xstream library
 add_subdirectory(xstream)
 
@@ -46,3 +66,6 @@ add_subdirectory(src)
 
 # install the scripts
 add_subdirectory(scripts)
+
+# install the schemas
+add_subdirectory(schemas)
