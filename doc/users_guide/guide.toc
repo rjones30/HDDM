@@ -3,7 +3,7 @@
 \tocdepth@restore 
 \contentsline {section}{\numberline {I}Introduction}{1}{}
 \contentsline {section}{\numberline {II}XML schemas and HDDM templates}{2}{}
-\contentsline {section}{\numberline {III}Quick start guide}{3}{}
+\contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{3}{}
 \contentsline {section}{\numberline {IV}HDDM in python}{3}{}
 \contentsline {subsection}{\numberline {A}writing HDDM files in python}{4}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in python}{5}{}
