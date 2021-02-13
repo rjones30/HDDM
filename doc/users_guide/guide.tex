@@ -216,10 +216,10 @@ arrangement. A simple example of a template is given in Fig.~\ref{simple_templat
 \end{verbatim}
 \end{minipage}
 \caption{\label{simple_template}
-A simple example of a HDDM data model template. The data stream would
-consist of a stream of \texttt{<student>} records of unbounded length, each with the
-same hierachical structure of contained data elements. Only the values designated
-by simple types, ``int'', ``string'', etc.\ are actually stored in the byte stream.}
+A simple example of a HDDM data model template. A hddm data stream encodes a
+sequence of \texttt{<student>} records, each with the same internal hierachical
+structure defined in the template. The data values designated by simple types,
+``int'', ``string'', etc.\ are stored sequentially in the byte stream.}
 \end{figure}
 
 All of the records in the file represent repeats of this basic structure, with 
@@ -526,7 +526,6 @@ corresponding to your HDDM model.
 \begin{minipage}{12cm}
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm
-$ mv hddm_x.cpp hddm_x++.cpp
 $ g++ -c  hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
   $HDDM_SOURCE_DIR/XString.cpp $HDDM_SOURCE_DIR/XParsers.cpp \
   $HDDM_SOURCE_DIR/md5.c -I$XERCESCROOT/include \
@@ -538,10 +537,6 @@ $ g++ -c  hddm_x++.cpp -I $HDDM_INSTALL_DIR/include \
 
 If the environment variables in this command are not defined in your shell
 environment, define them or replace them with the appropriate values.
-The rename step from \texttt{hddm\_x.cpp} to \texttt{hddm\_x++.cpp} is not
-strictly necessary at this point, but it is included here to avoid confusion
-between the files created in this section and those created later for use
-with the c API.
 
 \subsection{writing HDDM files in C++}
 
