@@ -184,7 +184,7 @@ themselves between memory and an external byte stream connected to an ordinary
 file on disk or to a network socket. The underlying implementation of the i/o
 library is in C++, so it provides good performance in terms of data rate to/from
 byte streams, with optional on-{}the-{}fly compression/decompression and data 
-integrity verification. In addition to oridnary sequential access to data,
+integrity verification. In addition to ordinary sequential access to data,
 random-{}access to records at an arbitrary offset in a stream is also provided
 for streams that support random seeks, without the need to read the entire stream.
 
@@ -216,10 +216,11 @@ arrangement. A simple example of a template is given in Fig.~\ref{simple_templat
 \end{verbatim}
 \end{minipage}
 \caption{\label{simple_template}
-A simple example of a HDDM data model template. A hddm data stream encodes a
-sequence of \texttt{<student>} records, each with the same internal hierachical
+A simple example of a HDDM data model template. A HDDM data stream encodes a
+sequence of \texttt{<student>} records, each with the same internal hierarchical
 structure defined in the template. The data values designated by simple types,
-``int'', ``string'', etc.\ are stored sequentially in the byte stream.}
+``int'', ``string'', etc.\ are packed sequentially into the byte stream on output,
+and unpacked into memory-resident objects on input.}
 \end{figure}
 
 All of the records in the file represent repeats of this basic structure, with 
@@ -237,7 +238,7 @@ present in every record or may be omitted (minOccurs=``0'') or whether it may
 be repeated any number of times (maxOccurs=``unbounded''), as in a standard
 xml schema. The top-{}level element is special in that it must always be named
 HDDM and have the attributes shown in Fig.~\ref{simple_template}. The class
-attribute of the \texttt{<HDDM>} element is any (preferrably short) string that
+attribute of the \texttt{<HDDM>} element is any (preferably short) string that
 you chose for the family of data models you are creating. Choose a short, unique
 name for your class because it is used in the type names of user objects that are
 defined written by the HDDM user library. Its purpose is to prevents collisions
@@ -338,7 +339,7 @@ template.
 \begin{verbatim}
 $ hddm-cpp exam1x.hddm  # builds the underlying C++ library
 $ hddm-py exam1x.hddm   # builds the python interface
-$ python setup_hddm_x.py build -b build_hddm_x # creates the module hddm_x
+$ python setup_hddm_x.py # creates the module hddm_x
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -503,11 +504,11 @@ Likewise, each call to method getXXXs() returns a python list of tag
 element objects that is iterable using the usual python \texttt{for}
 semantics, as illustrated for xrec.getCourses() above. As before, the
 individual attributes of each tag instance are accessed as plain data 
-members of their host object. The standard pythonb list functions (eg.
+members of their host object. The standard python list functions (eg.
 len(list), str(list), repr(list)) all work as expected for these hddm
 tag list objects returned by getXXXs() method. These natural python
 iteration and accessor semantics provide a quick-{}and-{}simple
-prototyping framework for analysis of repetitve experimental data.
+prototyping framework for analysis of repetitive experimental data.
 
 \subsection{advanced features of the python API}
 
@@ -605,7 +606,7 @@ $ g++ -o write_exam write_exam.cpp hddm_x++.o -I. -I $HDDM_INSTALL_DIR/include \
 The paths listed in the compilation command line may need to be customized
 for your own build environment. Once it completes successfully, will find
 the executable \texttt{write\_exam} in the working directory. Run it as
-\texttt{./write\_exam2} and it should create a new hddm file called 
+\texttt{./write\_exam2} and it should create a new HDDM file called 
 \texttt{exam2x.hddm}. Running \texttt{hddm-{}xml write\_exam2x.hddm}
 should produce output like the following.
 
@@ -647,11 +648,11 @@ values of its object attributes using set{\mbox{$<$}}attname{\mbox{$>$}}
 methods, as illustrated in the example, where {\mbox{$<$}}attname{\mbox{$>$}}
 is a capitalized version of the names of the attribute in the template.
 
-\subsection{reading hddm files in C++}
+\subsection{reading HDDM files in C++}
 
 This section assumes that you have created the file exam2x.hddm using the
 procedure described in the previous section. The following C++ program 
-opens this file and extracst bits of information from the first record,
+opens this file and extracts bits of information from the first record,
 and writes a summary report. Of course, in actual practice such a data
 file would probably contain many records, and the analysis would loop
 over many instances of student.
@@ -729,13 +730,13 @@ $ gcc -c hddm_x.c $HDDM_SOURCE_DIR/md5.c \
 
 This example turns once again to the template \texttt{exam1x.hddm} that is included
 with the source distribution. Use the instructions in the previous section to build
-the \texttt{hddm\_x} c API librar, then create a new main program source file and
+the \texttt{hddm\_x} c API library, then create a new main program source file and
 cut/paste the code below into it, then save it.
 
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-nclude "hddm_x.h"
+#include "hddm_x.h"
 
 int main()
 {
@@ -813,7 +814,7 @@ The shell environment variables containing the package installation paths in
 the above compile command may need to be customized for your own environment.
 Once it completes successfully, you will find the executable \texttt{write\_exam2}
 in the working directory. Run it as \texttt{./write\_exam2} and it should create
-a new hddm file called \texttt{exam2.hddm}. Running
+a new HDDM file called \texttt{exam2.hddm}. Running
 \texttt{hddm-{}xml write\_exam2.hddm} should produce output like the following.
 
 \vspace{0.5cm}
@@ -833,7 +834,7 @@ HDDM
 \vspace{0.5cm}
 
 This example explains most of what you need to know to set up HDDM c-structs
-in memory, and write them to an output file. All storage for hddm data is
+in memory, and write them to an output file. All storage for HDDM data is
 allocated on the heap. Most of this allocation is carried out automatically
 by the \texttt{make\_x\_XXXs()} functions, although for strings (char arrays)
 the user needs to allocate initial storage for the values. Memory pointed to
@@ -865,14 +866,14 @@ in the host struct that must be assigned in the user code to the value returned
 by the \texttt{make\_x\_XXXs()} function, as illustrated. Any such pointers
 that are not assigned remain null (initialized by \texttt{make\_x\_XXXs}) and
 represent parts of the template tree that are missing from the record. This
-is a perfectly valid hddm record, but user code must check for the NULL
+is a perfectly valid HDDM record, but user code must check for the NULL
 pointer condition before trying to dereference it since c has no automatic
 checking of the validity of pointers. As soon as a new struct array element is
 created, you can fill in the values of its attribute members using direct
 assignment semantics, as illustrated in the example above. Any values that
 are not explicitly assigned remain at the default values, typically zero or null.
 
-\subsection{reading hddm files in c}
+\subsection{reading HDDM files in c}
 
 This section assumes that you have created the file exam2.hddm using the 
 instructions in the previous section. The following c program opens this file
@@ -956,7 +957,7 @@ The \texttt{read\_x\_HDDM()} call allocates all of the memory needed to
 stand up the full record hierarchy in memory. The \texttt{flush\_x\_HDDM(record,0)}
 call at the end of the loop ensures that all of this memory gets recycled
 to the heap before the next record is read in. Accessing leaf elements that
-are deep inside the hddm template hierarchy can only be achieved by traversing
+are deep inside the HDDM template hierarchy can only be achieved by traversing
 all of the nodes in the tree above, which makes a simple data mining operation
 somewhat verbose, as illustrated in the above example, although it still scales
 well because the model is hierarchical, not a linked list. If you are unsure
@@ -984,7 +985,7 @@ a polite error message reporting this fact and quietly exits.
 
 \section{Advanced features}\label{Advanced_features}
 
-\subsection{on-{}the-{}fly compression/decompresson}
+\subsection{on-{}the-{}fly compression/decompression}
 
 HDDM streams added support for on-{}the-{}fly compression on output (and 
 decompression on input) with the introduction of the C++ API. Because the 
@@ -1039,7 +1040,7 @@ to distinguish different states of compression:
 \item \texttt{k\_bz2\_compression}
 \end{itemize}
 
-One of these three constans should be passed as mode to the 
+One of these three constants should be passed as mode to the 
 \texttt{setCompression(mode)} method of the \texttt{hddm\_x::ostream}
 class to initialize or change the compression state of any given output
 stream. All records written after this method is called will reflect the
@@ -1048,7 +1049,7 @@ stream can be queried by calling method \texttt{getCompression()}.
 The return value (int) can be compared with the three constants above
 to determine which of the three modes is presently enabled.
 
-In python HDDM modules, stream objects of class \texttt{hdd\_mx.istream}
+In python HDDM modules, stream objects of class \texttt{hddm\_x.istream}
 and \texttt{hddm\_x.ostream} support selection and sensing of the current
 compression mode by exposing read/write attribute \texttt{compression}.
 The named constants listed above are defined within the \texttt{hddm\_x}
@@ -1063,7 +1064,7 @@ around the C++ classes, it also supports this feature. Data integrity
 verification works by the writer computing a hash value on each output
 record and storing it as part of the output stream, which the reader then
 pulls off the stream and uses to verify the integrity of the data is reads
-from the stream. Two 32-{}bit hash algorithms are currently supported by hddm.
+from the stream. Two 32-{}bit hash algorithms are currently supported by HDDM.
 
 \begin{enumerate}
 \item{\bf CRC32} -{} the 32-{}bit cyclic redundancy check algorithm
@@ -1084,7 +1085,7 @@ but it is more expensive to compute than a CRC code. Neither MD5 nor CRC32
 options result in any noticeable overhead in the context of any models tested
 so far.
 
-In the C++ API, the hddm namespaces have defined the following constants to
+In the C++ API, the HDDM namespaces have defined the following constants to
 distinguish different states of data integrity checking:
 
 \begin{itemize}
@@ -1097,7 +1098,7 @@ One of these three values should be passed as mode to the
 \texttt{setIntegrityChecks(mode)} method of the \texttt{hddm\_x::ostream}
 class to change the current state of the output stream. All records written
 after this method is called will reflect this change. The present integrity
-checking mode of either an input or output hddm stream can be queried by
+checking mode of either an input or output HDDM stream can be queried by
 calling method \texttt{getIntegrityChecks()}. The return value (int) can
 be compared with the three constants above to determine which of the three
 integrity checking modes is presently enabled.
@@ -1108,11 +1109,11 @@ attribute \texttt{integrity}. The named constants listed above are defined
 within the \texttt{hddm\_x} module namespace. Setting CRC32 compression on
 an open ostream might look like, \texttt{fout.integrity = hddm\_x.k\_crc32\_integrity}.
 
-\subsection{random access to hddm records}
+\subsection{random access to HDDM records}
 
 HDDM streams added support for random access on input with the introduction
 of the python API. Because the python API is a thin wrapper around the C++
-classes, it is also supported by the C++ API. Random-{}access writing to hddm
+classes, it is also supported by the C++ API. Random-{}access writing to HDDM
 streams is not supported; the access point for output streams is always
 positioned after the end of the previous output record. Random-access reads
 are supported on any input stream that supports repositioning. To succeed,
@@ -1122,7 +1123,7 @@ initial phase when the stream was being written, or during a subsequent read
 pass over the same stream. The \texttt{getPosition()} query returns an opaque
 value representing a point in the stream either at the beginning of the first
 record, or immediately after the last valid record read or written on the 
-stream. Random access to individual records in the input hddm stream can
+stream. Random access to individual records in the input HDDM stream can
 take place in any order, and involve displacements either forward or reverse
 from the position of last access. 
 
@@ -1182,7 +1183,7 @@ in the input stream using a command like
 another position assignment is executed, reading proceeds in a serial
 fashion starting from the last record read from the stream.
 
-\section{Acknowledgements}
+\section{Acknowledgments}
 
 This work is supported by the U.S. National Science Foundation under grant 1812415
 

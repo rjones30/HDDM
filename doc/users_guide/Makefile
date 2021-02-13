@@ -17,4 +17,4 @@ all: guide.pdf
 	tar -zcf $@ $^
 
 clean:
-	rm -f *.aux *.log
+	rm -f *.aux *.log *.bak
