@@ -328,11 +328,11 @@ working through the language-{}specific procedures below.
 \section{HDDM in python}
 
 If you have access to a HDDM file that was already written, copy it into your
-work directory and use it as a template for building a python module to read the data
-into python list objects. Otherwise, the HDDM package distribution directory contains
-a simple example in \texttt{models/exam1x.hddm} that you can use for this purpose.
-Copy the HDDM file you are using for this test into a new project directory, and
-enter the following commands to build the python module for this data model. If
+work directory and use it as a template for building a python module to access the
+model data as python list objects. Otherwise, the HDDM package distribution directory
+contains a simple example in \texttt{models/exam1x.hddm} that you can use for this
+purpose. Copy the HDDM file you are using for this test into a new project directory,
+and enter the following commands to build the python module for this data model. If
 you encounter the error, ``command not found'', make sure that the bin directory
 where you installed the HDDM package is somewhere in your shell PATH.
 
@@ -519,8 +519,8 @@ See section \ref{Advanced_features} {Advanced features} below.
 \section{HDDM in C++}
 
 If you have access to a HDDM file that was already written, copy it into your
-work directory and use it as a template for building a C++ library to read and
-write data to/from C++  objects. Otherwise, the HDDM package distribution
+work directory and use it as a template for building a C++ library to access
+the model data as C++ objects. Otherwise, the HDDM package distribution
 directory contains a simple example in \texttt{models/exam1x.hddm} that you
 can use for this purpose. The following commands build the C++ library
 corresponding to your HDDM model.
@@ -711,8 +711,8 @@ See section \ref{Advanced_features} {Advanced features} below.
 \section{HDDM in c}
 
 If you have access to a HDDM file that was already written, copy it into your
-work directory and use it as a template for building a python module to read the data
-into c struct variables. Otherwise, the HDDM package distribution directory
+work directory and use it as a template for building a python module to access
+the model data as c struct records. Otherwise, the HDDM package distribution directory
 contains a simple example in \texttt{models/exam1x.hddm} that you can use for
 this purpose. The following commands build the c library that you will need
 to read and write HDDM streams that conform to this template.
