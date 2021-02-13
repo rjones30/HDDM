@@ -382,8 +382,7 @@ For this example, let us continue using the same template as was used in the
 example python HDDM reader above. You should already have built and installed
 the hddm\_x python module and installed it in your PYTHONPATH, using the build
 steps listed above. Execute the following python script to write a new output
-HDDM file from scratch, using and some test user data. This example is included
-in the distribution under \texttt{examples/exam2x\_writer.py}.
+HDDM file from scratch, using and some test user data.
 
 \vspace{0.5cm}
 \begin{minipage}{12cm}
@@ -481,9 +480,11 @@ for course in xrec.getCourses():
          total_credits += course.credits
       total_passed += 1
    total_enrolled += 1
-print(course.name, "enrolled in", total_courses, " courses",
+   studentname = course.name
+
+print(studentname, "enrolled in", total_courses, " courses",
        "and passed" , total_passed, "of them,\n",
-       "earning a total of", total_credits, "credits.\n")
+       "earning a total of", total_credits, "credits.")
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -494,7 +495,7 @@ Running the above code should produce output like the following:
 \begin{minipage}{12cm}
 \begin{verbatim}
 Humphrey Gaston enrolled in 3 courses and passed 3 of them,
-earning a total of 8 credits.
+ earning a total of 8 credits.
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -517,6 +518,10 @@ len(list), str(list), repr(list)) all work as expected for these hddm
 tag list objects returned by getXXXs() method. These natural python
 iteration and accessor semantics provide a quick-{}and-{}simple
 prototyping framework for analysis of repetitive experimental data.
+
+A slightly more complex example of reading and writing on HDDM streams
+based on this example template is found in the distribution under
+\texttt{examples/exam2.py}.
 
 \subsection{advanced features of the python API}
 
