@@ -347,7 +347,7 @@ $ python setup_hddm_x.py # creates the module hddm_x
 \vspace{0.5cm}
 
 In this example, I assigned `x' as the HDDM {\em class} letter (see the HDDM tag
-in the template header). You should change it to whatever the class abbreviation
+in the template header). You should change it to whatever class abbreviation
 you choose for your HDDM data model. The above steps should create a python module
 in the form of a shared library that starts with \texttt{hddm\_x} in your project
 directory. Copy that module to a directory in your PYTHONPATH where you usually
@@ -369,12 +369,12 @@ for rec in hddm_x.istream("exam1x.hddm"):
 
 To see the same data printed out as a properly formatted xml document, replace
 the \texttt{print(rec)} in the above python HDDM reader with 
-\texttt{print(rec.toXML())}'. 
+\texttt{print(rec.toXML())}. 
 If the above command generated no output then your input HDDM file is empty, as it
-would be if you used the example input file \texttt{models/exam1x.hddm}. Later on
-when you have written some data to the HDDM file, come back and try it again. The
-full set of methods and attributes supported by the python module is displayed by
-the command \texttt{pydoc hddm\_x}.
+would be if you used the example input file \texttt{models/exam1x.hddm}. After you
+have written some data to an HDDM file, as exlained in the next section, come back
+and try it again. The full set of methods and attributes supported by the python
+module is displayed by the command \texttt{pydoc hddm\_x}.
 
 \subsection{writing HDDM files in python}
 
