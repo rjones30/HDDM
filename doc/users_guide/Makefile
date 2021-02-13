@@ -16,5 +16,8 @@ all: guide.pdf
 %.tar: %.tex $(wildcard %.eps)
 	tar -zcf $@ $^
 
+install: guide.pdf
+	cp $^ ../users_guide.pdf
+
 clean:
 	rm -f *.aux *.log *.bak
