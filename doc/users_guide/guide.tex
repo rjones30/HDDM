@@ -392,9 +392,9 @@ element to be treated as a fixed-length binary object on serialization,
 which has advantages for efficient i/o. 
 \item  A datum that is sometimes absent can be expressed in the
 model by creating a sub-element to be contained within the host
-element with \texttt{minOccurs=''0''}, and assigning the optional
+element with \texttt{minOccurs=``0''}, and assigning the optional
 value as an attribute of the sub-element.
-\item  Fixed attributes (with \texttt{use=''fixed''}) may be attached
+\item  Fixed attributes (with \texttt{use=``fixed''}) may be attached
 to user-defined elements. They may be of any valid schema datatype,
 not just those listed above, and may be used as annotations to 
 qualify the information contained in the element. Because they have
@@ -452,7 +452,7 @@ same class, but it is not required.
 possible to form a union schema that will validate documents of
 either type by taking the xml union of the two schema documents
 and changing any sequence elements in one and not in the other
-to \texttt{minOccurs=''0''}. 
+to \texttt{minOccurs=``0''}. 
 \item  The translation tools \textbf{xml-hddm} and \textbf{hddm-xml}
 will work with any HDDM class. 
 \item  Any program built using the i/o library created with \textbf{hddm-c}
