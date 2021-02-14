@@ -3,7 +3,7 @@
 \tocdepth@restore 
 \contentsline {section}{\numberline {I}Introduction}{2}{}
 \contentsline {section}{\numberline {II}XML schemas and HDDM templates}{2}{}
-\contentsline {subsection}{\numberline {A}Rules for constructing HDDM templates}{3}{}
+\contentsline {subsection}{\numberline {A}rules for constructing HDDM templates}{3}{}
 \contentsline {subsection}{\numberline {B}rules for constructing HDDM schemas}{4}{}
 \contentsline {subsection}{\numberline {C}class relationships and model evolution}{5}{}
 \contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{6}{}
