@@ -278,7 +278,7 @@ The remainder of this document deals mainly only with templates.
 the structure of the xml that the program expects on input or produces on output.
 \item  The top element in the template must be $<$HDDM$>$ and have three required 
 attributes: {\em class}, {\em version}, and {\em xmlns}.
-The value of the latter must be \texttt{xmlns=``http://www.gluex.org/hddm''}.
+The value of the latter must be \texttt{xmlns="http://www.gluex.org/hddm"}.
 The values of the class and version arguments are user-defined. They serve to
 identify a family of schemas that share a common set of elements. See below for
 more details on classes. 
@@ -288,7 +288,7 @@ user-defined, but they must be constructed according to the following rules.
 Any text that appears between tags in the template is treated as a comment.
 \item  An element may have two kinds information attached to it: child
 elements which appear as new tags enclosed between the open and close tags
-of the parent element, and attributes which appear as \texttt{key=``value''}
+of the parent element, and attributes which appear as \texttt{key="value"}
 items inside the open tag. 
 \item  All variable quantities in the data model are carried by named
 attributes of elements. The rest of the document exists to express the
@@ -297,9 +297,9 @@ meaning of the data and the relationships between them.
 other elements, or both. Empty elements are meaningless, and are not allowed. 
 \item  A template contains type names in the place of actual numerical or
 string values for the fields in the structure. For example, instead of
-showing \texttt{energy=``12.5''} as might be shown for sample data, the
-template would show in this position \texttt{energy=``float''} or
-\texttt{energy=``double''}.
+showing \texttt{energy="12.5"} as might be shown for sample data, the
+template would show in this position \texttt{energy="float"} or
+\texttt{energy="double"}.
 \item  The complete list of allowed types supported by HDDM is ``int'',
 ``long'', ``float'', ``double'', ``boolean'', ``string'', ``anyURI'', and
 ``Particle\_t''. The Particle\_t type is a value from an enumerated list
@@ -321,7 +321,7 @@ a HDDM stream.
 \item  By default, it is assumed that an element appearing in the template
 must appear in that position exactly once. If the element is allowed to
 appear more than once or not at all then additional attributes should be
-supplied of the form \texttt{minOccurs=``N1''} and \texttt{maxOccurs=``N2''}
+supplied of the form \texttt{minOccurs="N1"} and \texttt{maxOccurs="N2"}
 where \texttt{N1} can be zero or any positive integer and \texttt{N2}
 can be any integer no smaller than \texttt{N1}, or set to the string
 ``unbounded''. Each defaults to 1. 
@@ -357,7 +357,7 @@ for HDDM schemas are represented by the private namespace
 \item  The top element defined by the schema must be \texttt{<HDDM>} 
 and have three required attributes: \texttt{class}, \texttt{version},
 and \texttt{xmlns}. The value of the latter must be
-\texttt{xmlns=``http://www.gluex.org/hddm''}. The class and version
+\texttt{xmlns="http://www.gluex.org/hddm"}. The class and version
 arguments are of type \texttt{xs:string} and are user-defined. They
 serve to identify a group of schemas that share a basic set of tags.
 \item  The names of elements below the root \texttt{<HDDM>} element
@@ -375,9 +375,9 @@ of the data and the relationships between them.
 contain other elements, or both. Empty nodes are meaningless, and
 are not allowed. 
 \item  Text content between open and close tags is allowed in
-documents (\texttt{type=``mixed''}) but it is treated as a comment
+documents (\texttt{type="mixed"}) but it is treated as a comment
 and stripped on translation to a template. Basic HDDM schemas do
-not use \texttt{type=``mixed''} elements. 
+not use \texttt{type="mixed"} elements. 
 \item  The datatype of an attribute is restricted to a subset of
 basic types to simplify the task of translation. Currently the list is
 \texttt{xs:int}, \texttt{xs:long}, \texttt{xs:float}, \texttt{xs:double},
@@ -392,9 +392,9 @@ element to be treated as a fixed-length binary object on serialization,
 which has advantages for efficient i/o. 
 \item  A datum that is sometimes absent can be expressed in the
 model by creating a sub-element to be contained within the host
-element with \texttt{minOccurs=``0''}, and assigning the optional
+element with \texttt{minOccurs="0"}, and assigning the optional
 value as an attribute of the sub-element.
-\item  Fixed attributes (with \texttt{use=``fixed''}) may be attached
+\item  Fixed attributes (with \texttt{use="fixed"}) may be attached
 to user-defined elements. They may be of any valid schema datatype,
 not just those listed above, and may be used as annotations to 
 qualify the information contained in the element. Because they have
@@ -452,7 +452,7 @@ same class, but it is not required.
 possible to form a union schema that will validate documents of
 either type by taking the xml union of the two schema documents
 and changing any sequence elements in one and not in the other
-to \texttt{minOccurs=``0''}. 
+to \texttt{minOccurs="0"}. 
 \item  The translation tools \textbf{xml-hddm} and \textbf{hddm-xml}
 will work with any HDDM class. 
 \item  Any program built using the i/o library created with \textbf{hddm-c}
