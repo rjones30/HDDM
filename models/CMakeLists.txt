@@ -11,7 +11,7 @@ list(APPEND MODEL_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
                                ${ZLIB_INCLDUE_DIRS}
     )
 
-add_custom_target(python_module_install ALL)
+add_custom_target(python_modules)
 
 list(LENGTH MODELS count)
 math(EXPR count "${count}-1")
@@ -26,10 +26,10 @@ foreach(i RANGE ${count})
    )
    add_custom_target(python_module_${class}
      COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
-     COMMAND python setup_hddm_${class}.py
+     COMMAND python ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp
    )
-   add_dependencies(python_module_install python_module_${class})
+   add_dependencies(python_modules python_module_${class})
    add_library(lib${model} STATIC hddm_${class}.c hddm_${class}++.cpp)
    target_include_directories(lib${model} PUBLIC ${MODEL_INCLUDE_DIRS})
    install(TARGETS lib${model} DESTINATION lib64)
