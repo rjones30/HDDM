@@ -1,31 +1,31 @@
 \tocdepth@munge 
-\contentsline {section}{\numberline {}Contents}{1}{}
+\contentsline {section}{\numberline {}Contents}{2}{}
 \tocdepth@restore 
-\contentsline {section}{\numberline {I}Introduction}{2}{}
-\contentsline {section}{\numberline {II}XML schemas and HDDM templates}{2}{}
-\contentsline {subsection}{\numberline {A}rules for constructing HDDM templates}{3}{}
-\contentsline {subsection}{\numberline {B}rules for constructing HDDM schemas}{4}{}
-\contentsline {subsection}{\numberline {C}class relationships and model evolution}{5}{}
-\contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{6}{}
-\contentsline {section}{\numberline {IV}HDDM in python}{7}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in python}{7}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in python}{8}{}
-\contentsline {subsection}{\numberline {C}python API reference}{9}{}
-\contentsline {section}{\numberline {V}HDDM in C++}{9}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in C++}{10}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{11}{}
-\contentsline {subsection}{\numberline {C}C++ API reference}{12}{}
-\contentsline {section}{\numberline {VI}HDDM in c}{12}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in c}{13}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in c}{15}{}
-\contentsline {subsection}{\numberline {C}c API reference}{17}{}
-\contentsline {section}{\numberline {VII}Advanced features}{17}{}
-\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{17}{}
-\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{18}{}
-\contentsline {subsection}{\numberline {C}random access to HDDM records}{19}{}
-\contentsline {section}{\numberline {VIII}Support for HDF5 file format}{19}{}
-\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{21}{}
-\contentsline {subsection}{\numberline {B}python API elements for HDF5}{23}{}
-\contentsline {subsection}{\numberline {C}thread safety of HDDM i/o with HDF5}{25}{}
-\contentsline {section}{\numberline {}Acknowledgments}{25}{}
-\contentsline {section}{\numberline {}References}{25}{}
+\contentsline {section}{\numberline {I}Introduction}{3}{}
+\contentsline {section}{\numberline {II}XML schemas and HDDM templates}{3}{}
+\contentsline {subsection}{\numberline {A}rules for constructing HDDM templates}{4}{}
+\contentsline {subsection}{\numberline {B}rules for constructing HDDM schemas}{5}{}
+\contentsline {subsection}{\numberline {C}class relationships and model evolution}{6}{}
+\contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{7}{}
+\contentsline {section}{\numberline {IV}HDDM in python}{8}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in python}{8}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in python}{9}{}
+\contentsline {subsection}{\numberline {C}python API reference}{10}{}
+\contentsline {section}{\numberline {V}HDDM in C++}{10}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in C++}{11}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{12}{}
+\contentsline {subsection}{\numberline {C}C++ API reference}{13}{}
+\contentsline {section}{\numberline {VI}HDDM in c}{13}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in c}{14}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in c}{16}{}
+\contentsline {subsection}{\numberline {C}c API reference}{18}{}
+\contentsline {section}{\numberline {VII}Advanced features}{18}{}
+\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{18}{}
+\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{19}{}
+\contentsline {subsection}{\numberline {C}random access to HDDM records}{20}{}
+\contentsline {section}{\numberline {VIII}Support for HDF5 file format}{20}{}
+\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{22}{}
+\contentsline {subsection}{\numberline {B}python API elements for HDF5}{24}{}
+\contentsline {subsection}{\numberline {C}thread safety of HDDM i/o with HDF5}{26}{}
+\contentsline {section}{\numberline {}Acknowledgments}{26}{}
+\contentsline {section}{\numberline {}References}{26}{}
