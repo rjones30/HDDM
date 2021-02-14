@@ -1477,11 +1477,11 @@ from a HDDM file,
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-std::ifstream hddm\_file("my\_sims.hddm");
-hddm\_s::istream hddm\_in(hddm\_file);
-hddm\_s::HDDM record;
-while (hddm\_in >> record) { do\_your\_thing(record); }
-hddm\_in.close();
+std::ifstream hddm_file("my_sims.hddm");
+hddm_s::istream hddm_in(hddm_file);
+hddm_s::HDDM record;
+while (hddm_in >> record) { do_your_thing(record); }
+hddm_in.close();
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1491,10 +1491,10 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-hid\_t hdf5\_in = hddm\_s::HDDM::hdf5FileOpen(?my\_sims.hdf5?);
-hddm\_s::HDDM record;
-while (record.hdf5FileRead(hdf5\_in) == 0) { do\_your\_thing(record); }
-hddm\_s::HDDM::hdf5FileClose(hdf5\_in);
+hid_t hdf5_in = hddm_s::HDDM::hdf5FileOpen(?my_sims.hdf5?);
+hddm_s::HDDM record;
+while (record.hdf5FileRead(hdf5_in) == 0) { do_your_thing(record); }
+hddm_s::HDDM::hdf5FileClose(hdf5_in);
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1504,11 +1504,11 @@ Similarly, for a C++ application writing to a HDDM file, replace
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-std::ofstream hddm\_file(?my\_sims.hddm?);
-hddm\_s::ostream hddm\_out(hddm\_file);
-hddm\_s::HDDM record;
-while ( do\_your\_thing(record) ) { hddm\_out << record; }
-hddm\_out.close();
+std::ofstream hddm_file(?my_sims.hddm?);
+hddm_s::ostream hddm_out(hddm_file);
+hddm_s::HDDM record;
+while ( do_your_thing(record) ) { hddm_out << record; }
+hddm_out.close();
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1518,10 +1518,10 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-hid\_t hdf5\_out = hddm\_s::HDDM::hdf5FileCreate(?my\_sims.hdf5?);
-hddm\_s::HDDM record;
-while ( do\_your\_thing(record) ) { record.hdf5FileWrite(hdf5\_out); }
-hddm\_s::HDDM::hdf5FileClose(hdf5\_out);
+hid_t hdf5_out = hddm_s::HDDM::hdf5FileCreate(?my_sims.hdf5?);
+hddm_s::HDDM record;
+while ( do_your_thing(record) ) { record.hdf5FileWrite(hdf5_out); }
+hddm_s::HDDM::hdf5FileClose(hdf5_out);
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1536,9 +1536,9 @@ HDDM file, simply replace
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-import hddm\_s
-for record in hddm\_s.istream(?my\_sims.hddm?):
-   do\_your\_thing(record)
+import hddm_s
+for record in hddm_s.istream(?my_sims.hddm?):
+   do_your_thing(record)
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1548,12 +1548,12 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-import hddm\_s
-record = hddm\_s.HDDM()
-hdf5\_in = hddm\_s.hdf5FileOpen(?my\_sims.hdf5?)
-while record.hdf5FileRead(hdf5\_in) == 0:
-   do\_your\_thing(record)
-hddm\_s.hdf5FileClose(hdf5\_in)
+import hddm_s
+record = hddm_s.HDDM()
+hdf5_in = hddm_s.hdf5FileOpen(?my_sims.hdf5?)
+while record.hdf5FileRead(hdf5_in) == 0:
+   do_your_thing(record)
+hddm_s.hdf5FileClose(hdf5_in)
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1563,12 +1563,12 @@ Similarly, for a python application writing to a hddm file, replace
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-import hddm\_s
-record = hddm\_s.HDDM()
-hddm\_out = hddm\_s.ostream(?my\_sims.hddm?)
-while do\_your\_thing(record):
-   hddm\_out.write(record)
-hddm\_out.close()
+import hddm_s
+record = hddm_s.HDDM()
+hddm_out = hddm_s.ostream(?my_sims.hddm?)
+while do_your_thing(record):
+   hddm_out.write(record)
+hddm_out.close()
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
@@ -1578,12 +1578,12 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-import hddm\_s
-record = hddm\_s.HDDM()
-hddm\_out = hddm\_s.hdf5FileCreate(?my\_sims.hddm?)
-while do\_your\_thing(record):
-   record.hdf5FileWrite(hddm\_out)
-hddm\_out.close()
+import hddm_s
+record = hddm_s.HDDM()
+hddm_out = hddm_s.hdf5FileCreate(?my_sims.hddm?)
+while do_your_thing(record):
+   record.hdf5FileWrite(hddm_out)
+hddm_out.close()
 \end{verbatim}
 \end{minipage}
 \vspace{0.5cm}
