@@ -74,11 +74,10 @@ add_subdirectory(schemas)
 add_subdirectory(models)
 add_subdirectory(examples)
 
-# install the example python modules
-install(CODE
-  "execute_process(
+# define a separate target for the example python modules
+add_custom_target(modules_install
       COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_installer.sh
               ${CMAKE_BINARY_DIR}/models 
               ${CMAKE_INSTALL_PREFIX}
-   )"
+      DEPENDS python_modules
 )
