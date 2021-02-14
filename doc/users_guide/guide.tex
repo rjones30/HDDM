@@ -1491,7 +1491,7 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-hid_t hdf5_in = hddm_s::HDDM::hdf5FileOpen(?my_sims.hdf5?);
+hid_t hdf5_in = hddm_s::HDDM::hdf5FileOpen("my_sims.hdf5");
 hddm_s::HDDM record;
 while (record.hdf5FileRead(hdf5_in) == 0) { do_your_thing(record); }
 hddm_s::HDDM::hdf5FileClose(hdf5_in);
@@ -1504,7 +1504,7 @@ Similarly, for a C++ application writing to a HDDM file, replace
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-std::ofstream hddm_file(?my_sims.hddm?);
+std::ofstream hddm_file("my_sims.hddm");
 hddm_s::ostream hddm_out(hddm_file);
 hddm_s::HDDM record;
 while ( do_your_thing(record) ) { hddm_out << record; }
@@ -1518,7 +1518,7 @@ with
 \vspace{0.5cm}
 \begin{minipage}{12cm}
 \begin{verbatim}
-hid_t hdf5_out = hddm_s::HDDM::hdf5FileCreate(?my_sims.hdf5?);
+hid_t hdf5_out = hddm_s::HDDM::hdf5FileCreate("my_sims.hdf5");
 hddm_s::HDDM record;
 while ( do_your_thing(record) ) { record.hdf5FileWrite(hdf5_out); }
 hddm_s::HDDM::hdf5FileClose(hdf5_out);
@@ -1537,7 +1537,7 @@ HDDM file, simply replace
 \begin{minipage}{12cm}
 \begin{verbatim}
 import hddm_s
-for record in hddm_s.istream(?my_sims.hddm?):
+for record in hddm_s.istream("my_sims.hddm"):
    do_your_thing(record)
 \end{verbatim}
 \end{minipage}
@@ -1550,7 +1550,7 @@ with
 \begin{verbatim}
 import hddm_s
 record = hddm_s.HDDM()
-hdf5_in = hddm_s.hdf5FileOpen(?my_sims.hdf5?)
+hdf5_in = hddm_s.hdf5FileOpen("my_sims.hdf5")
 while record.hdf5FileRead(hdf5_in) == 0:
    do_your_thing(record)
 hddm_s.hdf5FileClose(hdf5_in)
@@ -1565,7 +1565,7 @@ Similarly, for a python application writing to a hddm file, replace
 \begin{verbatim}
 import hddm_s
 record = hddm_s.HDDM()
-hddm_out = hddm_s.ostream(?my_sims.hddm?)
+hddm_out = hddm_s.ostream("my_sims.hddm")
 while do_your_thing(record):
    hddm_out.write(record)
 hddm_out.close()
@@ -1580,7 +1580,7 @@ with
 \begin{verbatim}
 import hddm_s
 record = hddm_s.HDDM()
-hddm_out = hddm_s.hdf5FileCreate(?my_sims.hddm?)
+hddm_out = hddm_s.hdf5FileCreate("my_sims.hddm")
 while do_your_thing(record):
    record.hdf5FileWrite(hddm_out)
 hddm_out.close()
