@@ -1,24 +1,28 @@
 \tocdepth@munge 
 \contentsline {section}{\numberline {}Contents}{1}{}
 \tocdepth@restore 
-\contentsline {section}{\numberline {I}Introduction}{1}{}
+\contentsline {section}{\numberline {I}Introduction}{2}{}
 \contentsline {section}{\numberline {II}XML schemas and HDDM templates}{2}{}
-\contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{3}{}
-\contentsline {section}{\numberline {IV}HDDM in python}{3}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in python}{4}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in python}{5}{}
-\contentsline {subsection}{\numberline {C}python API reference}{6}{}
-\contentsline {section}{\numberline {V}HDDM in C++}{6}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in C++}{6}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{8}{}
-\contentsline {subsection}{\numberline {C}C++ API reference}{9}{}
-\contentsline {section}{\numberline {VI}HDDM in c}{9}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in c}{9}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in c}{11}{}
-\contentsline {subsection}{\numberline {C}c API reference}{13}{}
-\contentsline {section}{\numberline {VII}Advanced features}{13}{}
-\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{13}{}
-\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{14}{}
-\contentsline {subsection}{\numberline {C}random access to HDDM records}{15}{}
-\contentsline {section}{\numberline {VIII}Acknowledgments}{15}{}
-\contentsline {section}{\numberline {IX}References}{15}{}
+\contentsline {subsection}{\numberline {A}Rules for constructing HDDM templates}{3}{}
+\contentsline {subsection}{\numberline {B}rules for constructing HDDM schemas}{4}{}
+\contentsline {subsection}{\numberline {C}class relationships and model evolution}{5}{}
+\contentsline {section}{\numberline {III}Overview of the HDDM toolkit}{6}{}
+\contentsline {section}{\numberline {IV}HDDM in python}{7}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in python}{7}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in python}{8}{}
+\contentsline {subsection}{\numberline {C}python API reference}{9}{}
+\contentsline {section}{\numberline {V}HDDM in C++}{9}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in C++}{10}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{11}{}
+\contentsline {subsection}{\numberline {C}C++ API reference}{12}{}
+\contentsline {section}{\numberline {VI}HDDM in c}{12}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in c}{13}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in c}{15}{}
+\contentsline {subsection}{\numberline {C}c API reference}{17}{}
+\contentsline {section}{\numberline {VII}Advanced features}{17}{}
+\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{17}{}
+\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{18}{}
+\contentsline {subsection}{\numberline {C}random access to HDDM records}{19}{}
+\contentsline {section}{\numberline {VIII}Acknowledgments}{19}{}
+\contentsline {section}{\numberline {IX}References}{20}{}
+\contentsline {section}{\numberline {}References}{20}{}
