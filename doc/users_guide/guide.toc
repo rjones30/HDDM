@@ -23,6 +23,9 @@
 \contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{17}{}
 \contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{18}{}
 \contentsline {subsection}{\numberline {C}random access to HDDM records}{19}{}
-\contentsline {section}{\numberline {VIII}Support for HDF5 file format}{20}{}
-\contentsline {section}{\numberline {}Acknowledgments}{20}{}
-\contentsline {section}{\numberline {}References}{20}{}
+\contentsline {section}{\numberline {VIII}Support for HDF5 file format}{19}{}
+\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{21}{}
+\contentsline {subsection}{\numberline {B}python API elements for HDF5}{23}{}
+\contentsline {subsection}{\numberline {C}thread safety of HDDM i/o with HDF5}{25}{}
+\contentsline {section}{\numberline {}Acknowledgments}{25}{}
+\contentsline {section}{\numberline {}References}{25}{}

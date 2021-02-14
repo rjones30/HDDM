@@ -1415,6 +1415,408 @@ fashion starting from the last record read from the stream.
 
 \section{Support for HDF5 file format}
 
+When selecting a binary format for HDDM, there were several open standards
+that were considered. One that was very close conceptually to HDDM was 
+BinX~\cite{binx} but the implementation of BinX was not complete at the
+time HDDM was being developed, and the future of support for BinX or the
+extent of community adoption was unclear at the time. Also the generality
+of BinX in its capability of representing an arbitrary well-formed XML
+document limited the potential optimizations that could be used for the
+regularly repeating structures that are present in data from modern
+scientific instruments.
+
+Another option that was consider during the design of HDDM was to use
+the HDF file format. HDF was already quite mature at the time, with broad
+community acceptance, and it was well-optimized for encoding the repeated
+structures of scientific data. However, HDF had the limiting constraint
+that all structures have fixed length at all but the highest level of
+the hierarchy. This one limitation made it very difficult to encode
+structures with variable-length lists at all levels of the hierarchy,
+which led to the decision for HDDM to have its own custom binary encoding
+based on XDR~\cite{xdr}.
+
+Since the time that decision was made, the HDF standard has evolved into
+HDF5~\cite{hdf5}, and support for ragged arrays has been introduced. This
+has made it possible to add support in HDDM for HDF5 file encoding without
+any changes to the HDDM data access API. Although it is not as efficient
+or compact as the HDDM native format, HDF5 encoding offers important
+advantages as a public format for publishing, archival, interchange of
+scientific data; widely used on science portals. HDF5 has persistent
+community support, is well documented, and has extensive tunability
+for optimized i/o on a wide variety of platforms from desktops to HPC
+facilities. 
+
+HDF5 is not a replacement for HDDM because it is only an i/o library.
+By contrast, HDDM contains an i/o library, but also supports data inspection
+/ mutation C++ semantics, similar to a STL container. Adding the capability
+to layer HDF5 under HDDM provides the installed HDDM application codebase
+the ability to read and write data in a standard archival format with very
+little additional work for users. HDF5 supports indexed files (random-access
+i/o) which means one can get rapid access to random events without reading
+the entire stream. 
+
+Adding HDF5 i/o functionality to existing HDDM applications is relatively 
+simple: replace the existing HDDM i/o semantics in a C++ application reading
+from a HDDM file,
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+std::ifstream hddm\_file("my\_sims.hddm");
+hddm\_s::istream hddm\_in(hddm\_file);
+hddm\_s::HDDM record;
+while (hddm\_in >> record) { do\_your\_thing(record); }
+hddm\_in.close();
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+with
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+hid\_t hdf5\_in = hddm\_s::HDDM::hdf5FileOpen(?my\_sims.hdf5?);
+hddm\_s::HDDM record;
+while (record.hdf5FileRead(hdf5\_in) == 0) { do\_your\_thing(record); }
+hddm\_s::HDDM::hdf5FileClose(hdf5\_in);
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+Similarly, for a C++ application writing to a HDDM file, replace
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+std::ofstream hddm\_file(?my\_sims.hddm?);
+hddm\_s::ostream hddm\_out(hddm\_file);
+hddm\_s::HDDM record;
+while ( do\_your\_thing(record) ) { hddm\_out << record; }
+hddm\_out.close();
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+with
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+hid\_t hdf5\_out = hddm\_s::HDDM::hdf5FileCreate(?my\_sims.hdf5?);
+hddm\_s::HDDM record;
+while ( do\_your\_thing(record) ) { record.hdf5FileWrite(hdf5\_out); }
+hddm\_s::HDDM::hdf5FileClose(hdf5\_out);
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+A more complete description of the HDF5 additions to the HDDM C++ API is
+given in the following section.
+
+A similar set of extensions have been introduced to the HDDM python module
+to support HDF5 i/o semantics. For a python application that reads from a
+HDDM file, simply replace
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+import hddm\_s
+for record in hddm\_s.istream(?my\_sims.hddm?):
+   do\_your\_thing(record)
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+with
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+import hddm\_s
+record = hddm\_s.HDDM()
+hdf5\_in = hddm\_s.hdf5FileOpen(?my\_sims.hdf5?)
+while record.hdf5FileRead(hdf5\_in) == 0:
+   do\_your\_thing(record)
+hddm\_s.hdf5FileClose(hdf5\_in)
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+Similarly, for a python application writing to a hddm file, replace
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+import hddm\_s
+record = hddm\_s.HDDM()
+hddm\_out = hddm\_s.ostream(?my\_sims.hddm?)
+while do\_your\_thing(record):
+   hddm\_out.write(record)
+hddm\_out.close()
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+with
+
+\vspace{0.5cm}
+\begin{minipage}{12cm}
+\begin{verbatim}
+import hddm\_s
+record = hddm\_s.HDDM()
+hddm\_out = hddm\_s.hdf5FileCreate(?my\_sims.hddm?)
+while do\_your\_thing(record):
+   record.hdf5FileWrite(hddm\_out)
+hddm\_out.close()
+\end{verbatim}
+\end{minipage}
+\vspace{0.5cm}
+
+\subsection{C++ API elements for HDF5}
+
+\begin{itemize}
+\item \texttt{static hid\_t hddm\_*::HDDM::hdf5FileCreate(std::string name, unsigned int flags=0)}\\
+Opens a new HDF5 file name for writing with access flags, and returns the HDF5
+identifier for the new file. The following values are supported for flags, defined
+in H5Fpublic.h:
+\begin{itemize}
+\item \texttt{H5F\_ACC\_TRUNC} (default) - truncate file, if it already exists, 
+erasing all data previously stored in the file
+\item \texttt{H5F\_ACC\_EXCL} - fail if file already exists.
+\end{itemize}
+An implicit call to hdf5FileStamp is made by hdf5FileCreate so that any records
+subsequently written with hdf5FileWrite will be stamped with the appropriate HDDM
+metadata for this class. Failure is indicated by a negative value in the returned
+identifier.
+
+\item \texttt{static hid\_t hddm\_*::HDDM::hdf5FileOpen(std::string name, unsigned int flags=0)}\\
+Opens an existing HDF5 file name for reading with access flags, and returns
+the HDF5 identifier for the file. The following values are supported for 
+flags, defined in H5Fpublic.h:
+\begin{itemize}
+\item \texttt{H5F\_ACC\_RDONLY} (default) - allow read-only access to file.
+\item \texttt{H5F\_ACC\_RDWR} (default) - allow read and write access to file.
+\end{itemize}
+An implicit call to hdf5FileCheck is made by hdf5FileOpen so that any 
+records subsequently read with hdf5FileRead are validated against the
+appropriate HDDM metadata for this class. Failure is indicated by a
+negative value in the returned identifier.
+\item \texttt{static herr\_t hddm\_*::HDDM::hdf5FileClose(hid\_t file\_id)}\\
+Closes an HDF5 file that has been previously opened by hdf5FileOpen
+or hdf5FileCreate. Failure is indicated by a negative returned value.
+\item \texttt{herr\_t hddm\_*::HDDM::hdf5FileWrite(hid\_t file\_id, long int entry=-1)}\\
+Writes this record to the HDDM dataset at the output HDF5 location
+identified by file\_id. The file\_id may be either the value returned from 
+a call to HDDM::hdf5FileCreate, or the HDF5 identifier of any HDF5 file or
+group within a file that was opened for writing. The optional argument entry
+is the record number offset from the start of the output dataset where this
+record should be written. A value of -1 for entry (or omitted) causes the 
+write to take place at the current offset in the file, which is one past 
+the last record written or the start of the dataset, if this is the first
+write. For the output record to be readable later through this API, the
+output file or group must be stamped for hddm output, but this is not
+checked by hdf5FileWrite. Output hddm record stamping is performed
+automatically by HDDM::hdf5FileCreate, but may also be done manually 
+using HDDM::hdf5FileStamp if the user independently manages the opening
+and closing of HDF5 groups and files. 
+\item \texttt{herr\_t hddm\_*::HDDM::hdf5FileRead(hid\_t file\_id, long int entry=-1)}\\
+Reads a record from the HDDM dataset at the input HDF5 location 
+identified by file\_id. The file\_id may be either the value returned
+from a call to HDDM::hdf5FileOpen, or the HDF5 identifier of any HDF5
+file or group within a file that was opened for reading. The optional 
+argument entry is the record number offset from the start of the output
+dataset where this record should be read. A value of -1 for entry (or
+omitted) causes the read to take place at the current offset in the file,
+which is one past the last record read or the start of the dataset, if
+this is the first read. For the input record to be readable, this file
+or group must have been stamped for hddm input (see HDDM::hdf5FileCheck),
+but this is not checked by hdf5FileRead. 
+\item \texttt{static herr\_t hddm\_*::HDDM::hdf5FileStamp(hid\_t file\_id, char **tags=0)}\\
+Creates or updates the HDDM metadata stamp for this HDDM class in the
+HDF5 output file location given by file\_id. The output file is presumed
+to already have been opened for writing. The tags argument is an optional
+zero-terminated list of user-defined strings that are appended to the HDDM
+metadata stamp before it is written. These can be used later when the dataset
+is read (see hdf5FileCheck) to verify that the dataset meets certain 
+user-defined requirements, in addition to the basic HDDM metadata stamp
+validation.
+\item \texttt{static herr\_t hddm\_*::HDDM::hdf5FileCheck(hid\_t file\_id, char **tags=0)}\\
+Checks the HDDM metadata stamp for this HDDM class in the HDF5 input file 
+location given by file\_id. The input file or group is presumed to already
+have been opened for writing. The tags argument is an optional zero-terminated
+list of user-defined strings that are checked against the HDDM metadata stamp
+that was saved when the dataset was written. These can be used later to verify
+that the dataset meets certain user-defined requirements, in addition to the
+basic HDDM metadata stamp validation.
+\item \texttt{static std::string hddm\_*::HDDM::hdf5DocumentString(hid\_t file\_id)}\\
+Returns the HDDM metadata string that is saved in the currently open HDF5
+location file\_id. Normally the user does not need to be concerned with the
+literal meaning of this string, only that its value matches what is returned by
+HDDM::DocumentString() for this HDDM class.
+\item \texttt{static long int hddm\_*::HDDM::hdf5GetEntries(hid\_t file\_id)}\\
+Returns the current number of entries in the HDDM dataset presumed to already
+exist in HDF5 location file\_id, already presumed to be open. The file\_id may
+be currently open for either reading or writing. If it is open for writing
+then at least one record must already have been written, otherwise this command
+will fail because the dataset does not yet exist in the file.
+\item \texttt{static herr\_t hddm\_*::HDDM::hdf5SetChunksize(hid\_t file\_id, hsize\_t chunksize)}\\
+Sets the chunk size for output to the HDF5 location given by file\_id, presumed
+to be already open for writing. For information about the concept of chunks in
+HDF5 files, see the HDF5 documentation. The HDF5 standard requires that the
+chunk size must be set before the first output record is written to the file,
+otherwise the request to change the chunk size is ignored. The default chunk 
+size for HDDM output is set when the file is opened to the value of 
+HDF5\_DEFAULT\_CHUNK\_SIZE in the hddm\_*.hpp header file. At the time of this
+writing, the default value is 100.
+\item \texttt{static hsize\_t hddm\_*::HDDM::hdf5GetChunksize(hid\_t file\_id)}\\
+Returns the chunk size that was used for writing the HDDM dataset to the HDF5
+location given by file\_id.  The file\_id may be currently open for either
+reading or writing. If it is open for writing then at least one record must
+already have been written, otherwise this command will return the default
+chunk size because the dataset does not yet exist in the file. For information
+about the concept of chunks in HDF5 files, see the HDF5 documentation.
+\item \texttt{static herr\_t hddm\_\*::HDDM::hdf5SetFilters(hid\_t file\_id, std::vector<H5Z\_filter\_t> \&filters)}\\
+Assigns an ordered list of HDF5 filters for use in subsequent writes to the HDF5
+location file\_id.  Filters are used by the HDF5 library mainly for data 
+compression and integrity checks. Each is identified by a unique integer that
+is registered for that filter with the HDF5 library. Filters are configurable
+by the user only when the dataset is written. When the dataset is read back 
+later, the library automatically selects the correct set of filters so that
+valid data can be read back into memory. Any valid filter identifier supported
+by the local build of the HDF5 library can be included in the filters list.
+The following known filter identifier constants are defined within the HDDM 
+header for convenience. By default, no filters are configured for HDDM output
+datasets.
+\begin{itemize}
+\item \texttt{k\_hdf5\_gzip\_filter} - gzip standard compression provided by hdf5
+\item \texttt{k\_hdf5\_szip\_filter} - szip standard compression provided by hdf5
+\item \texttt{k\_hdf5\_bzip2\_plugin} - bzip2 lossless compression used by PyTables
+\item \texttt{k\_hdf5\_blosc\_plugin} - Blosc lossless compression used by PyTables
+\item \texttt{k\_hdf5\_bshuf\_plugin} - bitshuffle shuffle filter at bit level instead of byte level
+\item \texttt{k\_hdf5\_jpeg\_plugin} - JPEG-XR compression filter used in jpeg images
+\item \texttt{k\_hdf5\_lz4\_plugin} - LZ4 fast lossless compression algorithm
+\item \texttt{k\_hdf5\_lzf\_plugin} - LZF fast lossless compression used by H5Py project
+\item \texttt{k\_hdf5\_lzma\_plugin} - modified LZMA compression filter (MAFISC)
+\item \texttt{k\_hdf5\_zfp\_plugin} - zfp rate, accuracy, or precision bounded compression for arrays of floats
+\end{itemize}
+\item \texttt{static herr\_t hddm\_\*::HDDM::hdf5GetFilters(hid\_t file\_id, std::vector<H5Z\_filter\_t> \&filters)}\\
+Gets the ordered list of HDF5 filters that are configured for i/o of HDDM
+datasets to the HDF5 location file\_id.  Filters are used by the HDF5 library
+mainly for data compression and integrity checks. Each is identified by a
+unique integer that is registered for that filter with the HDF5 library. For
+a partial list of supported filters, see the API description under hdf5SetFilters.
+\end{itemize}
+
+\subsection{python API elements for HDF5}
+
+\begin{itemize}
+\item \texttt{hddm\_*.hdf5FileCreate(name, flags=0)}\\
+Create a new HDF5 file name, and open for writing HDDM records. For the
+meaning of the unsigned integer argument flags, see the corresponding method
+description under the C++ HDDM user API. Return value is the HDF5 location
+identifier for use in subsequent HDF5 i/o and dataset query operations.
+\item \texttt{hddm\_*.hdf5FileOpen(name, flags=0)}\\
+Open an existing HDF5 file for reading HDDM records. For the meaning of the
+unsigned integer argument flags, see the corresponding method description under
+the C++ HDDM user API. Return value is the HDF5 location identifier for use in
+subsequent HDF5 i/o and dataset query operations.
+\item \texttt{hddm\_*.hdf5FileClose(file\_id)}\\
+Close an open HDF5 file and free its HDF5 resources. Return value is zero if
+the operation succeeded, negative if it failed.
+\item \texttt{record.hdf5FileWrite(file\_id, entry=-1)}\\
+Perform a random-access write from this HDDM record to an output HDF5 file 
+identified by file\_id. The record is written to the output dataset at offset
+entry, or one past the last written record if entry is -1 (or missing). Return
+value is zero if the operation succeeded, negative if it failed.
+\item \texttt{record.hdf5FileRead(file\_id, entry=-1)}\\
+Perform a random-access read into this HDDM record from an input HDF5 file
+identified by file\_id .The record is read from the output dataset at offset
+entry, or one past the last written record if entry is -1 (or missing). Return
+value is zero if the operation succeeded, negative if it failed.
+\item \texttt{hddm\_*.hdf5FileStamp(file\_id, [user\_tags])}\\
+Write the HDDM metadata stamp to the output HDF5 file identified by file\_id,
+optionally supplemented by any number of user-defined tag strings that may be
+useful to help identify the dataset later when it is read. This method is
+implicitly called by hdf5FileCreate. Return value is zero if the operation
+succeeded, negative if it failed.
+\item \texttt{hddm\_*.hdf5FileCheck(file\_id, [user\_tags])}\\
+Verify the HDDM metadata stamp in the HDF5 file identified by file\_id, 
+optionally supplemented by any number of user-defined tag strings to help 
+identify the dataset. This method is implicitly called by hdf5FileOpen. 
+Return value is zero if the operation succeeded, negative if it failed.
+\item \texttt{hddm\_*.hdf5DocumentString(file\_id)}\\
+Read the HDDM document string from the HDF5 hdf5 file identified by file\_id.
+The file may be open either for reading or writing. The return value is the
+HDDM metadata stamp that is stored in the file.
+\item \texttt{hddm\_*.hdf5GetEntries(file\_id)}\\
+Returns the number of records currently stored in the HDDM dataset in the HDF5
+file identified by file\_id, or a negative value if the request failed.
+\item \texttt{hddm\_*.hdf5GetChunksize(file\_id)}\\
+Returns the HDF5 chunksize on a HDDM dataset stored in an open HDF5 file 
+identified by file\_id, or a negative value if the operation failed. 
+\item \texttt{hddm\_*.hdf5SetChunksize(file\_id, chunksize)}\\
+Sets the HDF5 dataset chunk size to be used when writing a HDDM dataset to the
+HDF5 file identified by file\_id. This operation only succeeds if it is called
+between the time when file\_id was created and when the HDDM dataset was first
+written to it. Return value is zero if the operation succeeded, and negative
+if it failed.
+\item \texttt{hddm\_*.hdf5SetFilters(file\_id, filters)}\\
+Sets the list of filters active on the output HDF5 file identified by file\_id.
+The argument filters should be a mutable python list. It is preserved by this
+function. Filters must be set after file\_id is opened but before the first
+dataset record is written, otherwise they are ignored. Setting filters on a
+file\_id opened for input is an error. Return value is zero if the operation
+succeeded, and negative if it failed. The following filter identifiers are 
+defined constants in the python module for convenience, but any valid filter
+identifier may be included in the list.
+\begin{itemize}
+\item \texttt{k\_hdf5\_gzip\_filter} - gzip standard compression provided by hdf5
+\item \texttt{k\_hdf5\_szip\_filter} - szip standard compression provided by hdf5
+\item \texttt{k\_hdf5\_bzip2\_plugin} - bzip2 lossless compression used by PyTables
+\item \texttt{k\_hdf5\_blosc\_plugin} - Blosc lossless compression used by PyTables
+\item \texttt{k\_hdf5\_bshuf\_plugin} - bitshuffle shuffle filter at bit level instead of byte level
+\item \texttt{k\_hdf5\_jpeg\_plugin} - JPEG-XR compression filter used in jpeg images
+\item \texttt{k\_hdf5\_lz4\_plugin} - LZ4 fast lossless compression algorithm
+\item \texttt{k\_hdf5\_lzf\_plugin} - LZF fast lossless compression used by H5Py project
+\item \texttt{k\_hdf5\_lzma\_plugin} - modified LZMA compression filter (MAFISC)
+\item \texttt{k\_hdf5\_zfp\_plugin} - zfp rate, accuracy, or precision bounded compression for arrays of floats
+\end{itemize}
+\item \texttt{hddm\_*.hdf5GetFilters(file\_id, filters)}\\
+Gets the list of filters active on the HDF5 file identified by file\_id. The 
+argument filters should be a mutable list. It is overwritten by this function.
+Return value is zero if the operation succeeded, and negative if it failed.
+The following filter identifiers are defined constants in the python module for
+convenience, but any valid filter identifier may be included in the list.
+\end{itemize}
+
+\subsection{thread safety of HDDM i/o with HDF5}
+
+The HDDM i/o library is thread-safe, meaning that it is permitted to read
+or write simultaneously from multiple threads within a single application
+without interlocks. Contention for access to the underlying data source or
+sink is taken care of automatically by the library. In fact, users are
+encouraged to use multithreading to do overlapping i/o operations in order
+to take advantage of parallelism in the compression/decompression code.
+
+The HDF5 library advertises itself as thread-safe. No additional reentrancy
+protections have been added to the HDDM i/o interface for HDF5 beyond what is
+provided by the HDF5 library itself. Some i/o operations only make sense if
+they are serialized, for example creating a new output file, setting the
+chunksize on an output dataset, or assigning filters. The first read or write
+to a newly opened HDF5 file or group has to perform some initial setup
+operations on the dataset, so the first read/write on a file should be
+protected in the user code against overlap with subsequent read/write
+operations.
+
+In the random access of HDDM records in a dataset, there is a
+possible race condition implied by the fact that reads and writes access the
+records in sequential order by default, unless an explicit offset is requested
+by passing it in the entry argument. A multi-threaded application can avoid any
+risk of race conditions by doing an initial dummy hdf5GetEntries call to 
+trigger the dataset setup when the file is first opened, and then specifying
+the desired entry argument on any reads or writes requested within a worker thread.
+
 \section*{Acknowledgments}
 
 This work is supported by the U.S. National Science Foundation under grant 1812415
@@ -1423,14 +1825,14 @@ This work is supported by the U.S. National Science Foundation under grant 18124
 \bibitem{binx}
 ``Representing Scientific Data on the Grid with BinX, Binary XML Description
 Language'', M. Westhead and M. Bull, University of Edinburgh, January 2003.
-\tt{"http://www.epcc.ed.ac.uk/~gridserve/WP5/Binx/sci-data-with-binx.pdf"}
-\bibitem{hdf}
-``HDF5 Users's Guide'', working draft, July 2003.
-\tt{http://hdf.ncsa.uiuc.edu/HDF5/doc/UG/}
+\tt{https://www.researchgate.net/publication/238307424\_Representing\_scientific\_data\_on\_the\_Grid\_with\_BinX-binary\_XML\_description\_language}
 \bibitem{xdr}
 ``RFC 1832 (rfc1832) - XDR: External Data Representation standard'',
 September 1995.
-\tt{http://www.faqs.org/rfcs/rfc1832.html}
+\tt{https://tools.ietf.org/html/rfc1832}
+\bibitem{hdf5}
+``HDF5 Users's Guide'', HDF5 Release 1.10, June 2019.
+\tt{https://portal.hdfgroup.org/display/HDF5/HDF5+User+Guides}
 \end{thebibliography}
 
 \end{document}
