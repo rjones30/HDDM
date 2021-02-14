@@ -1946,9 +1946,11 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   fp->iomode = HDDM_STREAM_INPUT;"                << std::endl
          << "   head = (char*)malloc(hddm_" + classPrefix + "_headersize);"
                                                                 << std::endl
-         << "   if ((fgets(head,7,fp->fd) != 0) &&"             << std::endl
+         << "   while ((fgets(head,7,fp->fd) != 0) &&"          << std::endl
          << "       (strstr(head,\"<HDDM \") != head))"         << std::endl
          << "   {"                                              << std::endl
+         << "      if (strstr(head,\"<?xml \") == head)"        << std::endl
+         << "         continue;"                                << std::endl
          << "      fprintf(stderr,\"HDDM Error: input file \");" << std::endl
          << "      fprintf(stderr,\"file does not have a \");"  << std::endl
          << "      fprintf(stderr,\"valid HDDM header.\");"     << std::endl
