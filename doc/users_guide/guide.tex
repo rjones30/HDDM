@@ -750,7 +750,35 @@ based on this example template is found in the distribution under
 
 \subsection{python API reference}
 
+The python interface to HDDM is implemented as a CPython extension module.
+As such, the python API is a thin wrapper around the C++ API that is
+covered in detail elsewhere in this User's Guide. Once you have built
+the python module for your data model XXX, the command
+\texttt{pydoc hddm\_}XXX will automatically generate a descriptive
+listing of the classes and methods exposed by the module.
 
+In mapping C++ onto python sematics, the following refinements have been
+made.
+
+\begin{enumerate}
+\item direct accessors for attributes\\
+In place of the C++ getter/setter semantics, the python module exposes
+element attributes for direct reading and writing in user code. For
+example, the C++ statement \texttt{int eno = record.getEventNo();} 
+would translate to \texttt{eno = record.eventNo} in python, and C++
+statement \texttt{record.setEventNo(15);} would translate to
+\texttt{record.eventNo = 15} in python. The same applies to custom
+attributes of streams, eg.\ \texttt{istr.setCompression(flags)}
+would translate to istr.compression = flags.
+\item iterable input streams\\
+The common python pattern, \texttt{for rec in fil:} for looping over
+the lines in a text file also works for looping over HDDM records if
+the input file fil is a \texttt{hddm\_}XXX\texttt{.istream}.
+\item list semantics for {\em Element}\texttt{List} containers\\
+See the C++ API section for details on {\em Element}\texttt{List}
+containers. These support standard python list semantics through the
+python extension interface.
+\end{enumerate}
 
 \section{HDDM in C++}
 
@@ -1590,6 +1618,76 @@ written using the c-API can be read by applications built using any of the other
 API's. The converse of the last statement is not guaranteed to
 be true in all cases. If an input file is not readable by the c-{}API, it prints
 a polite error message reporting this fact and exits.
+
+The c API supports the following basic data types as attributes.
+The names of the types have been chosen to coincide for the most part with the
+equivalent xml schema simpleTypes so that the data model can be easily written
+in terms of a xml schema against which any HDDM file can be validated using a
+standard xml document validator.
+\begin{enumerate}
+\item \texttt{int} - 32-bit signed integers
+\item \texttt{long} - 64-bit signed integers
+\item \texttt{float} - IEEE 754 binary32 floating-point numbers
+\item \texttt{double} - IEEE 754 binary64 floating-point numbers
+\item \texttt{boolean} - 0 (false) or 1 (true)
+\item \texttt{string} - ordered sequence of UTF-8 bytes
+\item \texttt{anyURI} - string conforming to the URI schema (see RFC 3305)
+\item \texttt{Particle\_t} - string literal found in the dictionary of particle
+names (see HDDM header file particles.h)
+\end{enumerate}
+
+The c API consists of makers and an i/o suite.  The makers are functions that
+construct an instance of the data model in memory and create new nodes to be
+added to it.  Attaching nodes to a model instance and adding data to the nodes
+is done by the user by modifying the structures returned by the makers.  How
+this works is clarified by the example below.  The i/o suite consists of the
+following set of functions that provide facilities for reading, writing, and
+creating HDDM files.  In the following description, the symbol `\$' is used in
+place of the HDDM class abbreviation. The function members of the c input/output 
+interface are listed below.
+
+\begin{itemize}
+\item \texttt{\$\_HDDM\_t* read\_\$\_HDDM(\$\_iostream\_t* fp);}
+\item \texttt{int skip\_\$\_HDDM(\$\_iostream\_t* fp, int nskip);}
+\item \texttt{int flush\_\$\_HDDM(\$\_HDDM\_t* this1,\$\_iostream\_t* fp);}
+\item \texttt{\$\_iostream\_t* open\_\$\_HDDM(char* filename);}
+\item \texttt{\$\_iostream\_t* init\_\$\_HDDM(char* filename);}
+\item \texttt{void close\_\$\_HDDM(\$\_iostream\_t* fp);}
+\end{itemize}
+
+The meaning of most of these calls should be clear.  The difference between
+\texttt{open\_\$\_HDDM()} and \texttt{init\_\$\_HDDM()} is that the former
+opens an existing HDDM file for input, whereas the latter initializes a new
+HDDM file for output, possibly overwriting an existing file of the same name.
+It is recommended, although not required, that HDDM files end with the suffix
+``.hddm''.  The custom type \texttt{\$\_iostream\_t} is defined in the 
+header file \texttt{hddm\_\$.h} that must be included in the user's c
+code in order to access the API.
+
+The \texttt{read\_\$\_HDDM()} function inputs the next instance of the model
+data from the (previously opened with \texttt{open\_\$\_HDDM()}) input HDDM
+file and returns it in a
+in-memory data structure that can be directly accessed by the user code.  If
+there is only one top-level element permitted in the data model (under the
+HDDM document element) then the entire file is read into memory at once,
+otherwise only the next instance of the top-level elements together with their
+contents is read. Typically the data
+model allows for multiple instances of the top-level element, in which
+case repeated calls to \texttt{read\_\$\_HDDM()} are required to entirely
+read a HDDM file.   The \texttt{flush\_\$\_HDDM()} function frees
+the memory associated with the existing data model structure in memory.
+It is typically called between sequential reads in a processing loop
+in the user code.  The \texttt{flush\_\$\_HDDM()} function also doubles
+as a write function. When it is called with a non-zero 
+\texttt{\$\_iostream\_t*} argument then the in-memory data
+structure is written to the (previously opened with \texttt{init\_\$\_HDDM()})
+output stream before being freed. It returns zero on success.
+The \texttt{skip\_\$\_HDDM()} call allows events in the input 
+file to be skipped without the overhead of constructing their
+representation in memory.  The \texttt{\$\_iostream\_t}
+i/o semantics are those of a stream, so \texttt{skip\_\$\_HDDM()}
+should only be called with a positive skip count nskip.  It returns
+the number of events successfully skipped.
 
 \section{Advanced features}\label{Advanced_features}
 

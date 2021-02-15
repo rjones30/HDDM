@@ -11,22 +11,22 @@
 \contentsline {subsection}{\numberline {A}writing HDDM files in python}{8}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in python}{9}{}
 \contentsline {subsection}{\numberline {C}python API reference}{10}{}
-\contentsline {section}{\numberline {V}HDDM in C++}{10}{}
+\contentsline {section}{\numberline {V}HDDM in C++}{11}{}
 \contentsline {subsection}{\numberline {A}writing HDDM files in C++}{11}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{12}{}
-\contentsline {subsection}{\numberline {C}C++ API reference}{13}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in C++}{13}{}
+\contentsline {subsection}{\numberline {C}C++ API reference}{14}{}
 \contentsline {section}{\numberline {VI}HDDM in c}{19}{}
 \contentsline {subsection}{\numberline {A}writing HDDM files in c}{19}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in c}{21}{}
 \contentsline {subsection}{\numberline {C}c API reference}{23}{}
-\contentsline {section}{\numberline {VII}Advanced features}{23}{}
-\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{23}{}
-\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{24}{}
-\contentsline {subsection}{\numberline {C}random access to HDDM records}{25}{}
-\contentsline {section}{\numberline {VIII}Multithreaded i/o with HDDM}{25}{}
-\contentsline {section}{\numberline {IX}Support for HDF5 file format}{26}{}
-\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{27}{}
-\contentsline {subsection}{\numberline {B}python API elements for HDF5}{29}{}
-\contentsline {subsection}{\numberline {C}thread safety with HDF5}{31}{}
-\contentsline {section}{\numberline {}Acknowledgments}{31}{}
-\contentsline {section}{\numberline {}References}{31}{}
+\contentsline {section}{\numberline {VII}Advanced features}{24}{}
+\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{24}{}
+\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{25}{}
+\contentsline {subsection}{\numberline {C}random access to HDDM records}{26}{}
+\contentsline {section}{\numberline {VIII}Multithreaded i/o with HDDM}{26}{}
+\contentsline {section}{\numberline {IX}Support for HDF5 file format}{27}{}
+\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{28}{}
+\contentsline {subsection}{\numberline {B}python API elements for HDF5}{30}{}
+\contentsline {subsection}{\numberline {C}thread safety with HDF5}{32}{}
+\contentsline {section}{\numberline {}Acknowledgments}{32}{}
+\contentsline {section}{\numberline {}References}{32}{}
