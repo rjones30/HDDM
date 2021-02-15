@@ -15,18 +15,18 @@
 \contentsline {subsection}{\numberline {A}writing HDDM files in C++}{11}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in C++}{12}{}
 \contentsline {subsection}{\numberline {C}C++ API reference}{13}{}
-\contentsline {section}{\numberline {VI}HDDM in c}{13}{}
-\contentsline {subsection}{\numberline {A}writing HDDM files in c}{14}{}
-\contentsline {subsection}{\numberline {B}reading HDDM files in c}{16}{}
-\contentsline {subsection}{\numberline {C}c API reference}{18}{}
-\contentsline {section}{\numberline {VII}Advanced features}{18}{}
-\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{18}{}
-\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{19}{}
-\contentsline {subsection}{\numberline {C}random access to HDDM records}{20}{}
-\contentsline {section}{\numberline {VIII}Multithreaded i/o with HDDM}{20}{}
-\contentsline {section}{\numberline {IX}Support for HDF5 file format}{21}{}
-\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{22}{}
-\contentsline {subsection}{\numberline {B}python API elements for HDF5}{24}{}
-\contentsline {subsection}{\numberline {C}thread safety with HDF5}{26}{}
-\contentsline {section}{\numberline {}Acknowledgments}{26}{}
-\contentsline {section}{\numberline {}References}{26}{}
+\contentsline {section}{\numberline {VI}HDDM in c}{18}{}
+\contentsline {subsection}{\numberline {A}writing HDDM files in c}{19}{}
+\contentsline {subsection}{\numberline {B}reading HDDM files in c}{21}{}
+\contentsline {subsection}{\numberline {C}c API reference}{23}{}
+\contentsline {section}{\numberline {VII}Advanced features}{23}{}
+\contentsline {subsection}{\numberline {A}on-{}the-{}fly compression/decompression}{23}{}
+\contentsline {subsection}{\numberline {B}on-{}the-{}fly data integrity checks}{24}{}
+\contentsline {subsection}{\numberline {C}random access to HDDM records}{25}{}
+\contentsline {section}{\numberline {VIII}Multithreaded i/o with HDDM}{25}{}
+\contentsline {section}{\numberline {IX}Support for HDF5 file format}{26}{}
+\contentsline {subsection}{\numberline {A}C++ API elements for HDF5}{27}{}
+\contentsline {subsection}{\numberline {B}python API elements for HDF5}{29}{}
+\contentsline {subsection}{\numberline {C}thread safety with HDF5}{31}{}
+\contentsline {section}{\numberline {}Acknowledgments}{31}{}
+\contentsline {section}{\numberline {}References}{31}{}
