@@ -769,15 +769,15 @@ would translate to \texttt{eno = record.eventNo} in python, and C++
 statement \texttt{record.setEventNo(15);} would translate to
 \texttt{record.eventNo = 15} in python. The same applies to custom
 attributes of streams, eg.\ \texttt{istr.setCompression(flags)}
-would translate to istr.compression = flags.
+would translate to \texttt{istr.compression = flags}.
 \item iterable input streams\\
 The common python pattern, \texttt{for rec in fil:} for looping over
 the lines in a text file also works for looping over HDDM records if
-the input file fil is a \texttt{hddm\_}XXX\texttt{.istream}.
+the iterable fil is a \texttt{hddm\_}XXX\texttt{.istream}.
 \item list semantics for {\em Element}\texttt{List} containers\\
 See the C++ API section for details on {\em Element}\texttt{List}
-containers. These support standard python list semantics through the
-python extension interface.
+containers. The python extension interface exposes python list
+semantics for these C++ container objects.
 \end{enumerate}
 
 \section{HDDM in C++}
