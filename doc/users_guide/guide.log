@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2020.5.16)  15 FEB 2021 09:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=latex 2020.5.16)  15 FEB 2021 09:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -481,12 +481,12 @@ HDDM::hdf5GetFilters(hid[]t file[]id, std::vector<H5Z[]filter[]t>
 
 [29] [30] [31] (./guide.aux) ) 
 Here is how much of TeX's memory you used:
- 2151 strings out of 495064
- 26577 string characters out of 3182224
+ 2150 strings out of 495064
+ 26569 string characters out of 3182224
  94825 words of memory out of 3000000
- 5366 multiletter control sequences out of 15000+200000
+ 5365 multiletter control sequences out of 15000+200000
  7710 words of font info for 28 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  25i,4n,21p,486b,296s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on guide.dvi (31 pages, 135988 bytes).
+Output written on guide.dvi (31 pages, 135984 bytes).
