@@ -949,13 +949,13 @@ A named element from the user's data model is denoted by {\em element}
 when written in lower case, and by {\em Element} when it is written in
 upper case, eg.\ in the context of its datatype (C++ class). The plural
 form {\em Elements} is used to refer to a list of {\em Element} objects.
-The name of an attribute is written as {\em attribute} when it is
+The name of an attribute is denoted {\em attribute} when it is
 used in lower case, and {\em Attribute} when upper case is required.
-The datatype of an attribute is denoted by {\em Atype}, which
+The datatype of an attribute is denoted {\em Atype}, which
 represents one of the narrow set of simple data types that are supported
 by HDDM. For example, the expression 
 ``{\em Atype} hddm\_*::{\em Element}List(n).get{\em Attribute}()'' would
-translate in the context of a specific data model as the C++ expression
+translate in the context of a specific data model into the C++ expression
 ``\texttt{int hddm\_s::PhysicsEventList(n).getEventNo()}'', where {\em Atype}
 has become \texttt{int}, {\em Element} has become the capitalized 
 element name \texttt{PhysicsEvent} and {\em Attribute} has become
