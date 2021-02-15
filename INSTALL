@@ -53,15 +53,17 @@ hddm i/o library.
            ..
    $ make
    $ make install
+   $ make modules_install
 
 6) Some example HDDM data model templates are included in the directory
    models. The following commands illustrate how to turn user data model
    templates into i/o library modules that can be called by user
    applications to read and write data model records.
 
-   $ hddm-cpp models/simple.xml        # c++ library
-   $ hddm-c models/intermdiate.xml     # c library
-   $ hddm-py models/complicated.xml    # python bindings
+   $ hddm-cpp models/exam1x.xml        # c++ library
+   $ hddm-c models/exam1x.xml          # c library
+   $ hddm-py models/exam1x.xml         # python extension
+   $ ./setup_hddm_x.py                 # build the python module
 
 7) The examples directory contains examples of user code in c, c++, and
    python that illustrate how to write user applications that read and
