@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {A}writing HDDM files in C++}{11}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in C++}{12}{}
 \contentsline {subsection}{\numberline {C}C++ API reference}{13}{}
-\contentsline {section}{\numberline {VI}HDDM in c}{18}{}
+\contentsline {section}{\numberline {VI}HDDM in c}{19}{}
 \contentsline {subsection}{\numberline {A}writing HDDM files in c}{19}{}
 \contentsline {subsection}{\numberline {B}reading HDDM files in c}{21}{}
 \contentsline {subsection}{\numberline {C}c API reference}{23}{}

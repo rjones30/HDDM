@@ -1120,7 +1120,20 @@ name of the attribute is undetermined at compile time, so the
 get{\em Attribute}() method is not applicable. Note that there is no corresponding
 setAttribute(std::string name) method; to set the value of an attribute, the
 user needs a direct reference to the container {\em element}, and the name
-and type must be known at compile type.
+and type must be known at compile type. Defined values for the return argument
+atype are as follows.
+\begin{enumerate}
+\item \texttt{int} - 32-bit signed integers
+\item \texttt{long} - 64-bit signed integers
+\item \texttt{float} - IEEE 754 binary32 floating-point numbers
+\item \texttt{double} - IEEE 754 binary64 floating-point numbers
+\item \texttt{boolean} - 0 (false) or 1 (true)
+\item \texttt{string} - ordered sequence of UTF-8 bytes
+\item \texttt{anyURI} - string conforming to the URI schema (see RFC 3305)
+\item \texttt{Particle\_t} - string literal found in the dictionary of particle
+names (see hddm header file particles.h)
+\end{enumerate}
+
 \item \texttt{void set}{\em Attribute}\texttt{(}{\em Atype} \texttt{value)}\\
 Sets the current value of {\em Attribute} with value of type {\em Atype}.
 This is the standard data setter method in HDDM.
