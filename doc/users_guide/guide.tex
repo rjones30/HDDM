@@ -1092,6 +1092,7 @@ and the stream is no longer readable.
 \item \texttt{operator void*()}\\
 Effectively acts as the contrary of operator!().
 \end{itemize}
+
 \item \texttt{class} {\em Element}\\
 This interface is implemented in the generated HDDM C++ header file and
 implementation for each {\em Element} described by a tag in the user's
@@ -1182,6 +1183,8 @@ recursively all of its content.
 \item \texttt{std::string toXML(int indent=0)}\\
 Returns a plain-text xml representation of this {\em Element}, including
 recursively all of its content.
+\end{itemize}
+
 \item \texttt{class} {\em  Element}\texttt{List}\\
 An {\em Element}List class is defined in the HDDM header file for each user
 {\em Element}
@@ -1194,6 +1197,7 @@ related to lists of HDDM elements. {\em Element}Lists are produced by members
 of the data model element hierarchy owned by a HDDM record, so mutating methods
 acting on the {\em Element}List (see below) automatically act on the container
 {\em element} they are derived from.
+\begin{itemize}
 \item \texttt{bool empty() const}\\
 Returns true if the list is empty, otherwise false [standard].
 \item \texttt{int size() const}\\
@@ -1276,11 +1280,14 @@ Subtracts offset to the list iterator and returns a new iterator [extension].
 Takes the difference of two list iterators of the same type and returns the
 count. The two iterators must be initialized from the same {\em Element}List,
 or the results are unpredictable.
+\end{itemize}
+
 \item \texttt{class hddm\_*::HDDM}\\
 This is the top-level {\em Element} from the data model, so as such it inherits all
 of the methods described above for class hddm\_*::{\em Element}. In addition, it
 supports the following special methods that are only provided by the top-level
 record element.
+\begin{itemize}
 \item {\em Element}\texttt{List \&get}{\em Elements}\texttt{()}\\
 Returns an iterable {\em Element}List containing an ordered list of all 
 {\em Element} objects contained within this record, regardless of whether
