@@ -81,3 +81,21 @@ add_custom_target(modules_install
               ${CMAKE_INSTALL_PREFIX}
       DEPENDS python_modules
 )
+
+# package config
+set(INCLUDE_INSTALL_DIR include/)
+set(LIB_INSTALL_DIR lib64/)
+set(SYSCONFIG_INSTALL_DIR etc/hddm/)
+#...
+include(CMakePackageConfigHelpers)
+configure_package_config_file(HddmConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/HddmConfig.cmake
+  INSTALL_DESTINATION ${LIB_INSTALL_DIR}/hddm/cmake
+  PATH_VARS INCLUDE_INSTALL_DIR SYSCONFIG_INSTALL_DIR)
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/HddmConfigVersion.cmake
+  VERSION 1.0.0
+  COMPATIBILITY SameMajorVersion )
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/HddmConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/HddmConfigVersion.cmake
+        DESTINATION ${LIB_INSTALL_DIR}/hddm/cmake )
