@@ -29,14 +29,14 @@ if(DEFINED ROOTSYS)
     message("Looking in ${ROOTSYS} for local ROOT installation")
     find_package(ROOT PATHS ${ROOTSYS} REQUIRED NO_DEFAULT_PATH)
 endif()
-find_package(ROOT)
+find_package(ROOT QUIET)
 
 # HDF5 support
 if(DEFINED HDF5_ROOT)
     message("Looking in ${HDF5_ROOT} for local HDF5 installation")
     find_package(HDF5 PATHS ${HDF5_ROOT} REQUIRED NO_DEFAULT_PATH)
 endif()
-find_package(HDF5)
+find_package(HDF5 QUIET)
 
 # xalan-j2 package
 if(NOT DEFINED XALANJ2_PATH)
