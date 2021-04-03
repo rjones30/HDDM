@@ -43,7 +43,6 @@ HDDM relies on the following external open-source packages. Some must be install
 - libbz2 and libz : compression libraries available as system devel packages for most Linux distributions
 - xmllint : commandline utility in the standard libxml2-utils distribution
 - cmake version 3.10 : required for building the libraries from sources
-- distutils python package : required for building the python modules
 - git : required for installing hddm from github
 Uncountable other dependencies exist for other features of a standard unix/linux platform environment, such as the ld link loader, standard glibc and system libraries.
 
