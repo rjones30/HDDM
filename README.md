@@ -38,9 +38,14 @@ HDDM relies on the following external open-source packages. Some must be install
 - gcc/g++ compiler version 4.8.5 or above : compiler must support -std=c++11 standard language features
 - python 2.7 or above : standard python installation, including shutil, distutils modules and dependencies
 - apache xerces-c version 3 : standard implementation of the xerces xml library in C++, required
-- apache xalan-c version 1 : standard tools for schema-based xml validation and translation, optional
+- apache xalan-j version 2 : standard tools for schema-based xml validation and translation, optional
 - HDF5 version 1.12+ : public-domain library for standard disk representation of structured data, optional
-Uncountable other dependencies exist for other features of a standard unix/linux platform environment, such as the ld link loader, standard glibc and system libraries, compression libraries libz, libbz2, etc.
+- libbz2 and libz : compression libraries available as system devel packages for most Linux distributions
+- xmllint : commandline utility in the standard libxml2-utils distribution
+- cmake version 3.10 : required for building the libraries from sources
+- distutils python package : required for building the python modules
+- git : required for installing hddm from github
+Uncountable other dependencies exist for other features of a standard unix/linux platform environment, such as the ld link loader, standard glibc and system libraries.
 
 ## Acknowledgements
 HDDM contains as a part of its source codebase a sub-package named xstream, which is a fork of an earlier open-source package that was released as xstream 2.1 by its author Claudio Valente in 1999 under the GNU LESSER GENERAL PUBLIC LICENSE. The original author and license is included unchanged under xstream/AUTHOR and xstream/COPYING. The original README written by Claudio Valente is also included. The HDDM fork of xstream 2.1 was made in 2004 in order to correct some bugs in the original v2.1 code and to add new features related to stream repositioning and multi-threaded compression/decompression. These changes made the HDDM fork of xstream no longer backward-compatible with xstream 2.1. With open acknowledgement of the important contribution of xstream 2.1 by Claudio Valente to this project, the release here of the modified xstream code under an Apache open-source license is deemed consistent with the terms of the original LGPL license that accompanied Valente's release of xstream 2.1. The original C++ xstream 2.1 package released in 1999 is apparently unrelated to a number of other currently active open-source projects named xstream, including the java project XStream by Joe Walnes et al, the javascript project xstream by Andre Staltz, among others.
