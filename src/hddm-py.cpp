@@ -1954,7 +1954,7 @@ int main(int argC, char* argV[])
    "source_files = [source_file, source_dir + '/hddm_" + classPrefix + "++.cpp']\n"
    "copyfile(source_dir + '/pyhddm_" + classPrefix + ".cpy', source_file)\n"
    "my_include_dirs = [source_dir, hddm_dir + '/include',]\n"
-   "my_library_dirs = [hddm_dir + '/lib64', '/usr/lib64',]\n"
+   "my_library_dirs = [hddm_dir + '/lib', '/usr/lib64',]\n"
    "my_libraries = ['xstream', 'bz2', 'z']\n"
    "my_extra_cxxflags = ['-std=c++11']\n"
    "if 'HDF5_INCLUDE_DIRS' in os.environ:\n"
