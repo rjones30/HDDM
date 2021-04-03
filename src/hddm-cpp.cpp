@@ -2544,6 +2544,11 @@ void CodeBuilder::writeClassdef(DOMElement* el)
             << "   static herr_t hdf5GetFilters(hid_t file_id,"
             << " std::vector<H5Z_filter_t> &filters);"
             << std::endl
+            << "   static void hdf5_memcpy(void *dst, void *src, int size) {"
+            << std::endl
+	    << "      memcpy(dst, src, size);"
+            << std::endl
+	    << "   }" << std::endl
             << " private:" << std::endl
             << "   static std::map<std::string, hid_t> s_hdf5_datatype;"
             << std::endl
@@ -3761,7 +3766,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
                   << "(" << dnameS.simpleType() << "*)hdf5_record.vl_"
                   << dnameS << ".p;" << std::endl
                   << "      for (int i=0; i < len; ++i, ++iter) {" << std::endl
-                  << "         memcpy(p+i, *iter, size);" << std::endl
+                  << "         hdf5_memcpy(p+i, *iter, size);" << std::endl
                   << "         p[i].hdf5DataPack();" << std::endl
                   << "      }" << std::endl
                   << "   }" << std::endl;
