@@ -4,7 +4,7 @@ if(HDF5_FOUND)
     SET(HDF5_SUPPORT 1)
 endif()
 
-if(ROOT_FOUND)
+if(ROOTSYS)
     list(APPEND EXTRA_LIBRARIES ${ROOT_LIBRARIES})
     list(APPEND EXTRA_INCLUDE_DIRS ${ROOT_INCLUDE_DIRS})
 endif()
@@ -30,7 +30,7 @@ add_executable(hddm-cpp hddm-cpp.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddm-c hddm-c.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddm-py hddm-py.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(hddmcat hddmcat.cpp)
-if(${ROOT_FOUND})
+if(${ROOTSYS})
     add_executable(hddm-root hddm-root.cpp XString.cpp XParsers.cpp md5.c)
 endif()
 
@@ -50,16 +50,16 @@ target_include_directories(hddm-c PUBLIC ${EXTRA_INCLUDE_DIRS})
 target_include_directories(hddm-py PUBLIC ${EXTRA_INCLUDE_DIRS})
 target_include_directories(hddmcat PUBLIC ${EXTRA_INCLUDE_DIRS})
 
-if(${ROOT_FOUND})
+if(${ROOTSYS})
     target_include_directories(hddm-root PUBLIC ${EXTRA_INCLUDE_DIRS}
-                               "${ROOT_ROOT}/include"
+	                       "${ROOTSYS}/include"
                                )
-    execute_process(COMMAND ${ROOT_ROOT}/bin/root-config --libs
-                    OUTPUT_VARIABLE ROOTLIBRARIES 
+    execute_process(COMMAND ${ROOTSYS}/bin/root-config --libs
+                    OUTPUT_VARIABLE ROOT_LIBRARIES 
                     OUTPUT_STRIP_TRAILING_WHITESPACE
                    )
     target_link_libraries(hddm-root PUBLIC ${EXTRA_LIBRARIES}
-                          "-Wl,-rpath -Wl,${ROOT_ROOT}/lib"
+	                  "-Wl,-rpath -Wl,${ROOTSYS}/lib"
                          )
     set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
@@ -71,6 +71,6 @@ install(TARGETS hddm-cpp DESTINATION bin)
 install(TARGETS hddm-c DESTINATION bin)
 install(TARGETS hddm-py DESTINATION bin)
 install(TARGETS hddmcat DESTINATION bin)
-if(ROOT_FOUND)
+if(ROOTSYS)
     install(TARGETS hddm-root DESTINATION bin)
 endif()

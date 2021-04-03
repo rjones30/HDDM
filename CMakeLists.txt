@@ -42,7 +42,9 @@ find_package(HDF5)
 if(NOT DEFINED XALANJ2_PATH)
     set(XALANJ2_PATH /usr/share/java)
 endif()
-if(EXISTS ${XALANJ2_PATH}/xalan-j2.jar AND EXISTS ${XALANJ2_PATH}/xalan-j2-serializer.jar)
+if(EXISTS ${XALANJ2_PATH}/xalan2.jar)
+    message("-- Found xalan2 at ${XALANJ2_PATH}/xalan2.jar")
+elseif(EXISTS ${XALANJ2_PATH}/xalan-j2.jar AND EXISTS ${XALANJ2_PATH}/xalan-j2-serializer.jar)
     message("-- Found xalan-j2 at ${XALANJ2_PATH}/xalan-j2.jar")
 else()
     message("Cannot find xalan-j2 at ${XALANJ2_PATH}/xalan-j2.jar, some schema utilities will fail!")
@@ -84,7 +86,7 @@ add_custom_target(modules_install
 
 # package config
 set(INCLUDE_INSTALL_DIR include/)
-set(LIB_INSTALL_DIR lib64/)
+set(LIB_INSTALL_DIR lib/)
 set(SYSCONFIG_INSTALL_DIR etc/hddm/)
 #...
 include(CMakePackageConfigHelpers)
