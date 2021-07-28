@@ -671,11 +671,19 @@ int main(int argC, char* argV[])
    XString line;
    if (getline(*ifs,line))
    {
-      if (line.substr(0,5) == "<?xml")
+      if (line.find("<?xml") != line.npos)
       {
          xmlPreamble = line + "\n";
       }
-      else if (line.substr(0,5) == "<HDDM")
+      else if (line.find("<!DOCTYPE HDDM>") != line.npos)
+      {
+         xmlPreamble += line + "\n";
+      }
+      else if (line.size() == 0)
+      {
+         xmlPreamble += "\n";
+      }
+      else if (line.find("<HDDM ") != line.npos)
       {
          xmlHeader = line + "\n";
          ofs << xmlPreamble << xmlHeader;
