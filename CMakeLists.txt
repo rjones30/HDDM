@@ -60,6 +60,9 @@ else()
     message("Cannot find xmllint at ${XMLLINT_PATH}/xmllint, some schema utilities will fail!")
 endif()
 
+# libtirpc
+include_directories(/usr/include/tirpc)
+
 # add the xstream library
 add_subdirectory(xstream)
 
