@@ -1,2 +1,7 @@
 x86_64/*
 build*/*
+.clone_done
+bin
+hddm_prereqs_version.xml
+include
+lib
