@@ -1,4 +1,4 @@
-# HDDM
+# HDDM - efficient i/o library for self-describing structured scientific data
 ## Hierarchical Document Data Model
 
 HDDM is a tool for automatic building of a full-featured C++ library for representation of highly structured scientific data in memory, complete with a performant i/o library for integrated storage and retrieval of unlimited amounts of repetitive data with associated metadata. Starting from a structured document written in plain text, where the user describes the data values and relationships to be expressed, the HDDM tools automatically generate custom C++ header and source files that define new user classes for building an object-oriented representation of the data in memory, storing them in a standard format in disk files for retrieval later, and efficient means for browsing/manipulation of the data using familiar OO semantics in the user's C++ or python analysis application. All of the following features that a user expects fromd a big-data modeling and i/o library are supported by HDDM.
