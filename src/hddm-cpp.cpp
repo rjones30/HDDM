@@ -3556,7 +3556,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << "   char *pstamp;" << std::endl
             << "   hid_t stamp_id = H5Dopen(file_id, \"HDDMstamp\","
             << " H5P_DEFAULT);" << std::endl
-            << "   hid_t stamp_sid = H5Dget_space(stamp_id);"
+            << "   hid_t stamp_sid = H5Dget_space(stamp_id);" << std::endl
             << "   hid_t stamp_tid = H5Dget_type(stamp_id);" << std::endl
             << "   stamp_tid = H5Tget_native_type(stamp_tid, H5T_DIR_DEFAULT);"
             << std::endl
@@ -3593,7 +3593,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << "   char *pstamp;" << std::endl
             << "   hid_t stamp_id = H5Dopen(file_id, \"HDDMstamp\","
             << " H5P_DEFAULT);" << std::endl
-            << "   hid_t stamp_sid = H5Dget_space(stamp_id);"
+            << "   hid_t stamp_sid = H5Dget_space(stamp_id);" << std::endl
             << "   hid_t stamp_tid = H5Dget_type(stamp_id);" << std::endl
             << "   stamp_tid = H5Tget_native_type(stamp_tid, H5T_DIR_DEFAULT);"
             << std::endl
@@ -3636,8 +3636,8 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << std::endl
             << "   }" << std::endl
             << "   else {" << std::endl
-            << "      eventdata_id = s_hdf5_dataset[file_id];"
-            << "      chunking_id = s_hdf5_chunking[file_id];"
+            << "      eventdata_id = s_hdf5_dataset[file_id];" << std::endl
+            << "      chunking_id = s_hdf5_chunking[file_id];" << std::endl
             << "      eventspace_id = s_hdf5_dataspace[file_id];"
             << std::endl
             << "   }" << std::endl
@@ -3834,7 +3834,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << std::endl
             << "   }" << std::endl
             << "   else {" << std::endl
-            << "      eventdata_id = s_hdf5_dataset[file_id];"
+            << "      eventdata_id = s_hdf5_dataset[file_id];" << std::endl
             << "      hsize_t maxdims;" << std::endl
             << "      H5Sget_simple_extent_dims(eventspace_id,"
             << " &m_hdf5_record_extent, &maxdims);" << std::endl
@@ -3922,7 +3922,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << std::endl
             << "   }" << std::endl
             << "   else {" << std::endl
-            << "      eventdata_id = s_hdf5_dataset[file_id];"
+            << "      eventdata_id = s_hdf5_dataset[file_id];" << std::endl
             << "      chunking_id = s_hdf5_chunking[file_id];"
             << std::endl
             << "   }" << std::endl

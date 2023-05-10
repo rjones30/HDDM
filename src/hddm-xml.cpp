@@ -607,7 +607,7 @@ void XMLmaker::constructXML(xstream::xdr::istream *ifx,
             int32_t value;
             *ifx >> value;
             size -= 4;
-            attrStr << " " << nameS << "=\"" << ParticleType((Particle_t)value) << "\"";
+            attrStr << " " << nameS << "=\"" << ParticleType((Particle_t)value) << "(" << value << ")" << "\"";
          }
          else if (typeS == "string" || typeS == "anyURI")
          {
