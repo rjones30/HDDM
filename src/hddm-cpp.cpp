@@ -3830,7 +3830,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << std::endl
             << "      s_hdf5_dataset[file_id] = eventdata_id;" << std::endl
             << "      m_hdf5_record_extent = 0;" << std::endl
-            << "      m_hdf5_record_offset = 0;" << std::endl
+            << "      m_hdf5_record_offset = 0;"
             << std::endl
             << "   }" << std::endl
             << "   else {" << std::endl
