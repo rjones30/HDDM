@@ -16,6 +16,9 @@ set_property(TARGET xstream PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 # add to the include list
 target_include_directories(xstream PUBLIC
+                           ${BZIP2_INCLUDE_DIRS}
+                           ${ZLIB_INCLDUE_DIRS}
+                           ${EXTRA_INCLUDE_DIRS}
                            ${CMAKE_CURRENT_SOURCE_DIR}/../include
                           )
 
