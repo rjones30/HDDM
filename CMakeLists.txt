@@ -63,6 +63,10 @@ endif()
 # libtirpc
 include_directories(/usr/include/tirpc)
 
+# require standard pthreads
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 # add the xstream library
 add_subdirectory(xstream)
 
