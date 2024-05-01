@@ -404,7 +404,7 @@ int main(int argC, char* argV[])
          << "#include <stdlib.h>"                               << std::endl
          << "#include <stdio.h>"                                << std::endl
          << "#include <errno.h>"                                << std::endl
-         << "#include <rpc/rpc.h>"                              << std::endl
+         << "#include <rpc/xdr.h>"                              << std::endl
          << "#include <string.h>"                               << std::endl
          << "#include <strings.h>"                              << std::endl
          << "#include <particleType.h>"                         << std::endl
