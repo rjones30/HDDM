@@ -31,7 +31,7 @@ namespace posix{
         struct std::tm tm;
 
         //XXX check error and throw exception
-        std::localtime_r(&t,&tm);
+        ::localtime_r(&t,&tm);
 
         //first size of the allocated buffer
         //if needed it will be reallocated
