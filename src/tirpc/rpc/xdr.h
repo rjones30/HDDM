@@ -42,8 +42,8 @@
 #define _TIRPC_XDR_H
 #include <stdio.h>
 #include <stdint.h>
-#include <rpc/types.h>
 typedef u_int32_t uint32_t;
+#include <rpc/types.h>
 
 /*
  * XDR provides a conventional way for converting between C data
