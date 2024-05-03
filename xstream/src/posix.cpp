@@ -91,10 +91,10 @@ namespace posix{
     
     std::string fd::read(std::streamsize len)
     {
-        char *buf = malloc(len);
+        char *buf = (char*)malloc(len);
         ssize_t count = read(buf, len);
         std::string sbuf(buf, buf + count);
-        free buf;
+        free(buf);
         return sbuf;
     }
     
