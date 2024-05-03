@@ -37,12 +37,12 @@ namespace posix{
         //if needed it will be reallocated
         size_t len=512;
         std::string ret;
-        char *buf=malloc(1,sizeof(char));
+        char *buf=(char*)malloc(1);
 
         do {
             free(buf);
             LOG("\tlen=" << len);
-            buf = malloc(len,sizeof(char));
+            buf = (char*)malloc(len);
             size_t cret=std::strftime(buf,len,format.c_str(),&tm);
 
             if (0 != cret && cret <= len) {
