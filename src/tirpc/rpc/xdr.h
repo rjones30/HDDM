@@ -41,12 +41,7 @@
 #ifndef _TIRPC_XDR_H
 #define _TIRPC_XDR_H
 #include <stdio.h>
-//#include <netinet/in.h>
-typedef unsigned char uint8_t;
-typedef unsigned short int uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long int uint64_t;
-
+#include <stdint.h>
 #include <rpc/types.h>
 
 /*
