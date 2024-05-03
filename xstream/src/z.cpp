@@ -14,7 +14,10 @@
 
 #include <stdio.h>
 #include <zlib.h>
+
+#ifndef NO_ARPA_INET_AVAILABLE
 #include <arpa/inet.h>
+#endif
 
 #include <cassert>
 
