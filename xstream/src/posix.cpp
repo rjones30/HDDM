@@ -17,10 +17,6 @@
 
 #include "debug.h"
 
-/*
- * I don't prefix time localtime_r and strftime with std:: because lot's of implementaions are broken and it's an unnecessary purism
- *
- */
 
 namespace xstream {
 namespace posix{
@@ -35,7 +31,7 @@ namespace posix{
         struct std::tm tm;
 
         //XXX check error and throw exception
-        ::localtime_r(&t,&tm);
+        std::localtime_r(&t,&tm);
 
         //first size of the allocated buffer
         //if needed it will be reallocated
@@ -45,7 +41,7 @@ namespace posix{
         do {
             LOG("\tlen=" << len);
             char buf[len];
-            size_t cret=::strftime(buf,len,format.c_str(),&tm);
+            size_t cret=std::strftime(buf,len,format.c_str(),&tm);
 
             if (0 != cret && cret <= len) {
                 buf[len - 1] = '\0'; //just in case
