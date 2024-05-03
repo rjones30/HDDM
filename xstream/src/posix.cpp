@@ -59,8 +59,9 @@ namespace posix{
     void check_return(int code, const std::string& call) {
         LOG("posix::check_return " << call << " => " << code);
         if (-1 == code) {
-            //XXX please try to use strerror_r instead
-            const std::string desc(strerror(errno));
+            char errmsg[512];
+            ::strerror_r(errno, errmsg, 512);
+            const std::string desc(errmsg);
             LOG("\tthrowing " << errno << " => " << desc);
             throw general_error(call, errno, desc);
         }
