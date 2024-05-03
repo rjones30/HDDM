@@ -43,6 +43,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <rpc/types.h>
+typedef u_int32_t uint32_t;
 
 /*
  * XDR provides a conventional way for converting between C data
