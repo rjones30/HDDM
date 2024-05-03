@@ -8,6 +8,7 @@
 #define __XSTREAM_Z_H
 
 #include <xstream/config.h>
+#include <pthread.h>
 
 #if HAVE_LIBZ
 

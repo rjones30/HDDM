@@ -7,6 +7,7 @@
 #define __XSTREAM_BZ_H
 
 #include <xstream/config.h>
+#include <pthread.h>
 
 #if HAVE_LIBBZ2
 
