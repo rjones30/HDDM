@@ -124,7 +124,7 @@ int main(int argC, char* argV[])
    }
    if (ifs != &cin)
    {
-      ((ifstream*)ifs)->close();
+      delete ifs;
    }
 
    while (argInd < argC)
