@@ -40,6 +40,18 @@
 
 #include <sys/types.h>
 
+/* add some types from sys/types.h that are missing in the MS Visual Studio */
+#ifdef _MSC_VER
+typedef uint8_t u_int8_t;
+typedef uint16_t u_int16_t;
+typedef uint32_t u_int32_t;
+typedef uint64_t u_int64_t;
+typedef unsigned long long int u_quad_t;
+typedef long long int quad_t;
+typedef uint64_t ssize_t;
+typedef uint64_t caddr_t;
+#endif
+
 typedef int32_t bool_t;
 typedef int32_t enum_t;
 
