@@ -3,6 +3,7 @@
 
 #if HAVE_LIBZ
 
+#include <unistd.h>
 #include <algorithm>
 #include <string.h>
 #include <string>
