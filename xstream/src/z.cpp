@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <zlib.h>
 
-#ifndef NO_ARPA_INET_AVAILABLE
+#ifdef _MSC_VER
 #include <arpa/inet.h>
 #endif
 
