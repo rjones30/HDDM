@@ -3207,5 +3207,5 @@ Particle_t lookupParticle(const std::string &name)
          return (Particle_t)p;
       }
    }
-   return Unknown;
+   return UnknownParticle;
 }

@@ -162,9 +162,9 @@ class boolean_attribute_t : public attribute_t {
 
 class Particle_attribute_t : public attribute_t {
  public:
-   Particle_attribute_t() : attribute_t("", "Particle_t"), value(Unknown) {}
+   Particle_attribute_t() : attribute_t("", "Particle_t"), value(UnknownParticle) {}
    Particle_attribute_t(XString name) : attribute_t(name, "Particle_t"), 
-                                        value(Unknown) {}
+                                        value(UnknownParticle) {}
    virtual ~Particle_attribute_t() {}
 
    Particle_attribute_t &operator=(const Particle_attribute_t &src) {
@@ -174,7 +174,7 @@ class Particle_attribute_t : public attribute_t {
    }
 
    virtual void reset() {
-      value = Unknown;
+      value = UnknownParticle;
    }
    virtual void set(Particle_t val) {
       value = val;
