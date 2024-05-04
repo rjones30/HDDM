@@ -180,7 +180,7 @@ int main(int argC, char* argV[])
    XString xmlFile;
    if (argInd == argC)
    {
-      ifs = new std::ifstream(0);
+      ifs = new std::ifstream;
    }
    else if (argInd == argC - 1)
    {
