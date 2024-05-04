@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <zlib.h>
 
-#ifdef _MSC_VER
+#ifndef _MSC_VER
 #include <arpa/inet.h>
 #endif
 
