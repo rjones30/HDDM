@@ -26,7 +26,8 @@ list(APPEND EXTRA_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
 if(WIN32)
     list(APPEND EXTRA_LIBRARIES wsock32 
                                 ws2_32
-                                libpthreadVC3)
+                                pthreads4w_LIBRARIES
+    )
 endif()
 
 # add the executables

@@ -64,8 +64,9 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
 
 # require standard pthreads
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
+if(WIN32)
+    find_package(pthreads4w REQUIRED)
+endif()
 
 # add the xstream library
 add_subdirectory(xstream)
