@@ -26,7 +26,7 @@ list(APPEND EXTRA_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
 if(WIN32)
     list(APPEND EXTRA_LIBRARIES wsock32 
                                 ws2_32
-                                ${CMAKE_INSTALL_LIBDIR}/libpthreadVC3.lib
+                                ${CMAKE_INSTALL_PREFIX}/lib/libpthreadVC3.lib
     )
 endif()
 
