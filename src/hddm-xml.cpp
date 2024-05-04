@@ -297,9 +297,9 @@ int main(int argC, char* argV[])
    ofs.close();
 
 #if defined OLD_STYLE_XERCES_PARSER
-   DOMDocument* document = parseInputDocument(tmpFileStr.str().c_str(),false);
+   xercesc::DOMDocument* document = parseInputDocument(tmpFileStr.str().c_str(),false);
 #else
-   DOMDocument* document = buildDOMDocument(tmpFileStr.str().c_str(),false);
+   xercesc::DOMDocument* document = buildDOMDocument(tmpFileStr.str().c_str(),false);
 #endif
    if (document == 0)
    {

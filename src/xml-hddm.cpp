@@ -152,9 +152,9 @@ int main(int argC, char* argV[])
    }
 
 #if defined OLD_STYLE_XERCES_PARSER
-   DOMDocument* document = parseInputDocument(templFilename.c_str(),true);
+   xercesc::DOMDocument* document = parseInputDocument(templFilename.c_str(),true);
 #else
-   DOMDocument* document = buildDOMDocument(templFilename.c_str(),true);
+   xercesc::DOMDocument* document = buildDOMDocument(templFilename.c_str(),true);
 #endif
    if (document == 0)
    {
