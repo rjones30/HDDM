@@ -17,6 +17,9 @@
 
 #include "debug.h"
 
+#ifdef _MSC_VER
+typedef SSIZE_T ssize_t;
+#endif
 
 namespace xstream {
 namespace posix{
