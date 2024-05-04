@@ -42,7 +42,6 @@
 #define _TIRPC_XDR_H
 #include <stdio.h>
 #include <stdint.h>
-typedef unsigned int u_int32_t;
 #include <rpc/types.h>
 
 /*
