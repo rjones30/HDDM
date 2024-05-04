@@ -23,6 +23,10 @@ list(APPEND EXTRA_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
                                ${ZLIB_INCLDUE_DIRS}
     )
 
+if(WIN32)
+    list(APPEND EXTRA_LIBRARIES wsock32 ws2_32)
+endif()
+
 # add the executables
 add_executable(hddm-xml hddm-xml.cpp XString.cpp XParsers.cpp md5.c)
 add_executable(xml-hddm xml-hddm.cpp XString.cpp XParsers.cpp md5.c)
