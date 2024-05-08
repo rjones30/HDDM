@@ -237,8 +237,7 @@ int main(int argC, char* argV[])
    xstream::xdr::ostream ofx(*builder.ofs);
    std::stringstream tmpFileStr;
    char tmpname[] = "tmpXXXXXX";
-   mkstemp(tmpname);
-   tmpFileStr << tmpname;
+   tmpFileStr << mktemp(tmpname);
    while (getline(*ifs,line))
    {
       if (line.size() > 500000)

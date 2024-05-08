@@ -240,8 +240,7 @@ int main(int argC, char* argV[])
    }
    std::ostringstream tmpFileStr;
    char tmpname[] = "tmpXXXXXX";
-   mkstemp(tmpname);
-   tmpFileStr << tmpname;
+   tmpFileStr << mktemp(tmpname);
    std::ofstream ofs(tmpFileStr.str().c_str());
    if (! ofs.is_open())
    {
