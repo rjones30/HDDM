@@ -14,7 +14,9 @@
 #include <xstream/except/bz.h>
 
 #include <bzlib.h>
+#ifndef _MSC_VER
 #include <arpa/inet.h>
+#endif
 
 #include "debug.h"
 
