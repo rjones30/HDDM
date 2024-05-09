@@ -54,9 +54,6 @@ typedef long long int quad_t;
 typedef uint64_t ssize_t;
 typedef uint64_t caddr_t;
 #endif
-#ifndef strtok
-#define strtok strtok_s
-#endif
 #ifndef fopen
 #define fopen fopen_s
 #endif
@@ -66,6 +63,7 @@ typedef uint64_t caddr_t;
 
 #else
 #define strncpy_s(dest, destsz, src, count) strncpy(dest, src, count)
+#define strtok_s(str, strmax, delim, ptr) strtok(str, delim)
 #endif
 
 typedef int32_t bool_t;
