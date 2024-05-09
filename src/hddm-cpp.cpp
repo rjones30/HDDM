@@ -577,7 +577,7 @@ int main(int argC, char* argV[])
    "      pbump(int(pos));\n"
    "   }\n"
    "\n"
-   "   int64 size() {\n"
+   "   std::streamoff size() {\n"
    "      return pptr() - pbase();\n"
    "   }\n"
    "\n"
