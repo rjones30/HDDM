@@ -68,6 +68,7 @@ typedef uint64_t caddr_t;
 #ifndef _fdopen
 #define _fdopen fdopen
 #endif
+#endif
 
 typedef int32_t bool_t;
 typedef int32_t enum_t;
