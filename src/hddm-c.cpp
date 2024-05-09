@@ -2050,7 +2050,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   len = (int)strlen(HDDM_"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   head = (char*)malloc(len+1);"                   << std::endl
-         << "   strncpy(head,HDDM_,"
+         << "   strncpy(head,HDDM_"
          << classPrefix << "_DocumentString,len+1);"            << std::endl
          << "   if (fwrite(head,1,len,fp->fd) != len)"          << std::endl
          << "   {"                                              << std::endl
