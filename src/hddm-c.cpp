@@ -1845,7 +1845,7 @@ void CodeBuilder::writeMatcher()
          << "      {"                                           << std::endl
          << "         popNode* this1 = "
          << "(popNode*)malloc(sizeof(popNode));"                << std::endl
-         << "         int len = strchr(c+1,'\\n') - c;"         << std::endl
+         << "         int len = (int)(strchr(c+1,'\\n') - c);"  << std::endl
          << "         if (tag_strncmp(c,b,len) != 0)"           << std::endl
          << "         {"                                        << std::endl
          << "            collide(b,c);"                         << std::endl
