@@ -1759,13 +1759,13 @@ void CodeBuilder::writeMatcher()
          << "   size_t level;"                                  << std::endl
          << "   char* token;"                                   << std::endl
          << "   char line[500];"                                << std::endl
-         << "   strncpy(line,d,499);"                           << std::endl
+         << "   strncpy_s(line,500,d,499);"                     << std::endl
          << "   line[499] = 0;"                                 << std::endl
          << "   level = strchr(line,'<')-line;"                 << std::endl
          << "   if (level < 500 &&"                             << std::endl
          << "      (token = strtok(line+level+1,\" >\")))"      << std::endl
          << "   {"                                              << std::endl
-         << "      strncpy(tag,token,499);"                     << std::endl
+         << "      strncpy_s(tag,500,token,499);"               << std::endl
          << "      tag[499] = 0;"                               << std::endl
          << "      return (int)level/2;"                        << std::endl
          << "   }"                                              << std::endl
@@ -1776,7 +1776,7 @@ void CodeBuilder::writeMatcher()
          << "{"                                                 << std::endl
          << "   char line[500];"                                << std::endl
          << "   char endTag[510];"                              << std::endl
-         << "   strncpy(line,d,499);"                           << std::endl
+         << "   strncpy_s(line,500,d,499);"                     << std::endl
          << "   line[499] = 0;"                                 << std::endl
          << "   if (strstr(strtok(line,\"\\n\"),\"/>\") == 0)"  << std::endl
          << "   {"                                              << std::endl
@@ -1784,7 +1784,7 @@ void CodeBuilder::writeMatcher()
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
-         << "      strncpy(endTag,\"/>\",500);"                 << std::endl
+         << "      strncpy_s(endTag,500,\"/>\",499);"           << std::endl
          << "   }"                                              << std::endl
          << "   return strstr(d,endTag);"                       << std::endl
          << "}"                                                 << std::endl
@@ -2003,7 +2003,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   int len = (int)strlen(filename);"               << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy(fp->filename,filename,len+1);"          << std::endl
+         << "   strncpy_s(fp->filename,len+1,filename,len);"    << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
             " = hddm_" + classPrefix + "_buffersize);"          << std::endl
@@ -2050,8 +2050,8 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   len = (int)strlen(HDDM_"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   head = (char*)malloc(len+1);"                   << std::endl
-         << "   strncpy(head,HDDM_"
-         << classPrefix << "_DocumentString,len+1);"            << std::endl
+         << "   strncpy_s(head,len+1,HDDM_"
+         << classPrefix << "_DocumentString,len);"              << std::endl
          << "   if (fwrite(head,1,len,fp->fd) != len)"          << std::endl
          << "   {"                                              << std::endl
          << "      fprintf(stderr,\"HDDM Error: \");"           << std::endl
@@ -2061,7 +2061,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   len = (int)strlen(filename);"                   << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy(fp->filename,filename,len+1);"          << std::endl
+         << "   strncpy_s(fp->filename,len+1,filename,len);"    << std::endl
          << "   fp->popTop = 0;"                                << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
