@@ -1784,7 +1784,7 @@ void CodeBuilder::writeMatcher()
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
-         << "      strncpy(endTag,500,\"/>\");"                 << std::endl
+         << "      strncpy(endTag,\"/>\",500);"                 << std::endl
          << "   }"                                              << std::endl
          << "   return strstr(d,endTag);"                       << std::endl
          << "}"                                                 << std::endl
@@ -2003,7 +2003,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   int len = strlen(filename);"                    << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy(fp->filename,len+1,filename);"          << std::endl
+         << "   strncpy(fp->filename,filename,len+1);"          << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
             " = hddm_" + classPrefix + "_buffersize);"          << std::endl
@@ -2050,8 +2050,8 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   len = (int)strlen(HDDM_"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   head = (char*)malloc(len+1);"                   << std::endl
-         << "   strncpy(head,HDDM_,len+1,"
-         << classPrefix << "_DocumentString);"                  << std::endl
+         << "   strncpy(head,HDDM_,"
+         << classPrefix << "_DocumentString,len+1);"            << std::endl
          << "   if (fwrite(head,1,len,fp->fd) != len)"          << std::endl
          << "   {"                                              << std::endl
          << "      fprintf(stderr,\"HDDM Error: \");"           << std::endl
@@ -2061,7 +2061,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   int len = strlen(filename);"                    << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy(fp->filename,len+1,filename);"          << std::endl
+         << "   strncpy(fp->filename,filename,len+1);"          << std::endl
          << "   fp->popTop = 0;"                                << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
