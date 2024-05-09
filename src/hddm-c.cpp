@@ -1943,7 +1943,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   char* nullfilename=(char*)\"\";"                << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
-         << "      fp->fd = fopen(filename,\"r\");"             << std::endl
+         << "      fopen_s(fp->fd,filename,\"r\");"             << std::endl
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
@@ -2038,7 +2038,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "malloc(sizeof(" << classPrefix << "_iostream_t));" << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
-         << "      fp->fd = fopen(filename,\"w\");"             << std::endl
+         << "      fopen_s(fp->fd,filename,\"w\");"             << std::endl
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
