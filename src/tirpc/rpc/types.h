@@ -42,6 +42,7 @@
 
 /* add some types from sys/types.h that are missing in the MS Visual Studio */
 #ifdef _MSC_VER
+#include <winsock.h>
 typedef uint8_t u_int8_t;
 typedef uint16_t u_int16_t;
 typedef uint32_t u_int32_t;
@@ -104,8 +105,13 @@ typedef __caddr_t caddr_t;
 # define __daddr_t_defined
 #endif
 
+#ifdef _MSC_VER
+#include <time.h>
+#else
 #include <sys/time.h>
 #include <sys/param.h>
+#endif
+
 #include <stdlib.h>
 #include <netconfig.h>
 
