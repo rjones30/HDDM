@@ -2047,7 +2047,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "      return 0;"                                   << std::endl
          << "   }"                                              << std::endl
          << "   fp->iomode = HDDM_STREAM_OUTPUT;"               << std::endl
-         << "   len = strlen(HDDM_"
+         << "   len = (int)strlen(HDDM_"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   head = (char*)malloc(len+1);"                   << std::endl
          << "   strcpy(head,HDDM_"
