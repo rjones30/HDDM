@@ -2001,7 +2001,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "      fprintf(stderr,\"  Please recompile.\\n\");" << std::endl
          << "      exit(9);"                                    << std::endl
          << "   }"                                              << std::endl
-         << "   int len = strlen(filename);"                    << std::endl
+         << "   int len = (int)strlen(filename);"               << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
          << "   strncpy(fp->filename,filename,len+1);"          << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
