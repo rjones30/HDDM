@@ -43,6 +43,9 @@
 /* add some types from sys/types.h that are missing in the MS Visual Studio */
 #ifdef _MSC_VER
 #include <winsock.h>
+
+#ifndef _U_INT8_T
+#define _U_INT8_T 1
 typedef uint8_t u_int8_t;
 typedef uint16_t u_int16_t;
 typedef uint32_t u_int32_t;
@@ -51,6 +54,19 @@ typedef unsigned long long int u_quad_t;
 typedef long long int quad_t;
 typedef uint64_t ssize_t;
 typedef uint64_t caddr_t;
+#endif
+
+#ifndef strncpy_s
+#define strncpy_s strncpy
+#endif
+#ifndef strtok_s
+#define strtok_s strtok
+#endif
+#ifndef fopen_s
+#define fopen_s fopen
+#endif
+#ifndef _fdopen
+#define _fdopen fdopen
 #endif
 
 typedef int32_t bool_t;
