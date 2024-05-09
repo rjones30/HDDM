@@ -236,8 +236,7 @@ int main(int argC, char* argV[])
 
    xstream::xdr::ostream ofx(*builder.ofs);
    std::stringstream tmpFileStr;
-   char tmpname[] = "tmpXXXXXX";
-   tmpFileStr << mktemp(tmpname);
+   tmpFileStr << "tmp" << getpid();
    while (getline(*ifs,line))
    {
       if (line.size() > 500000)

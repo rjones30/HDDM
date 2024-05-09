@@ -233,8 +233,7 @@ int main(int argC, char* argV[])
       exit(1);
    }
    std::ostringstream tmpFileStr;
-   char tmpname[] = "tmpXXXXXX";
-   tmpFileStr << mktemp(tmpname);
+   tmpFileStr << "tmp" << getpid();
    std::ofstream ofs(tmpFileStr.str().c_str());
    if (! ofs.is_open())
    {
