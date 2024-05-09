@@ -1780,11 +1780,11 @@ void CodeBuilder::writeMatcher()
          << "   line[499] = 0;"                                 << std::endl
          << "   if (strstr(strtok(line,\"\\n\"),\"/>\") == 0)"  << std::endl
          << "   {"                                              << std::endl
-         << "      sprintf(endTag,\"</%s>\",tag);"              << std::endl
+         << "      snprintf(endTag,500,\"</%s>\",tag);"         << std::endl
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
-         << "      strcpy(endTag,\"/>\");"                      << std::endl
+         << "      strncpy(endTag,500,\"/>\");"                 << std::endl
          << "   }"                                              << std::endl
          << "   return strstr(d,endTag);"                       << std::endl
          << "}"                                                 << std::endl
@@ -2001,9 +2001,9 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "      fprintf(stderr,\"  Please recompile.\\n\");" << std::endl
          << "      exit(9);"                                    << std::endl
          << "   }"                                              << std::endl
-         << "   fp->filename = "
-         << "(char*)malloc(strlen(filename) + 1);"              << std::endl
-         << "   strcpy(fp->filename,filename);"                 << std::endl
+         << "   int len = strlen(filename);"                    << std::endl
+         << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
+         << "   strncpy(fp->filename,len+1,filename);"          << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
             " = hddm_" + classPrefix + "_buffersize);"          << std::endl
@@ -2050,7 +2050,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   len = (int)strlen(HDDM_"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   head = (char*)malloc(len+1);"                   << std::endl
-         << "   strcpy(head,HDDM_"
+         << "   strncpy(head,HDDM_,len+1,"
          << classPrefix << "_DocumentString);"                  << std::endl
          << "   if (fwrite(head,1,len,fp->fd) != len)"          << std::endl
          << "   {"                                              << std::endl
@@ -2059,9 +2059,9 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "      fprintf(stderr,\"output file %s\\n\",filename);" << std::endl
          << "      exit(9);"                                    << std::endl
          << "   }"                                              << std::endl
-         << "   fp->filename = "
-         << "(char*)malloc(strlen(filename) + 1);"              << std::endl
-         << "   strcpy(fp->filename,filename);"                 << std::endl
+         << "   int len = strlen(filename);"                    << std::endl
+         << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
+         << "   strncpy(fp->filename,len+1,filename);"          << std::endl
          << "   fp->popTop = 0;"                                << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
