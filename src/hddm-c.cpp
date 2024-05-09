@@ -2059,7 +2059,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "      fprintf(stderr,\"output file %s\\n\",filename);" << std::endl
          << "      exit(9);"                                    << std::endl
          << "   }"                                              << std::endl
-         << "   int len = strlen(filename);"                    << std::endl
+         << "   len = (int)strlen(filename);"                   << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
          << "   strncpy(fp->filename,filename,len+1);"          << std::endl
          << "   fp->popTop = 0;"                                << std::endl
