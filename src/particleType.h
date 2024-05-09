@@ -2896,7 +2896,7 @@ inline static int Is_CorrectCharge(Particle_t locPID, Charge_t locCharge)
 // Deduce particle type from charge and mass
 inline static Particle_t IDTrack(float locCharge, float locMass)
 {
-        float locMassTolerance(0.010);
+        float locMassTolerance = 0.010F;
         if (locCharge > 0.1) // Positive particles
         { 
 	  if (fabs(locMass - ParticleMass(Triton)) < locMassTolerance) return Triton;
