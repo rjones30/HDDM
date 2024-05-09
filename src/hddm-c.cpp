@@ -407,7 +407,6 @@ int main(int argC, char* argV[])
          << "#include <errno.h>"                                << std::endl
          << "#include <rpc/xdr.h>"                              << std::endl
          << "#include <string.h>"                               << std::endl
-         << "#include <strings.h>"                              << std::endl
          << "#include <particleType.h>"                         << std::endl
                                                                 << std::endl
          << "typedef char* string_t;        "
@@ -1763,7 +1762,7 @@ void CodeBuilder::writeMatcher()
          << "   char line[500];"                                << std::endl
          << "   strncpy(line,d,499);"                           << std::endl
          << "   line[499] = 0;"                                 << std::endl
-         << "   level = index(line,'<')-line;"                  << std::endl
+         << "   level = strchr(line,'<')-line;"                 << std::endl
          << "   if (level < 500 &&"                             << std::endl
          << "      (token = strtok(line+level+1,\" >\")))"      << std::endl
          << "   {"                                              << std::endl
@@ -1795,10 +1794,10 @@ void CodeBuilder::writeMatcher()
          << "{"                                                 << std::endl
          << "   char btag[500];"                                << std::endl
          << "   getTag(b,btag);"                                << std::endl
-         << "   b = index(b,'<');"                              << std::endl
-         << "   c = index(c,'<');"                              << std::endl
-         << "   *(index(b,'\\n')) = 0;"                         << std::endl
-         << "   *(index(c,'\\n')) = 0;"                         << std::endl
+         << "   b = strchr(b,'<');"                             << std::endl
+         << "   c = strchr(c,'<');"                             << std::endl
+         << "   *(strchr(b,'\\n')) = 0;"                        << std::endl
+         << "   *(strchr(c,'\\n')) = 0;"                        << std::endl
          << "   fprintf(stderr,\"HDDM warning: \");"            << std::endl
          << "   fprintf(stderr,\"tag %s in input file \", btag);" << std::endl
          << "   fprintf(stderr,\"does not match c header hddm_"
@@ -1809,8 +1808,8 @@ void CodeBuilder::writeMatcher()
                                                                 << std::endl
          << "   fprintf(stderr,\" rebuild to cure the problem ===\\n\");"
                                                                 << std::endl
-         << "   *(index(b,0)) = '\\n';"                         << std::endl
-         << "   *(index(c,0)) = '\\n';"                         << std::endl
+         << "   *(strchr(b,0)) = '\\n';"                        << std::endl
+         << "   *(strchr(c,0)) = '\\n';"                        << std::endl
          << "}"                                                 << std::endl
                                                                 << std::endl
          << "static int tag_strncmp(char* a, char* b, int len)" << std::endl
@@ -1847,7 +1846,7 @@ void CodeBuilder::writeMatcher()
          << "      {"                                           << std::endl
          << "         popNode* this1 = "
          << "(popNode*)malloc(sizeof(popNode));"                << std::endl
-         << "         int len = index(c+1,'\\n') - c;"          << std::endl
+         << "         int len = strchr(c+1,'\\n') - c;"         << std::endl
          << "         if (tag_strncmp(c,b,len) != 0)"           << std::endl
          << "         {"                                        << std::endl
          << "            collide(b,c);"                         << std::endl
@@ -1884,8 +1883,8 @@ void CodeBuilder::writeMatcher()
 
    cFile << "         this1->inParent = ptrSeqNo;"              << std::endl
          << "         this1->popListLength = 0;"                << std::endl
-         << "         c = index(c+1,'\\n');"                    << std::endl
-         << "         b = index(b+1,'\\n');"                    << std::endl
+         << "         c = strchr(c+1,'\\n');"                   << std::endl
+         << "         b = strchr(b+1,'\\n');"                   << std::endl
          << "         while (getTag(b,btag) > blevel)"          << std::endl
          << "         {"                                        << std::endl
          << "            this1->popList[this1->popListLength++] = matches(b,c);"
@@ -1900,14 +1899,14 @@ void CodeBuilder::writeMatcher()
          << "               exit(9);"                           << std::endl
          << "            }"                                     << std::endl
          << "            b = getEndTag(b,btag);"                << std::endl
-         << "            b = index(b+1,'\\n');"                 << std::endl
+         << "            b = strchr(b+1,'\\n');"                << std::endl
          << "         }"                                        << std::endl
          << "         return this1;"                            << std::endl
          << "      }"                                           << std::endl
          << "      else"                                        << std::endl
          << "      {"                                           << std::endl
          << "         c = getEndTag(c,ctag);"                   << std::endl
-         << "         c = index(c+1,'\\n');"                    << std::endl
+         << "         c = strchr(c+1,'\\n');"                   << std::endl
          << "         ++ptrSeqNo;"                              << std::endl
          << "      }"                                           << std::endl
          << "   }"                                              << std::endl
