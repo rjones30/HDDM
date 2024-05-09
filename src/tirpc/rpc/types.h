@@ -54,14 +54,14 @@ typedef long long int quad_t;
 typedef uint64_t ssize_t;
 typedef uint64_t caddr_t;
 #endif
-#ifndef strtok_s
-#define strtok_s strtok
+#ifndef strtok
+#define strtok strtok_s
 #endif
-#ifndef fopen_s
-#define fopen_s fopen
+#ifndef fopen
+#define fopen fopen_s
 #endif
-#ifndef _fdopen
-#define _fdopen fdopen
+#ifndef fdopen
+#define fdopen _fdopen
 #endif
 
 #else
