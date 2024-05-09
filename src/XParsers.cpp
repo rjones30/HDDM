@@ -386,7 +386,7 @@ std::string MyEntityResolver::GetMD5_checksum(void)
 
 		// get length of file:
 		ifs.seekg (0, ios::end);
-		unsigned int length = ifs.tellg();
+		std::streamoff length = ifs.tellg();
 		ifs.seekg (0, ios::beg);
 
 		// allocate memory:
@@ -407,7 +407,7 @@ std::string MyEntityResolver::GetMD5_checksum(void)
 	md5_finish(&pms, digest);
 	
 	char hex_output[16*2 + 1];
-	for(int di = 0; di < 16; ++di) sprintf(hex_output + di * 2, "%02x", digest[di]);
+	for(int di = 0; di < 16; ++di) snprintf(hex_output + di * 2, 32, "%02x", digest[di]);
 
 	return last_md5_checksum = hex_output;
 }
