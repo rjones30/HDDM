@@ -1723,7 +1723,7 @@ void CodeBuilder::constructFlushFunc(DOMElement* el)
          << "            fprintf(stderr,\"HDDM Error: error writing to \""
                                                                 << std::endl
          << "                    \"output hddm file.\\n\");"    << std::endl
-         << "            fprintf(stderr,\"%d bytes of %d "
+         << "            fprintf(stderr,\"%zd bytes of %d "
                                  "actually written.\\n\","      << std::endl
          << "                    wsize, size+4);"               << std::endl
          << "            exit(9);"                              << std::endl
@@ -1762,7 +1762,7 @@ void CodeBuilder::writeMatcher()
          << "   strncpy_s(line,500,d,499);"                     << std::endl
          << "   line[499] = 0;"                                 << std::endl
          << "   level = strchr(line,'<')-line;"                 << std::endl
-         << "   char **ptr;"                                    << std::endl
+         << "   char **ptr = 0;"                                << std::endl
          << "   if (level < 500 &&"                             << std::endl
          << "      (token = strtok_s(line+level+1,"
          << "\" >\",ptr)))"                                     << std::endl
@@ -1781,7 +1781,7 @@ void CodeBuilder::writeMatcher()
          << "   strncpy_s(line,500,d,499);"                     << std::endl
          << "   line[499] = 0;"                                 << std::endl
          << "   size_t nleft = 499;"                            << std::endl
-         << "   char **ptr;"                                    << std::endl
+         << "   char **ptr = 0;"                                << std::endl
          << "   if (strstr(strtok_s(line,"
          << "\"\\n\",ptr),\"/>\") == 0)"                        << std::endl
          << "   {"                                              << std::endl
@@ -1944,7 +1944,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   char* nullfilename=(char*)\"\";"                << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
-         << "      fopen_s(fp->fd,filename,\"r\");"             << std::endl
+         << "      fopen_s(&fp->fd,filename,\"r\");"            << std::endl
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
@@ -2039,7 +2039,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "malloc(sizeof(" << classPrefix << "_iostream_t));" << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
-         << "      fopen_s(fp->fd,filename,\"w\");"             << std::endl
+         << "      fopen_s(&fp->fd,filename,\"w\");"            << std::endl
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl

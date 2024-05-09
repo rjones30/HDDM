@@ -61,7 +61,7 @@ typedef uint64_t caddr_t;
 #else
 #define strncpy_s(dest, destsz, src, count) strncpy(dest, src, count)
 #define strtok_s(str, delim, ptr) strtok(str, delim)
-#define fopen_s(fdesc, filename, filemode) (fdesc = fopen(filename, filemode)), errno
+#define fopen_s(fdesc, filename, filemode) (*(fdesc) = fopen(filename, filemode)), errno
 #endif
 
 typedef int32_t bool_t;
