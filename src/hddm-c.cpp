@@ -1756,7 +1756,7 @@ void CodeBuilder::writeMatcher()
    cFile                                                        << std::endl
          << "static int getTag(char* d, char* tag)"             << std::endl
          << "{"                                                 << std::endl
-         << "   int level;"                                     << std::endl
+         << "   size_t level;"                                  << std::endl
          << "   char* token;"                                   << std::endl
          << "   char line[500];"                                << std::endl
          << "   strncpy(line,d,499);"                           << std::endl
@@ -1767,7 +1767,7 @@ void CodeBuilder::writeMatcher()
          << "   {"                                              << std::endl
          << "      strncpy(tag,token,499);"                     << std::endl
          << "      tag[499] = 0;"                               << std::endl
-         << "      return level/2;"                             << std::endl
+         << "      return int(level/2);"                        << std::endl
          << "   }"                                              << std::endl
          << "   return -1;"                                     << std::endl
          << "}"                                                 << std::endl
