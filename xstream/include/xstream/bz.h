@@ -169,7 +169,7 @@ class istreambuf: public common, public std::streambuf {
         std::streamsize block_size;
         std::streampos block_next;
         std::streamoff new_block_start;
-        unsigned int new_block_offset;
+        std::streamoff new_block_offset;
         typedef struct {
             int len;
             char buf[64];
@@ -222,7 +222,7 @@ class istreambuf: public common, public std::streambuf {
         std::streamsize get_block_size() {
             return block_size;
         }
-        void set_new_position(std::streamoff start, unsigned int offset) {
+        void set_new_position(std::streamoff start, std::streamoff offset) {
            new_block_start = start;
            new_block_offset = offset;
         }
