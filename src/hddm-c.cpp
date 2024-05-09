@@ -1716,7 +1716,7 @@ void CodeBuilder::constructFlushFunc(DOMElement* el)
          << "      }"                                           << std::endl
          << "      else if (size > 0)"                          << std::endl
          << "      {"                                           << std::endl
-         << "         int wsize = fwrite(fp->iobuffer,1,size+4,fp->fd);"
+         << "         size_t wsize = fwrite(fp->iobuffer,1,size+4,fp->fd);"
                                                                 << std::endl
          << "         if (wsize != size + 4)"                   << std::endl
          << "         {"                                        << std::endl
