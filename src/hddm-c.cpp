@@ -1321,7 +1321,7 @@ void CodeBuilder::constructReadFunc(DOMElement* topEl)
                    " to read this file.\\n\");"                 << std::endl
          << "      exit(9);"                                    << std::endl
          << "   }"                                              << std::endl
-         << "   else if (size + 4 > fp->iobuffer_size)"         << std::endl
+         << "   else if ((int)size + 4 > fp->iobuffer_size)"    << std::endl
          << "   {"                                              << std::endl
          << "      xdr_destroy(fp->xdrs);"                      << std::endl
          << "      char *newbuf = (char*)malloc(fp->iobuffer_size *= 2);"
@@ -1382,7 +1382,7 @@ void CodeBuilder::constructSkipFunc()
          <<           "interface to read this file.\\n\");"     << std::endl
          << "         exit(9);"                                 << std::endl
          << "      }"                                           << std::endl
-         << "      else if (size + 4 > fp->iobuffer_size)"      << std::endl
+         << "      else if ((int)size + 4 > fp->iobuffer_size)" << std::endl
          << "      {"                                           << std::endl
          << "         xdr_destroy(fp->xdrs);"                   << std::endl
          << "         char *newbuf = (char*)malloc(fp->iobuffer_size *= 2);"
@@ -1643,7 +1643,7 @@ void CodeBuilder::constructPackers()
       if (tagT.find("_HDDM") != tagT.npos)
       {
          cFile
-            << "   if (size + 4 > hddm_" + classPrefix + "_buffersize) {"
+            << "   if ((int)size + 4 > hddm_" + classPrefix + "_buffersize) {"
                                                                 << std::endl
             << "      fprintf(stderr,\"hddm error - \""         << std::endl
             << "      \"output buffer overflow on hddm stream,"
