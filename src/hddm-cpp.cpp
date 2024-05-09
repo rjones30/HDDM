@@ -1260,7 +1260,7 @@ int main(int argC, char* argV[])
    "      return true;\n"
    "   }\n"
    "   else {\n"
-   "      int len = a.length();\n"
+   "      size_t len = a.length();\n"
    "      int ia=0;\n"
    "      int ib=0;\n"
    "      for (; a[ia] == b[ib]; ++ia, ++ib, --len) {}\n"
