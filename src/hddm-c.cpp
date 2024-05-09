@@ -1767,7 +1767,7 @@ void CodeBuilder::writeMatcher()
          << "   {"                                              << std::endl
          << "      strncpy(tag,token,499);"                     << std::endl
          << "      tag[499] = 0;"                               << std::endl
-         << "      return int(level/2);"                        << std::endl
+         << "      return (int)level/2;"                        << std::endl
          << "   }"                                              << std::endl
          << "   return -1;"                                     << std::endl
          << "}"                                                 << std::endl
