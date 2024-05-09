@@ -541,7 +541,7 @@ int main(int argC, char* argV[])
    "   void seekg(std::streampos pos) {\n"
    "      reset();\n"
    "      for (; pos > MAX_INT; pos -= MAX_INT)\n"
-   "         gbump(MAX_INT)\n;
+   "         gbump(MAX_INT);\n"
    "      gbump(int(pos));\n"
    "   }\n"
    "\n"
