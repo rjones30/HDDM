@@ -396,7 +396,7 @@ std::string MyEntityResolver::GetMD5_checksum(void)
 		ifs.read (buff,length);
 		ifs.close();
 
-		md5_append(&pms, (const md5_byte_t *)buff, length);
+		md5_append(&pms, (const md5_byte_t *)buff, int(length));
 
 		delete[] buff;
 
