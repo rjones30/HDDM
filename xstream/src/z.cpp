@@ -526,7 +526,7 @@ namespace z {
 
         //try to satisfy request from buffered input
         std::streamsize available = egptr() - gptr();
-        int read = (available >= n)? n : (int)available;
+        int read = (int)((available >= n)? n : available);
         if (read) {
             std::copy(gptr(), gptr() + read, buffer);
             gbump(read);
@@ -663,7 +663,7 @@ namespace z {
             }
         }
         z_strm->next_in = reinterpret_cast < Bytef* >(in.buf);
-        z_strm->avail_in = read;
+        z_strm->avail_in = (unsigned int)read;
         inflate(f);
     }
 

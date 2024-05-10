@@ -39,7 +39,7 @@ namespace digest{
     void adler32::calculate_digest()
     {
         LOG("digest::adler32::calculate_digest");
-        _digest = ::adler32(_digest, reinterpret_cast<Bytef*>(pbase()), taken());
+        _digest = ::adler32(_digest, reinterpret_cast<Bytef*>(pbase()), (unsigned int)taken());
         LOG("\tdigest = " << _digest);
     }
 
@@ -51,7 +51,7 @@ namespace digest{
     void crc32::calculate_digest()
     {
         LOG("digest::crc32::calculate_digest");
-        _digest = ::crc32(_digest, reinterpret_cast<Bytef*>(pbase()), taken());
+        _digest = ::crc32(_digest, reinterpret_cast<Bytef*>(pbase()), (unsigned int)taken());
         LOG("\tdigest = " << _digest);
     }
 
