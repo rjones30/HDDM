@@ -7,7 +7,11 @@
 #include <ctime>
 
 //for read write, etc
+#ifdef _MSC_VER
+#include <unistd_win32.h>
+#else
 #include <unistd.h>
+#endif
 
 //for errno
 #include <errno.h>

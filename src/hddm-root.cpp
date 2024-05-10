@@ -26,7 +26,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <rpc/xdr.h>
+#ifdef _MSC_VER
+#include <unistd_win32.h>
+#else
 #include <unistd.h>
+#endif
 #include <xstream/z.h>
 #include <xstream/bz.h>
 #include <xstream/xdr.h>

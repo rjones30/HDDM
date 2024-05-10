@@ -83,7 +83,11 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
+#ifdef _MSC_VER
+#include <unistd_win32.h>
+#else
 #include <unistd.h>
+#endif
 
 #include <string>
 #include <vector>

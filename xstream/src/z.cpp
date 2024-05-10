@@ -3,7 +3,11 @@
 
 #if HAVE_LIBZ
 
+#ifdef _MSC_VER
+#include <unistd_win32.h>
+#else
 #include <unistd.h>
+#endif
 #include <algorithm>
 #include <string.h>
 #include <string>

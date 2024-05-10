@@ -4,7 +4,11 @@
 #if HAVE_LIBBZ2
 
 #include <stdint.h>
+#ifdef _MSC_VER
+#include <unistd_win32.h>
+#else
 #include <unistd.h>
+#endif
 #include <string.h>
 #include <cstring>
 #include <algorithm>
