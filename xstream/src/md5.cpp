@@ -240,7 +240,7 @@ namespace digest{
         LOG("\ttaken = " << t << "\tlen=" << l);
 
         //write size of data
-        unsigned long int ll = l * 8; //length in bits not bytes
+        size_t ll = l * 8; //length in bits not bytes
         char* const end = (b + block_size - 8) + (t >= block_size - 8 ? block_size : 0);
         LOG("\tend-b = " << (end - b));
         
