@@ -566,7 +566,9 @@ class istreambuffer : public std::streambuf {
 
    void seekg(std::streampos pos) {
       reset();
-      gbump(pos);
+      for (; pos > INT_MAX; pos -= INT_MAX)
+         gbump(INT_MAX);
+      gbump(int(pos));
    }
 
    int size() {

@@ -111,7 +111,7 @@ class istreambuffer : public std::streambuf {
 
    void seekg(std::streampos pos) {
       reset();
-      for (; pos < INT_MAX; pos -= INT_MAX)
+      for (; pos > INT_MAX; pos -= INT_MAX)
          gbump(INT_MAX);
       gbump(int(pos));
    }
@@ -143,7 +143,7 @@ class ostreambuffer : public std::streambuf {
 
    void seekp(std::streampos pos) {
       reset();
-      for (; pos < INT_MAX; pos -= INT_MAX)
+      for (; pos > INT_MAX; pos -= INT_MAX)
          pbump(INT_MAX);
       pbump(int(pos));
    }
