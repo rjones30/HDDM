@@ -1469,7 +1469,7 @@ void CodeBuilder::constructPackers()
       {
          cFile   << "   int m=0;"                               << std::endl;
       }
-      cFile << "   size_t size=0;"                              << std::endl
+      cFile << "   unsigned int size=0;"                        << std::endl
             << "   off_t base,start,end;"                       << std::endl
             << "   base = xdr_getpos64(xdrs);"                  << std::endl;
       if (tagT.find("_HDDM") != tagT.npos)
@@ -1639,7 +1639,7 @@ void CodeBuilder::constructPackers()
       cFile << "   }"                                           << std::endl
             << "   end = xdr_getpos64(xdrs);"                   << std::endl
             << "   xdr_setpos64(xdrs,base);"                    << std::endl
-            << "   size = end-start;"                           << std::endl;
+            << "   size = (unsigned int)(end-start);"           << std::endl;
       if (tagT.find("_HDDM") != tagT.npos)
       {
          cFile
