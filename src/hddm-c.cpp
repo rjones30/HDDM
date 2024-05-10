@@ -1467,7 +1467,7 @@ void CodeBuilder::constructPackers()
             << "{"                                              << std::endl;
       if (rep > 1)
       {
-         cFile   << "   int m=0;"                               << std::endl;
+         cFile   << "   unsigned int m=0;"                      << std::endl;
       }
       cFile << "   unsigned int size=0;"                        << std::endl
             << "   off_t base,start,end;"                       << std::endl
