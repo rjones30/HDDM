@@ -224,8 +224,8 @@ namespace digest{
         //cache current digest
         struct result d = result;
         
-        const size_t t = taken();
-        const size_t l = length + t;
+        const unsigned int t = (unsigned int)taken();
+        const unsigned int l = (unsigned int)(length + t);
         const char* orig = pbase();
 
         //I could make this a litle more efficient, but since this only occurs at the end, maybe it's ok
