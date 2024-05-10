@@ -1,4 +1,5 @@
-// this is a place holder
+#ifndef _UNISTD_H
+#define _UNISTD_H 1
 
 #include <io.h>
 #include <time.h>
@@ -37,4 +38,6 @@ inline int strerror_r(int errnum, char *strerrbuf, size_t buflen) {
 #ifndef _FSYNC
 #define _FSYNC 1
 int fsync(int fd);
+#endif
+
 #endif
