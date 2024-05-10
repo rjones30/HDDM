@@ -113,7 +113,7 @@ class istreambuffer : public std::streambuf {
       reset();
       for (; pos < INT_MAX; pos -= INT_MAX)
          gbump(INT_MAX);
-      gbump(pos);
+      gbump(int(pos));
    }
 
    size_t size() {
@@ -145,7 +145,7 @@ class ostreambuffer : public std::streambuf {
       reset();
       for (; pos < INT_MAX; pos -= INT_MAX)
          pbump(INT_MAX);
-      pbump(pos);
+      pbump(int(pos));
    }
 
    size_t size() {
