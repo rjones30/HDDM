@@ -54,8 +54,17 @@ typedef long long int quad_t;
 typedef uint64_t ssize_t;
 typedef uint64_t caddr_t;
 #endif
-#ifndef fdopen
-#define fdopen _fdopen
+#ifndef _FDOPEN
+#define _FDOPEN 1
+#define fdopen(fildes, mode) _fdopen(fildes, mode)
+#endif
+#ifndef _FTELLI64
+#define _FTELLI64 1
+#define ftello(stream) _ftelli64(stream)
+#endif
+#ifndef _FSEEKI64
+#define _FSEEKI64 1
+#define fseeko(stream, offset, origin) _fseeki64(stream, offset, origin)
 #endif
 
 #else
