@@ -57,7 +57,7 @@ namespace digest{
            sync();
         }
         setp((char*)b, (char*)b + n);
-        pbump(n);
+        pbump((int)n);
         sync();
         return n;
     }
@@ -79,7 +79,7 @@ namespace digest{
         while (t >= chunk_size) {
             LOG("\tchunk");
             setp(beg, beg + chunk_size);
-            pbump(chunk_size);
+            pbump((int)chunk_size);
             calculate_digest();
             beg += chunk_size;
             t -= chunk_size;
@@ -97,7 +97,7 @@ namespace digest{
             //t bytes at tail, need to be placed at the beggining and buffer set acordingly
             std::copy(beg, beg+t, buf.buf);
             setp(buf.buf, buf.buf + buf.size);
-            pbump(t);
+            pbump((int)t);
         }
 
         return 0;
@@ -134,7 +134,7 @@ namespace digest{
             sync();
         }
         setp((char*)b + r, (char*)b + n);
-        pbump(n - r);
+        pbump((int)(n - r));
         sync();
 
         return n;
