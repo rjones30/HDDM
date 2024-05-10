@@ -3985,7 +3985,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << std::endl
             << "                        H5P_DEFAULT, &m_hdf5_record);"
             << std::endl
-            << "   int len;" << std::endl;
+            << "   size_t len;" << std::endl;
       for (piter = parents.begin(); piter != parents.end(); ++piter)
       {
          XtString dnameS(piter->first);
