@@ -561,7 +561,7 @@ namespace bz {
 
         //try to satisfy request from buffered input
         std::streamsize available = egptr() - gptr();
-        int read = (available >= n)? n : (int)available;
+        size_t read = (available >= n)? n : (int)available;
         if (read) {
             std::copy(gptr(), gptr() + read, buffer);
             gbump(read);
@@ -649,7 +649,7 @@ namespace bz {
                 else {
                     read = _sb->sgetn(in.buf, block_size - read);
                 }
-                leftovers->len = _sb->sgetn(leftovers->buf, 8);
+                leftovers->len = (int)_sb->sgetn(leftovers->buf, 8);
                 if (leftovers->len > 4) {
                     std::memcpy(in.buf + read, leftovers->buf + 4, 
                                                leftovers->len - 4);
@@ -745,7 +745,7 @@ namespace bz {
             z_strm->next_out = saved_buffer;
         }
         z_strm->next_in = in.buf;
-        z_strm->avail_in = read;
+        z_strm->avail_in = (unsigned int)read;
         decompress();
     }
 
