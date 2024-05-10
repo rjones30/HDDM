@@ -1248,6 +1248,7 @@ int main(int argC, char* argV[])
    "\n"
    "#ifndef _FILE_OFFSET_BITS\n"
    "# define _FILE_OFFSET_BITS 64\n"
+   "# define _LARGEFILE64_SOURCE 1\n"
    "#endif\n"
    "\n"
    "using namespace hddm_" << classPrefix << ";\n"
