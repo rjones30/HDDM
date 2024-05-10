@@ -106,7 +106,7 @@ namespace xstream
 
             std::set<std::streambuf*>::iterator it = destinations.begin();
             for (;it != destinations.end(); it++) {
-                int ret = (*it)->sputn(buffer,n);
+                int ret = (int)(*it)->sputn(buffer,n);
                 return_code[*it] = ret;
             }
 

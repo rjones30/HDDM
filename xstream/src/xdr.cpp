@@ -119,7 +119,7 @@ ostream& ostream::operator<<(double v) {
         float binary64;
         uint32_t ui64;
     } _v;
-    _v.binary64 = v;
+    _v.binary64 = (float)v;
     return (*this << _v.ui64);
 }
 
