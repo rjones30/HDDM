@@ -269,12 +269,12 @@ namespace z {
         int written;
         if (in_s > 0) {
            z_strm->next_in = reinterpret_cast < Bytef* >(pbase());
-           z_strm->avail_in = in_s;
-           written = in_s;
+           z_strm->avail_in = (unsigned int)in_s;
+           written = (int)in_s;
         } else if (appendsize > 0) {
            z_strm->next_in = (Bytef*)appendbuf;
-           z_strm->avail_in = appendsize;
-           written = appendsize;
+           z_strm->avail_in = (unsigned int)appendsize;
+           written = (int)appendsize;
            appendsize = 0;
         } else {
            z_strm->next_in = reinterpret_cast < Bytef* >(pbase());
@@ -327,7 +327,7 @@ namespace z {
                 std::streamsize count = out.size - z_strm->avail_out;
                 if (count > 0) { // ignore empty blocks
                     LOG ("\twriting " << count << " bytes");
-                    int size = htonl(count);
+                    int size = htonl((unsigned long)count);
                     MUTEX_LOCK
                     const std::streamsize wrote = _sb->sputn((char*)&size, 4) +
                                                   _sb->sputn(out.buf, count);
@@ -343,7 +343,7 @@ namespace z {
                     MUTEX_UNLOCK
                 }
                 z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
-                z_strm->avail_out = out.size;
+                z_strm->avail_out = (unsigned int)out.size;
             }
 
             if (0 == z_strm->avail_out) { // && 0 != z_strm->avail_in)
@@ -353,8 +353,8 @@ namespace z {
 
             if (!redo && appendbuf && appendsize > 0) {
                 z_strm->next_in = (Bytef*)appendbuf;
-                z_strm->avail_in = appendsize;
-                written += appendsize;
+                z_strm->avail_in = (unsigned int)appendsize;
+                written += (int)appendsize;
                 appendsize = 0;
                 redo = true;
             }
@@ -372,7 +372,7 @@ namespace z {
             z_strm->zalloc = Z_NULL;
             z_strm->zfree = Z_NULL;
             z_strm->opaque = Z_NULL;
-            z_strm->avail_out = out.size;
+            z_strm->avail_out = (unsigned int)out.size;
             z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
             z_strm->avail_in = 0;
             z_strm->next_in = reinterpret_cast < Bytef* >(in.buf);
@@ -454,9 +454,9 @@ namespace z {
             }
             while (block_offset < new_block_offset) {
                 z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
-                z_strm->avail_out = new_block_offset - block_offset;
+                z_strm->avail_out = (unsigned int)(new_block_offset - block_offset);
                 if (z_strm->avail_out > out.size) {
-                    z_strm->avail_out = out.size;
+                    z_strm->avail_out = (unsigned int)out.size;
                 }
                 block_offset += z_strm->avail_out;
                 inflate();
@@ -465,7 +465,7 @@ namespace z {
             new_block_offset = 0;
         }
 
-        z_strm->avail_out = out.size;
+        z_strm->avail_out = (unsigned int)out.size;
         z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
 
         if (0 < z_strm->avail_in) {
@@ -504,8 +504,8 @@ namespace z {
             else
             {
                 std::streamsize available = egptr() - gptr();
-                int waste = new_block_offset - block_offset;
-                waste = (available < waste)? available : waste;
+                int waste = int(new_block_offset - block_offset);
+                waste = (available < waste)? (int)available : waste;
                 if (waste > 0) {
                     gbump(waste);
                     block_offset += waste;
@@ -513,9 +513,9 @@ namespace z {
             }
             while (block_offset < new_block_offset) {
                 z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
-                z_strm->avail_out = new_block_offset - block_offset;
+                z_strm->avail_out = (unsigned int)(new_block_offset - block_offset);
                 if (z_strm->avail_out > out.size) {
-                    z_strm->avail_out = out.size;
+                    z_strm->avail_out = (unsigned int)out.size;
                 }
                 block_offset += z_strm->avail_out;
                 inflate();
@@ -526,7 +526,7 @@ namespace z {
 
         //try to satisfy request from buffered input
         std::streamsize available = egptr() - gptr();
-        int read = (available >= n)? n : available;
+        int read = (available >= n)? n : (int)available;
         if (read) {
             std::copy(gptr(), gptr() + read, buffer);
             gbump(read);
@@ -542,7 +542,7 @@ namespace z {
             }
 
             z_strm->next_out = reinterpret_cast < Bytef* >(buffer) + read;
-            z_strm->avail_out = n - read;
+            z_strm->avail_out = (unsigned int)(n - read);
 
             if (0 < z_strm->avail_in) {
                 inflate();
@@ -563,7 +563,7 @@ namespace z {
     void istreambuf::read_inflate( const flush_kind f) {
         LOG("z::istreambuf::read_inflate " << f);
         bool reinit_inflator = false;
-        int read;
+        size_t read;
         if (block_size < 0) { // stream has no blocksize markers
             MUTEX_LOCK
             if (new_block_start > 0) {
@@ -614,7 +614,7 @@ namespace z {
                 else {
                     read = _sb->sgetn(in.buf, block_size - read);
                 }
-                leftovers->len = _sb->sgetn(leftovers->buf, 8);
+                leftovers->len = (int)_sb->sgetn(leftovers->buf, 8);
                 if (leftovers->len > 4) {
                     std::memcpy(in.buf + read, leftovers->buf + 4,
                                                leftovers->len - 4);
