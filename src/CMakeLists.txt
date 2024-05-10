@@ -72,6 +72,7 @@ if(${ROOTSYS})
 endif()
 
 install(FILES particleType.h DESTINATION include)
+install(FILES unistd_win32.h DESTINATION include)
 install(TARGETS hddm-xml DESTINATION bin)
 install(TARGETS xml-hddm DESTINATION bin)
 install(TARGETS hddm-cpp DESTINATION bin)
