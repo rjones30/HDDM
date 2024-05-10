@@ -564,12 +564,12 @@ namespace bz {
         size_t read = (available >= n)? n : (int)available;
         if (read) {
             std::copy(gptr(), gptr() + read, buffer);
-            gbump(read);
+            gbump((int)read);
             block_offset += read;
         }
 
         //inflate the rest directly into the user's buffer
-        if (read < n) {
+        if (read < (int)n) {
             if (end) {
                 LOG("\tend of stream (EOF)");
                 //signal the stream has reached it's end
