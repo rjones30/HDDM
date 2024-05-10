@@ -224,8 +224,8 @@ namespace digest{
         //cache current digest
         struct result d = result;
         
-        const unsigned int t = (unsigned int)taken();
-        const unsigned int l = (unsigned int)(length + t);
+        const size_t t = taken();
+        const size_t l = length + t;
         const char* orig = pbase();
 
         //I could make this a litle more efficient, but since this only occurs at the end, maybe it's ok
@@ -235,7 +235,7 @@ namespace digest{
 
         //pad data
         std::fill(b + t, b + 2 * block_size, '\0');
-        b[t] = 128; //add one bit after data
+        b[t] = -128; //add one bit after data
 
         LOG("\ttaken = " << t << "\tlen=" << l);
 
