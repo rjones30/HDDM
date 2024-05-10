@@ -1,6 +1,6 @@
 /*
- *  hddm-xml :	tool that reads in a HDDM document (Hall D Data Model)
- *		and translates it into plain-text xml.
+ *  hddm-xml : tool that reads in a HDDM document (Hall D Data Model)
+ *             and translates it into plain-text xml.
  *
  *  Version 1.4 - Richard Jones, February 10, 2021.
  *  - Modified to be able to read a hddm template (xml data model) as
@@ -111,10 +111,12 @@ class istreambuffer : public std::streambuf {
 
    void seekg(std::streampos pos) {
       reset();
+      for (; pos < INT_MAX; pos -= INT_MAX)
+         gbump(INT_MAX);
       gbump(pos);
    }
 
-   int size() {
+   size_t size() {
       return egptr() - gptr();
    }
 
@@ -141,10 +143,12 @@ class ostreambuffer : public std::streambuf {
 
    void seekp(std::streampos pos) {
       reset();
+      for (; pos < INT_MAX; pos -= INT_MAX)
+         pbump(INT_MAX);
       pbump(pos);
    }
 
-   int size() {
+   size_t size() {
       return pptr() - pbase();
    }
 
@@ -166,7 +170,7 @@ void usage()
         << "    hddm-xml [-n <count>] [-o <filename>] [HDDM file]\n\n"
         << "Options:\n"
         <<  "    -o <filename>  write to <filename>.xml"
-        <<  "    -n <count>	    limit output to <count> records"
+        <<  "    -n <count>     limit output to <count> records"
         << "Version: " << HDDM_VERSION_MAJOR << "." << HDDM_VERSION_MINOR
         << std::endl;
 }
@@ -340,7 +344,7 @@ int main(int argC, char* argV[])
    while (reqcount && ifs->good())
    {
       DOMNodeList* contList = rootEl->getChildNodes();
-      int contLength = contList->getLength();
+      int contLength = (int)contList->getLength();
       int tsize;
       ifs->read(event_buffer,4);
       if (ifs->eof()) {
@@ -561,7 +565,7 @@ void XMLmaker::constructXML(xstream::xdr::istream *ifx,
       writeXML("<");
       writeXML(S(tagS));
       DOMNamedNodeMap* attrList = el->getAttributes();
-      int listLength = attrList->getLength();
+      int listLength = (int)attrList->getLength();
       for (int a = 0; a < listLength; a++)
       {
          XString nameS(attrList->item(a)->getNodeName());
@@ -570,11 +574,11 @@ void XMLmaker::constructXML(xstream::xdr::istream *ifx,
          if (typeS == "int")
          {
             int32_t value;
-	    *ifx >> value;
+            *ifx >> value;
             size -= 4;
             attrStr << " " << nameS << "=\"" << value << "\"";
          }
-	 else if (typeS == "long")
+         else if (typeS == "long")
          {
             int64_t value;
             *ifx >> value;
@@ -613,7 +617,7 @@ void XMLmaker::constructXML(xstream::xdr::istream *ifx,
          {
             std::string value;
             *ifx >> value;
-            int strsize = value.size();
+            int strsize = (int)value.size();
             size -= strsize + 4 + ((strsize % 4)? 4-(strsize % 4) : 0);
             attrStr << " " << nameS << "=\"" << value << "\"";
          }
@@ -629,7 +633,7 @@ void XMLmaker::constructXML(xstream::xdr::istream *ifx,
       }
 
       DOMNodeList* contList = el->getChildNodes();
-      int contLength = contList->getLength();
+      int contLength = (int)contList->getLength();
       if (contLength > 1)
       {
          writeXML(">\n");
