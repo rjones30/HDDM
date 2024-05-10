@@ -66,6 +66,10 @@ typedef uint64_t caddr_t;
 #define _FSEEKI64 1
 #define fseeko(stream, offset, origin) _fseeki64(stream, offset, origin)
 #endif
+#ifndef _OFF64_T
+#define _OFF64_T 1
+#define off_t long long int
+#endif
 
 #else
 #define strncpy_s(dest, destsz, src, count) strncpy(dest, src, count)
