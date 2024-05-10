@@ -70,7 +70,7 @@ class ostreambuf: public xstream::ostreambuf
          * \brief Takes care of inserting delimiters every \c delim_w characters
          */
 
-        int write(const char* buf, size_t len);
+        size_t write(const char* buf, size_t len);
         
     public:
         /*!

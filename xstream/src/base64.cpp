@@ -45,7 +45,7 @@ namespace xstream
             out[3] = dictionary[lo6 & in[2]];
         }
 
-        int ostreambuf::write(const char* buf, size_t len) {
+        size_t ostreambuf::write(const char* buf, size_t len) {
             size_t rcol = delim_w - col;
             size_t ret = 0;
 
