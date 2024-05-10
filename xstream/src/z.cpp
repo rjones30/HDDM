@@ -121,7 +121,7 @@ namespace z {
         z_strm->zfree = Z_NULL;
         z_strm->opaque = Z_NULL;
         //buffers
-        z_strm->avail_out = out.size;
+        z_strm->avail_out = (unsigned int)out.size;
         z_strm->next_out = reinterpret_cast < Bytef* >(out.buf);
 
         z_strm->avail_in = 0;
@@ -136,7 +136,7 @@ namespace z {
         out.grow(factor);
 
         z_strm->next_out = reinterpret_cast < Bytef* >(out.buf + taken);
-        z_strm->avail_out = out.size - taken;
+        z_strm->avail_out = (unsigned int)(out.size - taken);
     }
 
     unsigned long int common::input_count() const {
@@ -196,7 +196,11 @@ namespace z {
             setp(in.buf, in.buf + in.size);
         } else {
             char str[256];
+#ifndef _MSC_VER
             sprintf(str, "invalid compression level %d", level);
+#else
+            sprintf_s(str, "invalid compression level %d", level);
+#endif
             throw std::domain_error(str);
         }
     }
@@ -256,7 +260,7 @@ namespace z {
         return flush(no_sync, buffer, n);
     }
 
-    int ostreambuf::flush(flush_kind f, const char *appendbuf, int appendsize) {
+    int ostreambuf::flush(flush_kind f, const char *appendbuf, std::streamsize appendsize) {
         LOG ("z::ostreambuf::flush(" << f << ")");
         std::streamsize in_s = taken ();
         LOG ("\tinput_size=" << in_s);

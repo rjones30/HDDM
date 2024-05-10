@@ -153,7 +153,7 @@ class ostreambuf: public common, public xstream::ostreambuf {
          * \param f kind of flush to do see flush_kind
          *
          */
-        int flush(flush_kind f, const char *appendbuf=0, int appendsize=0);
+        int flush(flush_kind f, const char *appendbuf=0, std::streamsize appendsize=0);
 
     public:
         /*!
