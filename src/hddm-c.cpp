@@ -572,7 +572,7 @@ int main(int argC, char* argV[])
          << "      return ((fseeko((FILE *)xdrs->x_private, pos, 0) < 0)? FALSE : TRUE);"
                                                                 << std::endl
          << "   }"                                              << std::endl
-         << "   return xdr_setpos(xdrs,pos);"                   << std::endl
+         << "   return xdr_setpos(xdrs,int(pos));"              << std::endl
          << "}"                                                 << std::endl;
 
    builder.constructUnpackers();
@@ -1469,7 +1469,7 @@ void CodeBuilder::constructPackers()
       {
          cFile   << "   int m=0;"                               << std::endl;
       }
-      cFile << "   unsigned int size=0;"                        << std::endl
+      cFile << "   size_t size=0;"                              << std::endl
             << "   off_t base,start,end;"                       << std::endl
             << "   base = xdr_getpos64(xdrs);"                  << std::endl;
       if (tagT.find("_HDDM") != tagT.npos)
