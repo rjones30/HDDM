@@ -19,9 +19,6 @@
 
 #ifdef _MSC_VER
 typedef SSIZE_T ssize_t;
-#define read(fd, buf, len) _read(fd, buf, (int)len)
-#define write(fd, buf, len) _write(fd, buf, (int)len)
-#define close(fd) _close(fd)
 #endif
 
 namespace xstream {
@@ -87,7 +84,11 @@ namespace posix{
         ssize_t count;
         
         do {
+#ifndef _MSC_VER
             count = ::read(fdn, buf, len);
+#else
+            count = ::_read(fdn, buf, (int)len);
+#endif
         } while (-1 == count && EINTR == errno);
 
         check_return((int)count, "read");
@@ -111,7 +112,11 @@ namespace posix{
         ssize_t count;
         
         do {
+#ifndef _MSC_VER
             count = ::write(fdn, buf, len);
+#else
+            count = ::_write(fdn, buf, (int)len);
+#endif
         } while (-1 == count && EINTR == errno);
 
         check_return((int)count, "write");
@@ -131,7 +136,11 @@ namespace posix{
         LOG("posix::fd::~fd");
         if (dest_close) {
             LOG("\tclosing");
+#ifndef MSC_VER
             int cret = ::close(fdn);
+#else
+            int cret = ::_close(fdn);
+#endif
             check_return(cret, "close");
         }
     }
