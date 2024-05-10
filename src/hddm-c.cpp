@@ -1122,7 +1122,7 @@ void CodeBuilder::constructUnpackers()
 
       if (rep > 1)
       {
-         cFile << "      int m;"                                << std::endl
+         cFile << "      unsigned int m;"                       << std::endl
                << "      unsigned int mult;"                    << std::endl
                << "      if (! xdr_u_int(xdrs,&mult))"          << std::endl
                << "         XDRerror();"                        << std::endl;
