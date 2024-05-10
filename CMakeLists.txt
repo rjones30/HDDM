@@ -80,7 +80,7 @@ add_subdirectory(models)
 add_subdirectory(examples)
 
 # define a separate target for the example python modules
-add_custom_target(modules_install
+add_custom_target(modules_install ALL
       COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_installer.sh
               ${CMAKE_BINARY_DIR}/models 
               ${CMAKE_INSTALL_PREFIX}
