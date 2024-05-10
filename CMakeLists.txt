@@ -62,6 +62,7 @@ endif()
 
 # libtirpc
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
+install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 
 # add the xstream library
 add_subdirectory(xstream)
@@ -80,7 +81,7 @@ add_subdirectory(models)
 add_subdirectory(examples)
 
 # define a separate target for the example python modules
-add_custom_target(modules_install
+add_custom_target(modules_install ALL
       COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_installer.sh
               ${CMAKE_BINARY_DIR}/models 
               ${CMAKE_INSTALL_PREFIX}
