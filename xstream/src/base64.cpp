@@ -46,8 +46,8 @@ namespace xstream
         }
 
         int ostreambuf::write(const char* buf, size_t len) {
-            unsigned int rcol = delim_w - col;
-            int ret = 0;
+            size_t rcol = delim_w - col;
+            size_t ret = 0;
 
             //XXX all these sputn calls need to be checked
             if (delim_w > 0 && rcol <= len) {
@@ -84,7 +84,7 @@ namespace xstream
 
         ostreambuf::~ostreambuf() {
             LOG("base64::~ostreambuf");
-            int av = available();
+            size_t av = available();
 
             if (3 == av) {
                 //no need to do anything
@@ -201,7 +201,7 @@ namespace xstream
                 int av = (delim_w - col);
                 if (delim_w > 0 && av <= 4) {
                     LOG("\texpecting delimiter at " << av);
-                    int ret = _sb->sgetn(enc, 5);
+                    size_t ret = _sb->sgetn(enc, 5);
                     LOG("\tenc=" << enc);
                     if (5 != ret) {
                         LOG("\tread " << ret << " but wanted " << 5);
@@ -223,7 +223,7 @@ namespace xstream
                     }
                 }
                 else {
-                    int ret = _sb->sgetn(enc, 4);
+                    size_t ret = _sb->sgetn(enc, 4);
                     col += 4;
 
                     if (4 != ret) {

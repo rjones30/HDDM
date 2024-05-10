@@ -34,8 +34,8 @@ class ostreambuf: public xstream::ostreambuf
 
         std::streambuf* _sb;
         char delim;
-        unsigned int delim_w;
-        unsigned int col;
+        size_t delim_w;
+        size_t col;
 
         char buf[3]; /*!< buffer to store non encoded data */
 
