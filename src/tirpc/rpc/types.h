@@ -70,6 +70,10 @@ typedef uint64_t caddr_t;
 #define _OFF64_T 1
 #define off_t long long int
 #endif
+#ifndef _SSCANF_S
+#define _SSCANF_S 1
+#define sscanf(...) sscanf_s(__VA_ARGS__)
+#endif
 
 #else
 #define strncpy_s(dest, destsz, src, count) strncpy(dest, src, count)
