@@ -682,7 +682,7 @@ void CodeBuilder::checkConsistency(DOMElement* el, DOMElement* elref)
 
    DOMNamedNodeMap* oldAttr = elref->getAttributes();
    DOMNamedNodeMap* newAttr = el->getAttributes();
-   unsigned int listLength = oldAttr->getLength();
+   size_t listLength = oldAttr->getLength();
    for (unsigned int n = 0; n < listLength; n++)
    {
       XtString nameS(oldAttr->item(n)->getNodeName());
@@ -786,7 +786,7 @@ void CodeBuilder::writeHeader(DOMElement* el)
          << "typedef struct {"                                  << std::endl;
 
    DOMNamedNodeMap* varList = el->getAttributes();
-   int varCount = varList->getLength();
+   size_t varCount = varList->getLength();
    for (int v = 0; v < varCount; v++)
    {
       DOMNode* var = varList->item(v);
@@ -831,7 +831,7 @@ void CodeBuilder::writeHeader(DOMElement* el)
    }
 
    DOMNodeList* contList = el->getChildNodes();
-   int contLength = contList->getLength();
+   size_t contLength = contList->getLength();
    for (int c = 0; c < contLength; c++)
    {
       DOMNode* cont = contList->item(c);
@@ -891,7 +891,7 @@ void CodeBuilder::constructGroup(DOMElement* el)
    tagList.push_back(el);
 
    DOMNodeList* contList = el->getChildNodes();
-   int contLength = contList->getLength();
+   size_t contLength = contList->getLength();
    for (int c = 0; c < contLength; c++)
    {
       DOMNode* cont = contList->item(c);
@@ -945,7 +945,7 @@ void CodeBuilder::constructConstructors()
                << "   for (i=0; i<n; i++) {"                    << std::endl
                << "      " << simpleType << "* pp = &p->in[i];" << std::endl;
          DOMNamedNodeMap* varList = tagEl->getAttributes();
-         int varCount = varList->getLength();
+         size_t varCount = varList->getLength();
          for (int v = 0; v < varCount; v++)
          {
             DOMNode* var = varList->item(v);
@@ -1017,7 +1017,7 @@ void CodeBuilder::constructConstructors()
                << "(" << simpleType << "*)MALLOC(size,\""
                << simpleType << "\");"                          << std::endl;
          DOMNamedNodeMap* varList = tagEl->getAttributes();
-         int varCount = varList->getLength();
+         size_t varCount = varList->getLength();
          for (int v = 0; v < varCount; v++)
          {
             DOMNode* var = varList->item(v);
@@ -2128,7 +2128,7 @@ void CodeBuilder::constructDocument(DOMElement* el)
    XtString tagS(el->getTagName());
    cFile << "<" << tagS;
    DOMNamedNodeMap* attrList = el->getAttributes();
-   int attrListLength = attrList->getLength();
+   size_t attrListLength = attrList->getLength();
    for (int a = 0; a < attrListLength; a++)
    {
       DOMNode* node = attrList->item(a);
@@ -2138,7 +2138,7 @@ void CodeBuilder::constructDocument(DOMElement* el)
    }
 
    DOMNodeList* contList = el->getChildNodes();
-   int contListLength = contList->getLength();
+   size_t contListLength = contList->getLength();
    if (contListLength > 0)
    {
       cFile << ">\\n\"" << std::endl;
