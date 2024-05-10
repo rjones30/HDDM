@@ -1,3 +1,5 @@
+list(APPEND EXTRA_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/src)
+
 add_library(xstream base64.cpp
                     bz.cpp 
                     common.cpp 
