@@ -3,7 +3,7 @@
 
 #if HAVE_LIBZ
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <unistd_win32.h>
 #else
 #include <unistd.h>
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <zlib.h>
 
-#ifndef _MSC_VER
+#ifndef _WIN32
 #include <arpa/inet.h>
 #endif
 
@@ -200,7 +200,7 @@ namespace z {
             setp(in.buf, in.buf + in.size);
         } else {
             char str[256];
-#ifndef _MSC_VER
+#ifndef _WIN32
             sprintf(str, "invalid compression level %d", level);
 #else
             sprintf_s(str, "invalid compression level %d", level);

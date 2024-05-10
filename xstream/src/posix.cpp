@@ -7,7 +7,7 @@
 #include <ctime>
 
 //for read write, etc
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <unistd_win32.h>
 #else
 #include <unistd.h>
@@ -21,7 +21,7 @@
 
 #include "debug.h"
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 typedef SSIZE_T ssize_t;
 #endif
 
@@ -88,7 +88,7 @@ namespace posix{
         ssize_t count;
         
         do {
-#ifndef _MSC_VER
+#ifndef _WIN32
             count = ::read(fdn, buf, len);
 #else
             count = ::_read(fdn, buf, (int)len);
@@ -116,7 +116,7 @@ namespace posix{
         ssize_t count;
         
         do {
-#ifndef _MSC_VER
+#ifndef _WIN32
             count = ::write(fdn, buf, len);
 #else
             count = ::_write(fdn, buf, (int)len);
@@ -140,7 +140,7 @@ namespace posix{
         LOG("posix::fd::~fd");
         if (dest_close) {
             LOG("\tclosing");
-#ifndef _MSC_VER
+#ifndef _WIN32
             int cret = ::close(fdn);
 #else
             int cret = ::_close(fdn);

@@ -4,7 +4,7 @@
 #if HAVE_LIBBZ2
 
 #include <stdint.h>
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <unistd_win32.h>
 #else
 #include <unistd.h>
@@ -18,7 +18,7 @@
 #include <xstream/except/bz.h>
 
 #include <bzlib.h>
-#ifndef _MSC_VER
+#ifndef _WIN32
 #include <arpa/inet.h>
 #endif
 

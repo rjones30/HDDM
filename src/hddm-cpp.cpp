@@ -84,7 +84,7 @@
 
 #include <particleType.h>
 #include <errno.h>
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <unistd_win32.h>
 #else
 #include <unistd.h>

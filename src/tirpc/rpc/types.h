@@ -41,7 +41,7 @@
 #include <sys/types.h>
 
 /* add some types from sys/types.h that are missing in the MS Visual Studio */
-#ifdef _MSC_VER
+#ifdef _WIN32
 #include <winsock.h>
 #ifndef _U_INT8_T
 #define _U_INT8_T 1
