@@ -3774,7 +3774,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << "{" << std::endl
             << "   hdf5_record_t hdf5_record;" << std::endl
             << "   int size;\n" << std::endl
-            << "   int len;\n" << std::endl;
+            << "   size_t len;\n" << std::endl;
       parentTable_t::iterator piter;
       for (piter = parents.begin(); piter != parents.end(); ++piter)
       {
