@@ -4,7 +4,7 @@
 #include <time.h>
 #include <winsock.h>
 
-#ifdef _MSC_VER
+#ifdef _WIN32
 #ifndef _GETPID_DEF
 #define _GETPID_DEF 1
 #include <process.h>
