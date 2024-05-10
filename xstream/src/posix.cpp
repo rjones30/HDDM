@@ -136,7 +136,7 @@ namespace posix{
         LOG("posix::fd::~fd");
         if (dest_close) {
             LOG("\tclosing");
-#ifndef MSC_VER
+#ifndef _MSC_VER
             int cret = ::close(fdn);
 #else
             int cret = ::_close(fdn);
