@@ -2559,7 +2559,7 @@ void CodeBuilder::writeClassdef(DOMElement* el)
             << std::endl
             << "   static std::string hdf5DocumentString(hid_t file_id);"
             << std::endl
-            << "   static long int hdf5GetEntries(hid_t file_id);"
+            << "   static hsize_t hdf5GetEntries(hid_t file_id);"
             << std::endl
             << "   static herr_t hdf5SetChunksize(hid_t file_id,"
             << " hsize_t chunksize);"
@@ -3626,7 +3626,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
             << "   H5Dclose(stamp_id);" << std::endl
             << "   return sstamp;" << std::endl
             << "}" << std::endl;
-      cFile << "long int " << tagS.simpleType()
+      cFile << "hsize_t " << tagS.simpleType()
             << "::hdf5GetEntries(hid_t file_id)" << std::endl
             << "{" << std::endl
             << "   hid_t eventspace_id;" << std::endl
