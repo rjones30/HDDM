@@ -572,7 +572,7 @@ int main(int argC, char* argV[])
          << "      return ((fseeko((FILE *)xdrs->x_private, pos, 0) < 0)? FALSE : TRUE);"
                                                                 << std::endl
          << "   }"                                              << std::endl
-         << "   return xdr_setpos(xdrs,int(pos));"              << std::endl
+         << "   return xdr_setpos(xdrs,(int)pos);"              << std::endl
          << "}"                                                 << std::endl;
 
    builder.constructUnpackers();
