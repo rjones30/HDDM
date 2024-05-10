@@ -51,7 +51,7 @@ typedef uint32_t u_int32_t;
 typedef uint64_t u_int64_t;
 typedef unsigned long long int u_quad_t;
 typedef long long int quad_t;
-typedef uint64_t ssize_t;
+typedef long long int ssize_t;
 typedef uint64_t caddr_t;
 #endif
 #ifndef _FDOPEN
