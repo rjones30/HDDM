@@ -3517,10 +3517,10 @@ void CodeBuilder::writeClassimp(DOMElement* el)
          << "      char *ddlstring = (char*)malloc(slen);" << std::endl
          << "      H5LTdtype_to_text(tid, ddlstring, H5LT_DDL, &slen);" << std::endl
          << "      if (inmemory)" << std::endl
-         << "         printf(\"=== in-memory datatype %ld for %s is:\\n %s\\n\","
+         << "         printf(\"=== in-memory datatype %lld for %s is:\\n %s\\n\","
          << " tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      else" << std::endl
-         << "         printf(\"=== on-disk datatype %ld for %s is:\\n %s\\n\","
+         << "         printf(\"=== on-disk datatype %lld for %s is:\\n %s\\n\","
          << " tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      free(ddlstring);" << std::endl
          << "   }" << std::endl
