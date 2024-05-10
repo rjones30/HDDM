@@ -1,6 +1,6 @@
 /*
- *  hddmcat :	tool that reads in a sequence of HDDM files
- *		and catenates them into a single HDDM stream
+ *  hddmcat : tool that reads in a sequence of HDDM files
+ *            and catenates them into a single HDDM stream
  *
  *  Version 1.2 - Richard Jones, December 2005.
  *  - Updated code to use STL strings and vectors instead of old c-style
@@ -117,7 +117,7 @@ int main(int argC, char* argV[])
 
    const int bufferSize = 65536;
    char buffer[bufferSize];
-   int count;
+   std::streamsize count;
    while ((count = (ifs->read(buffer,bufferSize), ifs->gcount())))
    {
       cout.write(buffer,count);
@@ -149,7 +149,7 @@ int main(int argC, char* argV[])
          }
          else if (**h == line)
          {
-	    ++h;
+            ++h;
          }
          else
          {
@@ -171,11 +171,11 @@ int main(int argC, char* argV[])
             cerr << "hddmcat: Input stream contains invalid hddm header"
                  << endl;
             exit(1);
-	 }
-	 else if (++h == stringList.end() && line == "</HDDM>")
+         }
+         else if (++h == stringList.end() && line == "</HDDM>")
          {
             break;
-	 }
+         }
       }
 
       while ((count = (ifs->read(buffer,bufferSize), ifs->gcount())))
