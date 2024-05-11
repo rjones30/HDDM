@@ -2368,7 +2368,7 @@ void CodeBuilder::writeClassdef(DOMElement* el)
          }
          else if (typeS == "long")
          {
-            pyFile << "   return PyLong_FromLong(self->elem->" 
+            pyFile << "   return PyLong_FromLongLong(self->elem->" 
                    << getS << "());\n";
          }
          else if (typeS == "float")
@@ -2414,7 +2414,7 @@ void CodeBuilder::writeClassdef(DOMElement* el)
          }
          else if (guessType(typeS) == "long")
          {
-            pyFile << "   return PyLong_FromLong(self->elem->" 
+            pyFile << "   return PyLong_FromLongLong(self->elem->" 
                    << getS << "());\n";
          }
          else if (guessType(typeS) == "float")
@@ -2468,7 +2468,7 @@ void CodeBuilder::writeClassdef(DOMElement* el)
       }
       else if (typeS == "long")
       {
-         pyFile << "   return PyLong_FromLong(self->elem->" 
+         pyFile << "   return PyLong_FromLongLong(self->elem->" 
                 << getS << "());\n";
       }
       else if (typeS == "float")
@@ -2512,7 +2512,7 @@ void CodeBuilder::writeClassdef(DOMElement* el)
       }
       else if (guessType(typeS) == "long")
       {
-         pyFile << "   return PyLong_FromLong(self->elem->" 
+         pyFile << "   return PyLong_FromLongLong(self->elem->" 
                 << getS << "());\n";
       }
       else if (guessType(typeS) == "float")
