@@ -41,7 +41,7 @@ foreach(i RANGE ${count})
              XSTREAM_DIR=${CMAKE_SOURCE_DIR}/xstream
              HDDMSRC_DIR=${CMAKE_SOURCE_DIR}/src
              ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
-     DEPENDS hddm_${class}++.cpp
+     DEPENDS hddm_${class}++.cpp xstream
    )
    add_dependencies(python_modules python_module_${class})
    add_library(${model} STATIC hddm_${class}.c hddm_${class}++.cpp)
