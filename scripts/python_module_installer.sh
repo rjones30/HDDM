@@ -19,5 +19,5 @@ done
 
 # on windows only support python3 runtime environments
 for mod in `ls hddm_*.pyd`; do
-    cp $mod $2/bin
+    cp $mod $2/lib
 done
