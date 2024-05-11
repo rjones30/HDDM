@@ -1984,6 +1984,7 @@ int main(int argC, char* argV[])
    "   for libpthread in ['libpthreadVC3.lib', 'pthreadVC3.lib']:\n"
    "      if os.path.exists(os.path.join(dir, libpthread)):\n"
    "          my_libraries.append('libpthreadVC3')\n"
+   "          my_libraries.append('Ws2_32')\n"
    "          break\n"
    "my_extra_cxxflags = ['-std=c++11']\n"
    "if 'HDF5_INCLUDE_DIRS' in os.environ:\n"
