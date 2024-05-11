@@ -36,7 +36,10 @@ foreach(i RANGE ${count})
    )
    add_custom_target(python_module_${class}
      COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
-     COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh HDDM_DIR=${CMAKE_INSTALL_PREFIX} ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
+     COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh
+             HDDM_DIR=${CMAKE_INSTALL_PREFIX}
+             XSTREAM_DIR=${CMAKE_SOURCE_DIR}/xstream
+             ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp
    )
    add_dependencies(python_modules python_module_${class})
