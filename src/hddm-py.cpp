@@ -1989,7 +1989,7 @@ int main(int argC, char* argV[])
    "if 'XSTREAM_DIR' in os.environ:\n"
    "   my_include_dirs += [os.path.join(os.environ['XSTREAM_DIR'], 'include')]\n"
    "if 'HDDMSRC_DIR' in os.environ:\n"
-   "   my_include_dirs += ['HDDMSRC_DIR']\n"
+   "   my_include_dirs += [os.environ['HDDMSRC_DIR']]\n"
    "my_extra_cxxflags = ['-std=c++11']\n"
    "if 'HDF5_INCLUDE_DIRS' in os.environ:\n"
    "   for idir in os.environ['HDF5_INCLUDE_DIRS'].split(':'):\n"
