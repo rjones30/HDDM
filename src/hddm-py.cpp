@@ -1986,6 +1986,8 @@ int main(int argC, char* argV[])
    "          my_libraries.append('libpthreadVC3')\n"
    "          my_libraries.append('Ws2_32')\n"
    "          break\n"
+   "if 'XSTREAM_DIR' in os.environ:\n"
+   "   my_include_dirs += [os.path.join(os.environ['XSTREAM_DIR'], 'include')]\n"
    "my_extra_cxxflags = ['-std=c++11']\n"
    "if 'HDF5_INCLUDE_DIRS' in os.environ:\n"
    "   for idir in os.environ['HDF5_INCLUDE_DIRS'].split(':'):\n"
