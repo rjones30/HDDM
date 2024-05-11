@@ -38,8 +38,9 @@ foreach(i RANGE ${count})
      COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
      COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh
              HDDM_DIR=${CMAKE_INSTALL_PREFIX}
-             XSTREAM_DIR=${CMAKE_SOURCE_DIR}/xstream
-             HDDMSRC_DIR=${CMAKE_SOURCE_DIR}/src
+             XSTREAM_SRC=${CMAKE_SOURCE_DIR}/xstream
+             XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
+             HDDM_SRC=${CMAKE_SOURCE_DIR}/src
              ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp xstream
    )
