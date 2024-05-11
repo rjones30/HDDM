@@ -2014,7 +2014,7 @@ int main(int argC, char* argV[])
    "            src = os.path.join(build_dir, dname, soname)\n"
    "            dest = os.path.join(source_dir, soname)\n"
    "            copyfile(src, dest)\n"
-   "rmtree(build_dir)\n"
+   "#rmtree(build_dir)\n"
    ;
 
    XMLPlatformUtils::Terminate();
