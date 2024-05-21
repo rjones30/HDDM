@@ -53,7 +53,6 @@ typedef unsigned long long u_quad_t;
 typedef long long quad_t;
 typedef uint64_t caddr_t;
 typedef long ssize_t;
-#define H5_SIZEOF_SIZE_T 4
 #endif
 #ifndef _FDOPEN
 #define _FDOPEN 1
