@@ -1962,7 +1962,7 @@ int main(int argC, char* argV[])
    "source_files = [source_file, os.path.join(source_dir, 'hddm_" + classPrefix + "++.cpp')]\n"
    "copyfile(os.path.join(source_dir, 'pyhddm_" + classPrefix + ".cpy'), source_file)\n"
    "my_include_dirs = [source_dir, os.path.join(hddm_dir, 'include')]\n"
-   "my_library_dirs = [os.path.join(hddm_dir, 'lib'), os.path.join('usr', 'lib64')]\n"
+   "my_library_dirs = [os.path.join(hddm_dir, 'lib'), os.path.join(os.sep, 'usr', 'lib64')]\n"
    "my_libraries = ['xstream', 'bz2']\n"
    "for dir in my_library_dirs:\n"
    "   for libz in ['libz.a', 'libz.so']:\n"
