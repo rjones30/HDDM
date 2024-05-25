@@ -1,0 +1,1 @@
+cmake3 -DCMAKE_INSTALL_PREFIX=../x86_64 ..
