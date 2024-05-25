@@ -46,17 +46,17 @@ configure_file(VersionConfig.hpp.in VersionConfig.hpp)
 
 if(APPLE)
     target_link_libraries(hddm-xml PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
     target_link_libraries(xml-hddm PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
     target_link_libraries(hddm-cpp PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
     target_link_libraries(hddm-c PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
     target_link_libraries(hddm-py PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
     target_link_libraries(hddmcat PUBLIC ${EXTRA_LIBRARIES}
-                          "-framework CoreFoundation")
+                          "-framework CoreServices" "-lcurl")
 else()
     target_link_libraries(hddm-xml PUBLIC ${EXTRA_LIBRARIES})
     target_link_libraries(xml-hddm PUBLIC ${EXTRA_LIBRARIES})
