@@ -43,12 +43,28 @@ endif()
 
 configure_file(VersionConfig.hpp.in VersionConfig.hpp)
 
-target_link_libraries(hddm-xml PUBLIC ${EXTRA_LIBRARIES})
-target_link_libraries(xml-hddm PUBLIC ${EXTRA_LIBRARIES})
-target_link_libraries(hddm-cpp PUBLIC ${EXTRA_LIBRARIES})
-target_link_libraries(hddm-c PUBLIC ${EXTRA_LIBRARIES})
-target_link_libraries(hddm-py PUBLIC ${EXTRA_LIBRARIES})
-target_link_libraries(hddmcat PUBLIC ${EXTRA_LIBRARIES})
+
+if(APPLE)
+    target_link_libraries(hddm-xml PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+    target_link_libraries(xml-hddm PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+    target_link_libraries(hddm-cpp PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+    target_link_libraries(hddm-c PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+    target_link_libraries(hddm-py PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+    target_link_libraries(hddmcat PUBLIC ${EXTRA_LIBRARIES}
+                          "-framework CoreFoundation")
+else()
+    target_link_libraries(hddm-xml PUBLIC ${EXTRA_LIBRARIES})
+    target_link_libraries(xml-hddm PUBLIC ${EXTRA_LIBRARIES})
+    target_link_libraries(hddm-cpp PUBLIC ${EXTRA_LIBRARIES})
+    target_link_libraries(hddm-c PUBLIC ${EXTRA_LIBRARIES})
+    target_link_libraries(hddm-py PUBLIC ${EXTRA_LIBRARIES})
+    target_link_libraries(hddmcat PUBLIC ${EXTRA_LIBRARIES})
+endif(APPLE)
 
 target_include_directories(hddm-xml PUBLIC ${EXTRA_INCLUDE_DIRS})
 target_include_directories(xml-hddm PUBLIC ${EXTRA_INCLUDE_DIRS})
