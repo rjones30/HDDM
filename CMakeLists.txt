@@ -34,9 +34,10 @@ find_package(ROOT QUIET)
 # HDF5 support
 if(DEFINED HDF5_ROOT)
     message("Looking in ${HDF5_ROOT} for local HDF5 installation")
-    find_package(HDF5 PATHS ${HDF5_ROOT} REQUIRED NO_DEFAULT_PATH)
+    find_package(HDF5 REQUIRED COMPONENTS C CXX HL PATHS ${HDF5_ROOT} NO_DEFAULT_PATH)
+else()
+    find_package(HDF5 REQUIRED COMPONENTS C CXX HL)
 endif()
-find_package(HDF5 QUIET)
 
 # xalan-j2 package
 if(NOT DEFINED XALANJ2_PATH)

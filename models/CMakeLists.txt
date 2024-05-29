@@ -2,9 +2,8 @@ set(MODELS exam1x sample_mc sample_s simple1 test1)
 set(CLASSES x       mc          s       a      v  )
 
 if(HDF5_FOUND)
-    list(APPEND EXTRA_LIBRARIES ${HDF5_LIBRARIES})
+    list(APPEND EXTRA_LIBRARIES ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
     list(APPEND EXTRA_INCLUDE_DIRS ${HDF5_INCLUDE_DIRS})
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHDF5_SUPPORT=1")
 endif()
 
 list(APPEND MODEL_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
@@ -23,6 +22,8 @@ set(CMAKE_MSVCIDE_RUN_PATH ${CMAKE_INSTALL_PREFIX}/bin)
 
 list(JOIN HDF5_INCLUDE_DIRS ":" HDF5_INCLUDE_PATH)
 list(JOIN HDF5_LIBRARIES ":" HDF5_LIBRARY_PATH)
+list(JOIN HDF5_HL_LIBRARIES ":" HDF5_HL_LIBRARY_PATH)
+string(JOIN ":" HDF5_LIBRARY_PATHS ${HDF5_LIBRARY_PATH} ${HDF5_HL_LIBRARY_PATH})
 list(LENGTH MODELS count)
 math(EXPR count "${count}-1")
 foreach(i RANGE ${count})
@@ -41,6 +42,8 @@ foreach(i RANGE ${count})
              XSTREAM_SRC=${CMAKE_SOURCE_DIR}/xstream
              XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
              HDDM_SRC=${CMAKE_SOURCE_DIR}/src
+             HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
+             HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
              ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp xstream
    )
