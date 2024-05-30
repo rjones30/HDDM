@@ -4,7 +4,11 @@ set(CLASSES x       mc          s       a      v  )
 if(HDF5_FOUND)
     list(APPEND EXTRA_LIBRARIES ${HDF5_LIBRARIES} ${HDF5_HL_LIBRARIES})
     list(APPEND EXTRA_INCLUDE_DIRS ${HDF5_INCLUDE_DIRS})
+    set(HDF5_SUPPORT 1)
 endif()
+
+set(ISTREAM_OVER_HTTP 1)
+set(ISTREAM_OVER_XROOTD 0)
 
 list(APPEND MODEL_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
                                ${CMAKE_CURRENT_BINARY_DIR}
@@ -44,8 +48,10 @@ foreach(i RANGE ${count})
              HDDM_SRC=${CMAKE_SOURCE_DIR}/src
              HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
              HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
+	     HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
              ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp xstream
+     DEPENDS hddm_${class}++.cpp httpstream
    )
    add_dependencies(python_modules python_module_${class})
    add_library(${model} STATIC hddm_${class}.c hddm_${class}++.cpp)

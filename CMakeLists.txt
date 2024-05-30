@@ -10,7 +10,7 @@ set(CPACK_PACKAGE_VERSION_MINOR "${HDDM_VERSION_MINOR}")
 include(CPack)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # check for presence of compression libraries
@@ -67,6 +67,9 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 
 # add the xstream library
 add_subdirectory(xstream)
+
+# add the httpstream library
+add_subdirectory(httpstream)
 
 # build the executables
 add_subdirectory(src)
