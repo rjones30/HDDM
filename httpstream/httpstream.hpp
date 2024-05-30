@@ -30,18 +30,14 @@ class httpStreambuf : public std::streambuf {
      public:
         stream_block(std::streampos offset, std::streamoff size) {
            offset_ = offset;
-	   size_ = size;
+           size_ = size;
            reader_ = 0;
-        }
-        ~stream_block() {
-           if (reader_ != 0)
-              delete reader_;
         }
         static void background_fill(stream_block* block, 
                                     const std::string url);
 
         std::streamoff offset_;
-	std::streamoff size_;
+        std::streamoff size_;
         cpr::Response resp_;
         std::thread *reader_;
     };

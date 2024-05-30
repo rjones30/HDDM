@@ -4,8 +4,6 @@
 
 #include "httpstream.hpp"
 
-std::ofstream flog("httpstream.log");
-
 httpStreambuf::httpStreambuf(const std::string& url, size_t buffersize)
  : url_(url),
    lookback_(3),
@@ -35,8 +33,13 @@ httpStreambuf::httpStreambuf(const std::string& url, size_t buffersize)
 
 httpStreambuf::~httpStreambuf() {
    std::deque<stream_block*>::iterator iter;
-   for (iter = buffer_.begin(); iter != buffer_.end(); ++iter)
+   for (iter = buffer_.begin(); iter != buffer_.end(); ++iter) {
+      if ((*iter)->reader_ != 0) {
+         (*iter)->reader_->join();
+         delete (*iter)->reader_;
+      }
       delete *iter;
+   }
 }
 
 int httpStreambuf::advance() {
@@ -85,10 +88,13 @@ int httpStreambuf::underflow() {
    if (++buffer_index_ == buffer_.size())
       return std::streambuf::underflow();
    buffer_[buffer_index_]->reader_->join();
+   delete buffer_[buffer_index_]->reader_;
+   buffer_[buffer_index_]->reader_ = 0;
    char *buf = (char*)buffer_[buffer_index_]->resp_.text.c_str();
    size_t len = buffer_[buffer_index_]->resp_.text.size();
-   if (len == 0)
+   if (len == 0) {
       return std::streambuf::underflow();
+   }
    setg(buf, buf, buf + len);
    while (buffer_index_ > lookback_) {
       delete buffer_.front();
@@ -113,6 +119,4 @@ void httpStreambuf::setg(char *gbeg, char *gcurr, char *gend) {
                 << ", gend=" << (void*)gend << std::endl;
    }
    std::streambuf::setg(gbeg, gcurr, gend);
-   flog.write(gbeg, gend - gbeg);
-   flog.flush();
 }
