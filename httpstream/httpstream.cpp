@@ -14,6 +14,7 @@ httpStreambuf::httpStreambuf(const std::string& url, size_t buffersize)
 {
    buffer_.push_back(new stream_block(0, buffersize_));
    buffer_.back()->resp_ = cpr::Get(cpr::Url{url},
+		           cpr::VerifySsl(0),
                            cpr::ReserveSize(buffersize),
                            cpr::Range{0, buffersize_ - 1});
    if (buffer_.back()->resp_.status_code != 206) {
@@ -63,6 +64,7 @@ int httpStreambuf::advance() {
 void httpStreambuf::stream_block::background_fill(stream_block *block,
                                                   const std::string url) {
    block->resp_ = cpr::Get(cpr::Url{url},
+		           cpr::VerifySsl(0),
                            cpr::ReserveSize(block->size_),
                            cpr::Range{block->offset_,
                                       block->offset_ + block->size_ - 1}
