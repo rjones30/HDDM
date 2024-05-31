@@ -3523,10 +3523,10 @@ void CodeBuilder::writeClassimp(DOMElement* el)
          << "      char *ddlstring = (char*)malloc(slen);" << std::endl
          << "      H5LTdtype_to_text(tid, ddlstring, H5LT_DDL, &slen);" << std::endl
          << "      if (inmemory)" << std::endl
-         << "         printf(\"=== in-memory datatype %lld for %s is:\\n %s\\n\","
+         << "         printf(\"=== in-memory datatype %ld for %s is:\\n %s\\n\","
          << " tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      else" << std::endl
-         << "         printf(\"=== on-disk datatype %lld for %s is:\\n %s\\n\","
+         << "         printf(\"=== on-disk datatype %ld for %s is:\\n %s\\n\","
          << " tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      free(ddlstring);" << std::endl
          << "   }" << std::endl
@@ -3799,7 +3799,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
                   << "      " << dnameS.simpleType() << " *p = "
                   << "(" << dnameS.simpleType() << "*)hdf5_record.vl_"
                   << dnameS << ".p;" << std::endl
-                  << "      for (int i=0; i < len; ++i, ++iter) {" << std::endl
+                  << "      for (int i=0; i < (int)len; ++i, ++iter) {" << std::endl
                   << "         hdf5_memcpy(p+i, *iter, size);" << std::endl
                   << "         p[i].hdf5DataPack();" << std::endl
                   << "      }" << std::endl
@@ -4001,7 +4001,7 @@ void CodeBuilder::writeClassimp(DOMElement* el)
                   << "      " << dnameS.simpleType() << " *p ="
                   << "(" << dnameS.simpleType() << "*)"
                   << "m_hdf5_record.vl_" << dnameS << ".p;" << std::endl
-                  << "      for (int i=0; i < len; ++i ) {" << std::endl
+                  << "      for (int i=0; i < (int)len; ++i ) {" << std::endl
                   << "         m_" << dnameS << "_plist.push_back("
                   << "new(p+i) " << dnameS.simpleType() << ");"
                   << std::endl
