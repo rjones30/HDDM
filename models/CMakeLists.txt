@@ -48,7 +48,7 @@ foreach(i RANGE ${count})
              HDDM_SRC=${CMAKE_SOURCE_DIR}/src
              HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
              HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
-	     HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
+             HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
              ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
      DEPENDS hddm_${class}++.cpp xstream
      DEPENDS hddm_${class}++.cpp httpstream
