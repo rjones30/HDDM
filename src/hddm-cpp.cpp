@@ -3524,10 +3524,10 @@ void CodeBuilder::writeClassimp(DOMElement* el)
          << "      H5LTdtype_to_text(tid, ddlstring, H5LT_DDL, &slen);" << std::endl
          << "      if (inmemory)" << std::endl
          << "         printf(\"=== in-memory datatype %ld for %s is:\\n %s\\n\","
-         << " tid, \"" << tagS << "\", ddlstring);" << std::endl
+         << " (long int)tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      else" << std::endl
          << "         printf(\"=== on-disk datatype %ld for %s is:\\n %s\\n\","
-         << " tid, \"" << tagS << "\", ddlstring);" << std::endl
+         << " (long int)tid, \"" << tagS << "\", ddlstring);" << std::endl
          << "      free(ddlstring);" << std::endl
          << "   }" << std::endl
          << "   return tid;" << std::endl
