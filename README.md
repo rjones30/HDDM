@@ -53,7 +53,7 @@ Extensions are available to the core i/o functionality of the generated HDDM lib
 in the place of a ifstream("mydatafile.hddm"), or similarly an xrootdIstream object constructed as 
 - xrootdIstream rstream("root://my.server.org/mydatafile.hddm");
 
-is all that is required to access the streaming input capability through the C++ api. Using the python module, simply supply a url string in the place of the input filename provided to the istream constructor is all that is needed. Building your hddm library with streaming support requires that you check out the streaming\_input branch instead of main. The build instructions for the streaming\_input branch are the same as main, with the following additional dependencies.
+is all that is required to access the streaming input capability through the C++ api. Using the python module, simply supply a url string in the place of the input filename provided to the istream constructor. Building your hddm library with streaming support requires that you check out the streaming\_input branch of HDDM instead of main. The build instructions for the streaming\_input branch are the same as main, with the following additional dependencies.
 - gcc/g++ compiler version 8 or above: compiler must support -std=c++17, needed to build libcpr
 - python 3.9 or above: needed to link against libraries built with c++17
 - libcpr: download from https://github.com/rjones30/cpr.git and install with the usual cmake procedure
