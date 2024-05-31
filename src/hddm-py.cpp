@@ -1980,7 +1980,7 @@ int main(int argC, char* argV[])
    "                   os.path.join(hddm_dir, 'lib64'),\n"
    "                   os.path.join(os.sep, 'usr', 'lib64'),\n"
    "                  ]\n"
-   "my_libraries = [
+   "my_libraries = [\n"
    "                'xstream',\n"
    "                'bz2',\n"
    "               ]\n"
