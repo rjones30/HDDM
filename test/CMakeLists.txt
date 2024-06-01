@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # build against the cpr library
 find_package(cpr REQUIRED)
+
 add_executable(httpstream_test httpstream_test.cpp)
 target_include_directories(httpstream_test PRIVATE
                            ${CMAKE_SOURCE_DIR}/../src
@@ -25,3 +26,15 @@ target_link_directories(httpstream_test PRIVATE
                        )
 target_link_libraries(httpstream_test PRIVATE cpr curl ssl ssl3 crypto z)
 install(TARGETS httpstream_test)
+
+add_executable(xrootdstream_test xrootdstream_test.cpp)
+target_include_directories(xrootdstream_test PRIVATE
+                           ${CMAKE_SOURCE_DIR}/../src
+                           ${CMAKE_INSTALL_PREFIX}/include
+                          )
+target_link_directories(xrootdstream_test PRIVATE
+                        ${CMAKE_INSTALL_PREFIX}/lib
+                        ${CMAKE_INSTALL_PREFIX}/lib64
+                       )
+target_link_libraries(xrootdstream_test PRIVATE xrootd)
+install(TARGETS xrootdstream_test)
