@@ -68,8 +68,9 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 # add the xstream library
 add_subdirectory(xstream)
 
-# add the httpstream library
+# add the streaming library components
 add_subdirectory(httpstream)
+add_subdirectory(xrootdstream)
 
 # build the executables
 add_subdirectory(src)

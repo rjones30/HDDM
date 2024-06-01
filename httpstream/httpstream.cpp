@@ -1,8 +1,8 @@
+#include "httpstream.hpp"
+
 #include <exception>
 #include <sstream>
 #include <fstream>
-
-#include "httpstream.hpp"
 
 httpStreambuf::httpStreambuf(const std::string& url, size_t buffersize)
  : url_(url),
@@ -71,7 +71,7 @@ void httpStreambuf::stream_block::background_fill(stream_block *block,
                           );
    if (block->resp_.status_code != 206 && block->resp_.status_code != 416) {
       std::stringstream errmsg;
-      errmsg << "httpStreambuf constructor - get request for "
+      errmsg << "httpStreambuf::background_fill - get request for "
              << url << " returned error with HTTP response code " 
              << block->resp_.status_line << " : "
              << block->resp_.reason;
