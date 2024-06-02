@@ -13,6 +13,9 @@ include(CPack)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# look for installed packages in local build area
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/share/cmake)
+
 # check for presence of compression libraries
 find_package(BZip2 REQUIRED)
 find_package(ZLIB REQUIRED)
