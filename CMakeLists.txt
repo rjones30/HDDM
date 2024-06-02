@@ -34,6 +34,7 @@ if(DEFINED ROOTSYS)
 endif()
 find_package(ROOT QUIET)
 
+# HDF5 support
 if(DEFINED HDF5_ROOT)
     message("Looking in ${HDF5_ROOT} for local HDF5 installation")
     find_package(HDF5 REQUIRED COMPONENTS C CXX HL PATHS ${HDF5_ROOT} NO_DEFAULT_PATH)
