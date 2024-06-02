@@ -46,6 +46,21 @@ HDDM relies on the following external open-source packages. Some must be install
 - git : required for installing hddm from github
 Uncountable other dependencies exist for other features of a standard unix/linux platform environment, such as the ld link loader, standard glibc and system libraries.
 
+## Streaming readers
+Extensions are available to the core i/o functionality of the generated HDDM libraries for reading from streaming data sources using HTTP/s and XRootD protocols. The most immediate application in view is the capability to read from large hddm data files hosted on a remote server without first having to download the entire file and then read the data from local storage. If the hddm model library is built with streaming input support then substitution of a httpIstream object constructed as
+- httpIstream hstream("https://my.server.org/mydatafile.hddm");
+
+in the place of a ifstream("mydatafile.hddm"), or similarly an xrootdIstream object constructed as 
+- xrootdIstream rstream("root://my.server.org/mydatafile.hddm");
+
+is all that is required to access the streaming input capability through the C++ api. Using the python module, simply supply a url string in the place of the input filename provided to the istream constructor. Building your hddm library with streaming support requires that you check out the streaming\_input branch of HDDM instead of main. The build instructions for the streaming\_input branch are the same as main, with the following additional dependencies.
+- gcc/g++ compiler version 8 or above: compiler must support -std=c++17, needed to build libcpr
+- python 3.9 or above: needed to link against libraries built with c++17
+- libcpr: download from https://github.com/rjones30/cpr.git and install with the usual cmake procedure
+- openssl: install from standard distribution if not already present as a system package
+- special cmake build options: -Dcpr\_DIR={my.path/cpr} and -DCPR\_INCLUDE\_DIR={my.path/cpr/include}
+- xrootd: needed to build streaming over xrootd, only tested with xrootd version 4
+
 ## Acknowledgements
 HDDM contains as a part of its source codebase a sub-package named xstream, which is a fork of an earlier open-source package that was released as xstream 2.1 by its author Claudio Valente in 1999 under the GNU LESSER GENERAL PUBLIC LICENSE. The original author and license is included unchanged under xstream/AUTHOR and xstream/COPYING. The original README written by Claudio Valente is also included. The HDDM fork of xstream 2.1 was made in 2004 in order to correct some bugs in the original v2.1 code and to add new features related to stream repositioning and multi-threaded compression/decompression. These changes made the HDDM fork of xstream no longer backward-compatible with xstream 2.1. With open acknowledgement of the important contribution of xstream 2.1 by Claudio Valente to this project, the release here of the modified xstream code under an Apache open-source license is deemed consistent with the terms of the original LGPL license that accompanied Valente's release of xstream 2.1. The original C++ xstream 2.1 package released in 1999 is apparently unrelated to a number of other currently active open-source projects named xstream, including the java project XStream by Joe Walnes et al, the javascript project xstream by Andre Staltz, among others.
 
