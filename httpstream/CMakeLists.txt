@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_definitions( -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 )
 
 # build against the cpr library
-find_package(cpr REQUIRED)
+#find_package(cpr REQUIRED)
 
 add_library(httpstream STATIC httpstream.cpp)
 set_property(TARGET httpstream PROPERTY POSITION_INDEPENDENT_CODE ON)
