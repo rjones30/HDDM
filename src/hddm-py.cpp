@@ -2081,7 +2081,7 @@ int main(int argC, char* argV[])
    "      my_include_dirs += [idir,]\n"
    "if 'HDF5_LIBRARIES' in os.environ:\n"
    "   for lib in os.environ['HDF5_LIBRARIES'].split(':'):\n"
-   "      my_libraries += [re.sub('\\.so$', '', re.sub('.*/lib', '', lib))]\n"
+   "      my_libraries += [re.sub('\\.[^\\.]*$', '', re.sub('.*/lib', '', lib))]\n"
    "   my_extra_cxxflags += ['-DHDF5_SUPPORT']\n"
    "for lib in glob.glob(os.path.join(hddm_dir, 'lib*', 'libhddmstream*')):\n"
    "   my_libraries += [re.sub('\\.so$', '', re.sub('.*/lib', '', lib))]\n"
