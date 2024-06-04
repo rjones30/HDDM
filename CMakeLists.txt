@@ -82,6 +82,7 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 set(BUILD_OPENSSL TRUE)
 set(OPENSSL_BUILD_VERSION https://github.com/openssl/openssl/releases/download/openssl-3.2.1/openssl-3.2.1.tar.gz)
 if(NOT EXISTS external/openssl-cmake/CMakeLists.txt)
+    execute_process(COMMAND perl -MCPAN -e install FindBin)
     execute_process(COMMAND git submodule init
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
     execute_process(COMMAND git submodule update
