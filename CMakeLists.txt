@@ -78,6 +78,11 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
 install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 
+# add the openssl library
+set(BUILD_OPENSSL TRUE)
+set(OPENSSL_BUILD_VERSION 3.2.1)
+add_subdirectory(external/openssl-cmake)
+
 # add the xstream library
 add_subdirectory(xstream)
 
