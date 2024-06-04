@@ -78,6 +78,9 @@ endif()
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
 install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 
+# supply packaged perl modules
+set(ENV{PERL5LIB} ${CMAKE_SOURCE_DIR}/scripts)
+
 # add the openssl library
 set(BUILD_OPENSSL TRUE)
 set(OPENSSL_BUILD_VERSION https://github.com/openssl/openssl/releases/download/openssl-3.2.1/openssl-3.2.1.tar.gz)
