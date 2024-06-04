@@ -81,6 +81,10 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 # add the openssl library
 set(BUILD_OPENSSL TRUE)
 set(OPENSSL_BUILD_VERSION 3.2.1)
+if(NOT EXISTS external/openssl-cmake/CMakeLists.txt)
+    execute_process("git submodule init")
+    execute_process("git submodule update")
+endif()
 add_subdirectory(external/openssl-cmake)
 
 # add the xstream library
