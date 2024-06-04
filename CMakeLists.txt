@@ -82,8 +82,10 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 set(BUILD_OPENSSL TRUE)
 set(OPENSSL_BUILD_VERSION 3.2.1)
 if(NOT EXISTS external/openssl-cmake/CMakeLists.txt)
-    execute_process(COMMAND git submodule init)
-    execute_process(COMMAND git submodule update)
+    execute_process(COMMAND git submodule init
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+    execute_process(COMMAND git submodule update
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 add_subdirectory(external/openssl-cmake)
 
