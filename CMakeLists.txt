@@ -85,6 +85,8 @@ endif()
 
 execute_process(COMMAND git submodule update --init
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
+set(BUILD_OPENSSL TRUE)
 set(OPENSSL_BUILD_VERSION https://www.openssl.org/source/openssl-3.2.2.tar.gz)
 add_subdirectory(external/openssl-cmake)
 
