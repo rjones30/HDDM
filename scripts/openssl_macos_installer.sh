@@ -43,7 +43,7 @@ cd $source
 make VERBOSE=1
 make install
 
-if ! $install_prefix/bin/openssl version
+if ! $install_prefix/bin/openssl version; then
     error_exit $? "openssl installation failed"
 else
     echo "openssl installation completed successfully!"
