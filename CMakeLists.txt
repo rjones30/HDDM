@@ -76,11 +76,19 @@ endif()
 
 # openssl
 if(UNIX AND APPLE)
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_install_macos.sh $CMAKE_INSTALL_DIR)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_macos_installer.sh $CMAKE_INSTALL_DIR)
+    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin:$ENV{PATH}")
+    execute_process(COMMAND which perl)
+    execute_process(COMMAND perl -v)
 elseif(UNIX)
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_install_linux.sh $CMAKE_INSTALL_DIR)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_linux_installer.sh $CMAKE_INSTALL_DIR)
+    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin:$ENV{PATH}")
+    execute_process(COMMAND which perl)
+    execute_process(COMMAND perl -v)
 else()
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_install_win32.bat $CMAKE_INSTALL_DIR)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_win32_installer.bat $CMAKE_INSTALL_DIR)
+    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin;$ENV{PATH}")
+    execute_process(COMMAND perl -v)
 endif()
 
 execute_process(COMMAND git submodule update --init
