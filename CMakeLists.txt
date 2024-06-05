@@ -77,26 +77,14 @@ endif()
 # openssl
 if(UNIX AND APPLE)
     execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_macos_installer.sh $CMAKE_INSTALL_DIR)
-    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin:$ENV{PATH}")
-    execute_process(COMMAND which perl)
-    execute_process(COMMAND perl -v)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_macos_installer.sh $CMAKE_INSTALL_DIR)
 elseif(UNIX)
     execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_linux_installer.sh $CMAKE_INSTALL_DIR)
-    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin:$ENV{PATH}")
-    execute_process(COMMAND which perl)
-    execute_process(COMMAND perl -v)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_linux_installer.sh $CMAKE_INSTALL_DIR)
 else()
     execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_win32_installer.bat $CMAKE_INSTALL_DIR)
-    set(ENV{PATH} "${CMAKE_INSTALL_PREFIX}/bin;$ENV{PATH}")
-    execute_process(COMMAND perl -v)
+    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_win32_installer.bat $CMAKE_INSTALL_DIR)
 endif()
-
-execute_process(COMMAND git submodule update --init
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
-set(BUILD_OPENSSL TRUE)
-set(OPENSSL_BUILD_VERSION https://www.openssl.org/source/openssl-3.2.2.tar.gz)
-add_subdirectory(external/openssl-cmake)
 
 # libtirpc
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
