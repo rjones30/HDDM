@@ -74,18 +74,6 @@ else()
     message("Cannot find xmllint at ${XMLLINT_PATH}/xmllint, some schema utilities will fail!")
 endif()
 
-# openssl
-if(UNIX AND APPLE)
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_macos_installer.sh ${CMAKE_INSTALL_PREFIX})
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_macos_installer.sh ${CMAKE_INSTALL_PREFIX})
-elseif(UNIX)
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_linux_installer.sh ${CMAKE_INSTALL_PREFIX})
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_linux_installer.sh ${CMAKE_INSTALL_PREFIX})
-else()
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/perl_win32_installer.bat ${CMAKE_INSTALL_PREFIX})
-    execute_process(COMMAND bash ${CMAKE_SOURCE_DIR}/scripts/openssl_win32_installer.bat ${CMAKE_INSTALL_PREFIX})
-endif()
-
 # libtirpc
 include_directories(${CMAKE_SOURCE_DIR}/src/tirpc)
 install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
