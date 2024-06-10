@@ -8,7 +8,9 @@ if(HDF5_FOUND)
 endif()
 
 set(ISTREAM_OVER_HTTP 1)
-set(ISTREAM_OVER_XROOTD 1)
+if(NOT WIN32)
+    set(ISTREAM_OVER_XROOTD 1)
+endif()
 
 list(APPEND MODEL_INCLUDE_DIRS ${PROJECT_BINARY_DIR}
                                ${CMAKE_CURRENT_BINARY_DIR}
@@ -39,22 +41,38 @@ foreach(i RANGE ${count})
    add_custom_command(OUTPUT hddm_${class}++.cpp
      COMMAND hddm-cpp ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
    )
-   add_custom_target(python_module_${class}
-     COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
-     COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh
-             HDDM_DIR=${CMAKE_INSTALL_PREFIX}
-             XSTREAM_SRC=${CMAKE_SOURCE_DIR}/xstream
-             XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
-             HDDM_SRC=${CMAKE_SOURCE_DIR}/src
-             HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
-             HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
-             HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
-             XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
-             ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
-     DEPENDS hddm_${class}++.cpp xstream
-     DEPENDS hddm_${class}++.cpp httpstream
-     DEPENDS hddm_${class}++.cpp xrootdstream
-   )
+   if(NOT WIN32)
+       add_custom_target(python_module_${class}
+         COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
+         COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh
+                 HDDM_DIR=${CMAKE_INSTALL_PREFIX}
+                 XSTREAM_SRC=${CMAKE_SOURCE_DIR}/xstream
+                 XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
+                 HDDM_SRC=${CMAKE_SOURCE_DIR}/src
+                 HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
+                 HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
+                 HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
+                 XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
+                 ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
+         DEPENDS hddm_${class}++.cpp xstream
+         DEPENDS hddm_${class}++.cpp httpstream
+         DEPENDS hddm_${class}++.cpp xrootdstream
+       )
+   else()
+       add_custom_target(python_module_${class}
+         COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
+         COMMAND ${CMAKE_SOURCE_DIR}/scripts/python_module_builder.sh
+                 HDDM_DIR=${CMAKE_INSTALL_PREFIX}
+                 XSTREAM_SRC=${CMAKE_SOURCE_DIR}/xstream
+                 XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
+                 HDDM_SRC=${CMAKE_SOURCE_DIR}/src
+                 HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
+                 HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
+                 HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
+                 ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
+         DEPENDS hddm_${class}++.cpp xstream
+         DEPENDS hddm_${class}++.cpp httpstream
+     )
    add_dependencies(python_modules python_module_${class})
    add_library(${model} STATIC hddm_${class}.c hddm_${class}++.cpp)
    target_include_directories(${model} PUBLIC ${MODEL_INCLUDE_DIRS})

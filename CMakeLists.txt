@@ -83,7 +83,9 @@ add_subdirectory(xstream)
 
 # add the streaming library components
 add_subdirectory(httpstream)
-add_subdirectory(xrootdstream)
+if(NOT WIN32)
+    add_subdirectory(xrootdstream)
+endif()
 
 # build the executables
 add_subdirectory(src)
