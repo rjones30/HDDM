@@ -72,7 +72,8 @@ foreach(i RANGE ${count})
                  ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
          DEPENDS hddm_${class}++.cpp xstream
          DEPENDS hddm_${class}++.cpp httpstream
-     )
+       )
+   endif()
    add_dependencies(python_modules python_module_${class})
    add_library(${model} STATIC hddm_${class}.c hddm_${class}++.cpp)
    target_include_directories(${model} PUBLIC ${MODEL_INCLUDE_DIRS})
