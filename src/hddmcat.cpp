@@ -18,7 +18,6 @@
 #include <fstream>
 #include <string>
 #include <list>
-using namespace std;
 
 #include <assert.h>
 #include <stdlib.h>
@@ -31,6 +30,7 @@ using namespace std;
 #include <unistd.h>
 #endif
 
+using namespace std;
 
 void usage()
 {
