@@ -26,10 +26,10 @@ add_custom_target(python_modules)
 
 set(CMAKE_MSVCIDE_RUN_PATH ${CMAKE_INSTALL_PREFIX}/bin)
 
-list(JOIN HDF5_INCLUDE_DIRS ":" HDF5_INCLUDE_PATH)
-list(JOIN HDF5_LIBRARIES ":" HDF5_LIBRARY_PATH)
-list(JOIN HDF5_HL_LIBRARIES ":" HDF5_HL_LIBRARY_PATH)
-string(JOIN ":" HDF5_LIBRARY_PATHS ${HDF5_LIBRARY_PATH} ${HDF5_HL_LIBRARY_PATH})
+list(JOIN HDF5_INCLUDE_DIRS "," HDF5_INCLUDE_PATH)
+list(JOIN HDF5_LIBRARIES "," HDF5_LIBRARY_PATH)
+list(JOIN HDF5_HL_LIBRARIES "," HDF5_HL_LIBRARY_PATH)
+string(JOIN "," HDF5_LIBRARY_PATHS ${HDF5_HL_LIBRARY_PATH} ${HDF5_LIBRARY_PATH})
 list(LENGTH MODELS count)
 math(EXPR count "${count}-1")
 foreach(i RANGE ${count})
@@ -52,7 +52,10 @@ foreach(i RANGE ${count})
                  HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
                  HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
                  HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
+                 HTTP_ISTREAM_LIBS="cpr,curl,ssl,ssl3,crypto,z"
                  XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
+                 XROOTD_ISTREAM_LIBS="XrdCl,XrdFfs,XrdCrypto"
+                 COMPILER_STD_OPTION="-std=c++17"
                  ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
          DEPENDS hddm_${class}++.cpp xstream
          DEPENDS hddm_${class}++.cpp httpstream
@@ -67,8 +70,10 @@ foreach(i RANGE ${count})
                  XSTREAM_DIR=${CMAKE_BINARY_DIR}/xstream
                  HDDM_SRC=${CMAKE_SOURCE_DIR}/src
                  HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
-                 HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
+                 HDF5_LIBRARIES="libhdf5_hl,libhdf5"
                  HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
+                 HTTP_ISTREAM_LIBS="cpr,libcurl,libssl,libcrypto,zlib,Advapi32,Crypt32"
+                 COMPILER_STD_OPTION="-std:c++17"
                  ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
          DEPENDS hddm_${class}++.cpp xstream
          DEPENDS hddm_${class}++.cpp httpstream
