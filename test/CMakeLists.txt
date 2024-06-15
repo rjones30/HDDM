@@ -24,7 +24,7 @@ target_link_directories(httpstream_test PRIVATE
                         ${CMAKE_INSTALL_PREFIX}/lib
                         ${CMAKE_INSTALL_PREFIX}/lib64
                        )
-target_link_libraries(httpstream_test PRIVATE cpr curl ssl ssl3 crypto z)
+target_link_libraries(httpstream_test PRIVATE cpr curl ssl crypto z)
 install(TARGETS httpstream_test)
 
 if(NOT WIN32)
