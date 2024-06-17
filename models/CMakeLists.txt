@@ -54,7 +54,7 @@ foreach(i RANGE ${count})
                  HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
                  HTTP_ISTREAM_LIBS="cpr,curl,ssl,crypto,z"
                  XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
-                 XROOTD_ISTREAM_LIBS="XrdCl,XrdFfs,XrdCrypto"
+                 XROOTD_ISTREAM_LIBS="XrdCl,XrdCrypto"
                  COMPILER_STD_OPTION="-std=c++17"
                  ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
          DEPENDS hddm_${class}++.cpp xstream
