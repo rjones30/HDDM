@@ -2023,6 +2023,8 @@ int main(int argC, char* argV[])
    "         my_library_dirs += [os.path.join(xstream_libdir, 'Release')]\n"
    "if 'COMPILER_STD_OPTION' in os.environ:\n"
    "   my_extra_cxxflags = [os.environ['COMPILER_STD_OPTION']]\n"
+   "else:\n"
+   "   my_extra_cxxflags = ['-std=c++11']\n"
    "if 'HDF5_INCLUDE_DIRS' in os.environ:\n"
    "   for idir in os.environ['HDF5_INCLUDE_DIRS'].split(','):\n"
    "      my_include_dirs += [idir,]\n"
