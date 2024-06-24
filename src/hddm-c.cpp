@@ -409,11 +409,11 @@ int main(int argC, char* argV[])
          << "#include <stdio.h>"                                << std::endl
          << "#include <errno.h>"                                << std::endl
          << "#ifndef _WIN32"                                    << std::endl
-         << "static inline errno_t "
-         << "fopen_s(FILE **file, const char *filename, const char *mode)
+         << "static inline int "
+         << "fopen_s(FILE **file, const char *filename, const char *mode)"
                                                                 << std::endl
          << "{"                                                 << std::endl
-         << "   if (file == NULL || filename == NULL || mode == NULL)
+         << "   if (file == NULL || filename == NULL || mode == NULL)"
                                                                 << std::endl
          << "      return EINVAL;"                              << std::endl
          << "   *file = fopen(filename, mode);"                 << std::endl
@@ -425,7 +425,7 @@ int main(int argC, char* argV[])
          << "#include <rpc/xdr.h>"                              << std::endl
          << "#include <string.h>"                               << std::endl
          << "#ifndef _WIN32"                                    << std::endl
-         << "static inline errno_t "                            << std::endl
+         << "static inline int "
          << "strncpy_s(char *dest, size_t destsz, const char *src, size_t count)"
                                                                 << std::endl
          << "{"                                                 << std::endl
@@ -436,13 +436,13 @@ int main(int argC, char* argV[])
          << "   if (count > destsz - 1)"                        << std::endl
          << "   count = destsz - 1;"                            << std::endl
          << "   strncpy(dest, src, count);"                     << std::endl
-         << "   dest[count] = '\0';"                            << std::endl
+         << "   dest[count] = '\\0';"                           << std::endl
          << "   return 0;"                                      << std::endl
          << "}"                                                 << std::endl
          << "#define strncpy_s(dest, destsz, src, count) "
          << "strncpy_s((dest), (destsz), (src), (count))"       << std::endl
          << "static inline char* "                              << std::endl
-         << "strtok_s(char *str, const char *delim, char **context)
+         << "strtok_s(char *str, const char *delim, char **context)"
                                                                 << std::endl
          << "{"                                                 << std::endl
          << "   return strtok_r(str, delim, context);"          << std::endl

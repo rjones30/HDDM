@@ -74,11 +74,6 @@ typedef long ssize_t;
 #define _SSCANF_S 1
 #define sscanf(...) sscanf_s(__VA_ARGS__)
 #endif
-
-#else
-#define strncpy_s(dest, destsz, src, count) strncpy(dest, src, count)
-#define strtok_s(str, delim, ptr) strtok(str, delim)
-#define fopen_s(fdesc, filename, filemode) (*(fdesc) = fopen(filename, filemode)), errno
 #endif
 
 typedef int32_t bool_t;
