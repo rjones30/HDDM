@@ -58,6 +58,7 @@ is all that is required to access the streaming input capability through the C++
 - python 3.9 or above: needed to link against libraries built with c++17
 - libcpr: download from https://github.com/rjones30/cpr.git and install with the usual cmake procedure
 - openssl: install from standard distribution if not already present as a system package
+- special cmake build options: -Dcpr\_DIR={my.path/cpr} and -DCPR\_INCLUDE\_DIR={my.path/cpr/include}
 - xrootd: needed to build streaming over xrootd, only tested with xrootd version 4
 
 ## Acknowledgements
