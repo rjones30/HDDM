@@ -1,4 +1,4 @@
-import hddm_s
+from gluex import hddm_s
 
 for rec in hddm_s.istream("root://nod25.phys.uconn.edu/Gluex/simulation" +
                           "/simsamples/particle_gun-v5.2.0/particle_gun001_019.hddm"):
