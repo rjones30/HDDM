@@ -2128,8 +2128,11 @@ int main(int argC, char* argV[])
    "   my_libraries += os.environ['XROOTD_ISTREAM_LIBS'].split(',')\n"
    "if 'macos' in sysconfig.get_platform():\n"
    "   my_extra_cxxflags += ['-mmacosx-version-min=10.15']\n"
+   "my_include_dirs = [s for s in my_include_dirs if s]
    "print('my_include_dirs are', my_include_dirs)\n"
+   "my_library_dirs = [s for s in my_library_dirs if s]
    "print('my_library_dirs are', my_library_dirs)\n"
+   "my_libraries = [s for s in my_libraries if s]
    "print('my_libraries are', my_libraries)\n"
    "module1 = Extension('hddm_" + classPrefix + "',\n"
    "                    include_dirs = my_include_dirs,\n"
