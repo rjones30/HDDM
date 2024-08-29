@@ -13,10 +13,12 @@ xrootdStreambuf::xrootdStreambuf(const std::string& url, size_t buffersize)
    verbose_(0)
 {
    buffer_.push_back(new stream_block(0, buffersize_));
-   xrdfs_ = new XrdCl::FileSystem(XrdCl::URL(url));
+   //xrdfs_ = new XrdCl::FileSystem(XrdCl::URL(url));
    xrdfile_ = new XrdCl::File();
    buffer_.back()->resp_ = xrdfile_->Open(url, XrdCl::OpenFlags::Read);
    if (! buffer_.back()->resp_.IsOK()) {
+      delete xrdfile_;
+      xrdfile_ = 0;
       std::stringstream errmsg;
       errmsg << "xrootdStreambuf constructor - open request failed"
              << " for " << url;
@@ -41,6 +43,14 @@ xrootdStreambuf::~xrootdStreambuf() {
          delete (*iter)->reader_;
       }
       delete *iter;
+   }
+   if (xrdfile_ != 0) {
+      XrdCl::XRootDStatus resp = xrdfile_->Close();
+      if (! buffer_.back()->resp_.IsOK()) {
+         //std::cerr << "XrdCl::File::Close returns error on file "
+         //          << url_ << std::endl;
+      }
+      delete xrdfile_;
    }
 }
 
