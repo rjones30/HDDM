@@ -68,6 +68,8 @@ namespace digest{
         LOG("md5::process_chunk (A,B,C,D) = (" << AA << "," << BB << "," << CC << "," << DD << ")");
 
         //hope register is at least tolerated by most compilers
+	//remove register storage class, removed in c++17
+#define register
         register uint32_t A=AA;
         register uint32_t B=BB;
         register uint32_t C=CC;

@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
+cmake_policy(SET CMP0074 NEW)
 
 # set the project name and version
 project(HDDM VERSION 1.0)
@@ -10,7 +11,7 @@ set(CPACK_PACKAGE_VERSION_MINOR "${HDDM_VERSION_MINOR}")
 include(CPack)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # look for installed packages in local build area
@@ -36,7 +37,6 @@ find_package(ROOT QUIET)
 
 # HDF5 support
 if(DEFINED HDF5_ROOT)
-    message("Looking in ${HDF5_ROOT} for local HDF5 installation")
     find_package(HDF5 REQUIRED COMPONENTS C CXX HL PATHS ${HDF5_ROOT} NO_DEFAULT_PATH)
 elseif(EXISTS "${CMAKE_INSTALL_PREFIX}/share/cmake/hdf5-config.cmake")
     message("Looking in ${CMAKE_INSTALL_PREFIX} for local HDF5 installation")
@@ -50,6 +50,11 @@ elseif(EXISTS "${CMAKE_INSTALL_PREFIX}/share/cmake/hdf5-config.cmake")
     find_library(HDF5_HL_LIBRARIES hdf5_hl)
 else()
     find_package(HDF5 REQUIRED COMPONENTS C CXX HL)
+endif()
+
+# XROOTD support
+if(DEFINED XROOTD_ROOT)
+    find_package(XRootD PATHS ${XROOTD_ROOT} NO_DEFAULT_PATH)
 endif()
 
 # xalan-j2 package
@@ -80,6 +85,12 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 
 # add the xstream library
 add_subdirectory(xstream)
+
+# add the streaming library components
+add_subdirectory(httpstream)
+if(NOT WIN32)
+    add_subdirectory(xrootdstream)
+endif()
 
 # build the executables
 add_subdirectory(src)
