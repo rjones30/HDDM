@@ -14,6 +14,10 @@ include(CPack)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# specify defaults for optional components
+option(ENABLE_ISTREAM_OVER_HTTP "Enable hddm_X::istream over HTTP" ON)
+option(ENABLE_ISTREAM_OVER_XROOTD "Enable hddm_X::istream over XRootD" ON)
+
 # look for installed packages in local build area
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/share/cmake)
 
@@ -87,8 +91,16 @@ install(FILES ${CMAKE_SOURCE_DIR}/src/unistd_win32.h DESTINATION include)
 add_subdirectory(xstream)
 
 # add the streaming library components
-add_subdirectory(httpstream)
-if(NOT WIN32)
+if(ENABLE_ISTREAM_OVER_HTTP)
+    add_definitions(-DENABLE_ISTREAM_OVER_HTTP=1)
+    add_subdirectory(httpstream)
+endif()
+if(ENABLE_ISTREAM_OVER_XROOTD)
+    if(WIN32)
+        message(FATAL_ERROR "The XRootD library does not currently build without errors.\n"
+		"You can build HDDM on windows but you must disable http[s] streaming.")
+    endif()
+    add_definitions(-DENABLE_ISTREAM_OVER_XROOTD=1)
     add_subdirectory(xrootdstream)
 endif()
 

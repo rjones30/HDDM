@@ -323,6 +323,16 @@ int main(int argC, char* argV[])
    "#include <iostream>\n"
    "#include <exception>\n"
    "#include <particleType.h>\n"
+   ;
+
+#ifdef ENABLE_ISTREAM_OVER_HTTP
+   builder.pyFile << "#define ISTREAM_OVER_HTTP 1\n";
+#endif
+#ifdef ENABLE_ISTREAM_OVER_XROOTD
+   builder.pyFile << "#define ISTREAM_OVER_XROOTD 1\n";
+#endif
+
+   builder.pyFile <<
    "#ifdef ISTREAM_OVER_HTTP\n"
    "#include <httpstream.hpp>\n"
    "#endif\n"
