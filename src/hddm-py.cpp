@@ -2125,6 +2125,7 @@ int main(int argC, char* argV[])
    "   my_libraries += ['httpstream']\n"
    "   my_libraries += os.environ['HTTP_ISTREAM_LIBS'].split(',')\n"
    "if os.environ.get('XROOTD_ISTREAM'):\n"
+   "   my_include_dirs.insert(0, os.path.join(os.path.sep, 'usr', 'include', 'xrootd'))\n"
    "   my_include_dirs.insert(0, os.path.join(hddm_dir, 'include', 'xrootd'))\n"
    "   my_include_dirs.insert(0, os.path.join(hddm_src, '..', 'xrootdstream'))\n"
    "   for lib in os.listdir(os.environ['XROOTD_ISTREAM']):\n"
