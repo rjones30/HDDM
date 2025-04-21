@@ -11,7 +11,7 @@ set(CPACK_PACKAGE_VERSION_MINOR "${HDDM_VERSION_MINOR}")
 include(CPack)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # specify defaults for optional components

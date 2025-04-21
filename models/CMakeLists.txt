@@ -62,7 +62,7 @@ foreach(i RANGE ${count})
                      XROOTD_LIBRARIES=${XROOTD_LIBRARIES_STRING}
                      #XROOTD_ISTREAM_LIBS="XrdCl_static,XrdCrypto_static,XrdUtils_static,XrdXml_static"
                      XROOTD_ISTREAM_LIBS="XrdCl,XrdCrypto,XrdUtils,XrdXml"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp httpstream
@@ -83,7 +83,7 @@ foreach(i RANGE ${count})
                      XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
                      #XROOTD_ISTREAM_LIBS="XrdCl_static,XrdCrypto_static,XrdUtils_static,XrdXml_static"
                      XROOTD_ISTREAM_LIBS="XrdCl,XrdCrypto,XrdUtils,XrdXml"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp httpstream
@@ -101,7 +101,7 @@ foreach(i RANGE ${count})
                      HDF5_LIBRARIES="libhdf5_hl,libhdf5"
                      HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
                      HTTP_ISTREAM_LIBS="cpr,libcurl,libssl,libcrypto,zlib,Advapi32,Crypt32"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp httpstream
@@ -123,7 +123,7 @@ foreach(i RANGE ${count})
                      XROOTD_LIBRARIES=${XROOTD_LIBRARIES_STRING}
                      #XROOTD_ISTREAM_LIBS="XrdCl_static,XrdCrypto_static,XrdUtils_static,XrdXml_static"
                      XROOTD_ISTREAM_LIBS="XrdCl,XrdCrypto,XrdUtils,XrdXml"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp xrootdstream
@@ -141,7 +141,7 @@ foreach(i RANGE ${count})
                      XROOTD_ISTREAM=${CMAKE_BINARY_DIR}/xrootdstream
                      #XROOTD_ISTREAM_LIBS="XrdCl_static,XrdCrypto_static,XrdUtils_static,XrdXml_static"
                      XROOTD_ISTREAM_LIBS="XrdCl,XrdCrypto,XrdUtils,XrdXml"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp xrootdstream
@@ -156,7 +156,7 @@ foreach(i RANGE ${count})
                      HDDM_SRC=${CMAKE_SOURCE_DIR}/src
                      HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
                      HDF5_LIBRARIES="libhdf5_hl,libhdf5"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
            )
@@ -174,7 +174,7 @@ foreach(i RANGE ${count})
                      HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
                      HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
                      HTTP_ISTREAM_LIBS="cpr_static,curl_static,ssl,crypto,z"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp httpstream
@@ -191,7 +191,7 @@ foreach(i RANGE ${count})
                      HDF5_LIBRARIES="libhdf5_hl,libhdf5"
                      HTTP_ISTREAM=${CMAKE_BINARY_DIR}/httpstream
                      HTTP_ISTREAM_LIBS="cpr,libcurl,libssl,libcrypto,zlib,Advapi32,Crypt32"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
              DEPENDS hddm_${class}++.cpp httpstream
@@ -208,7 +208,7 @@ foreach(i RANGE ${count})
                      HDDM_SRC=${CMAKE_SOURCE_DIR}/src
                      HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
                      HDF5_LIBRARIES=${HDF5_LIBRARY_PATHS}
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
            )
@@ -222,7 +222,7 @@ foreach(i RANGE ${count})
                      HDDM_SRC=${CMAKE_SOURCE_DIR}/src
                      HDF5_INCLUDE_DIRS=${HDF5_INCLUDE_PATH}
                      HDF5_LIBRARIES="libhdf5_hl,libhdf5"
-                     COMPILER_STD_OPTION="-std=c++17"
+                     COMPILER_STD_OPTION="-std=c++20"
                      ${CMAKE_CURRENT_BINARY_DIR}/setup_hddm_${class}.py
              DEPENDS hddm_${class}++.cpp xstream
            )

@@ -2104,7 +2104,7 @@ int main(int argC, char* argV[])
    "if os.environ.get('COMPILER_STD_OPTION'):\n"
    "   my_extra_cxxflags = [os.environ['COMPILER_STD_OPTION']]\n"
    "else:\n"
-   "   my_extra_cxxflags = ['-std=c++11']\n"
+   "   my_extra_cxxflags = ['-std=c++20']\n"
    "if os.environ.get('HDF5_INCLUDE_DIRS'):\n"
    "   my_include_dirs += os.environ['HDF5_INCLUDE_DIRS'].split(',')\n"
    "if os.environ.get('HDF5_LIBRARIES'):\n"

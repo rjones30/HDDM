@@ -110,9 +110,9 @@ int main(int argC, char* argV[])
    }
    catch (const XMLException* toCatch)
    {
-      std::cerr
-           << "hddm-xml: Error during initialization! :\n"
-           << toCatch->getMessage() << std::endl;
+      char* errmsg = xercesc::XMLString::transcode(toCatch->getMessage());
+      std::cerr << "hddm-xml: Error during initialization! :\n"
+                << errmsg << std::endl;
       return 1;
    }
 
