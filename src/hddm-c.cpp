@@ -1823,10 +1823,10 @@ void CodeBuilder::writeMatcher()
          << "static char* getEndTag(char* d, char* tag)"        << std::endl
          << "{"                                                 << std::endl
          << "   char line[500];"                                << std::endl
-         << "   char endTag[510];"                              << std::endl
+         << "   char endTag[512];"                              << std::endl
          << "   strncpy_s(line,500,d,499);"                     << std::endl
          << "   line[499] = 0;"                                 << std::endl
-         << "   size_t nleft = 499;"                            << std::endl
+         << "   //size_t nleft = 499;"                          << std::endl
          << "   char *ptr = 0;"                                 << std::endl
          << "   if (strstr(strtok_s(line,"
          << "\"\\n\",&ptr),\"/>\") == 0)"                       << std::endl
@@ -1835,7 +1835,7 @@ void CodeBuilder::writeMatcher()
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
-         << "      strncpy_s(endTag,500,\"/>\",499);"           << std::endl
+         << "      strncpy_s(endTag,500,\"/>\",2);"             << std::endl
          << "   }"                                              << std::endl
          << "   return strstr(d,endTag);"                       << std::endl
          << "}"                                                 << std::endl
@@ -1988,6 +1988,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   char* p;"                                       << std::endl
          << "   char* head;"                                    << std::endl
          << "   char* nullfilename=(char*)\"\";"                << std::endl
+	 << "   fp->fd = 0;"                                    << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
          << "      fopen_s(&fp->fd,filename,\"r\");"            << std::endl
@@ -2083,6 +2084,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   " << classPrefix << "_iostream_t* fp = "
          << "(" << classPrefix << "_iostream_t*)"
          << "malloc(sizeof(" << classPrefix << "_iostream_t));" << std::endl
+	 << "   fp->fd = 0;"                                    << std::endl
          << "   if (filename)"                                  << std::endl
          << "   {"                                              << std::endl
          << "      fopen_s(&fp->fd,filename,\"w\");"            << std::endl
