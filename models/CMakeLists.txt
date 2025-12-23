@@ -44,7 +44,7 @@ foreach(i RANGE ${count})
    add_custom_command(OUTPUT hddm_${class}++.cpp
      COMMAND hddm-cpp ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
    )
-   if({ENABLE_ISTREAM_OVER_XROOTD AND ENABLE_ISTREAM_OVER_HTTP)
+   if(ENABLE_ISTREAM_OVER_XROOTD AND ENABLE_ISTREAM_OVER_HTTP)
        if(XROOTD_FOUND)
            add_custom_target(python_module_${class}
              COMMAND hddm-py ${CMAKE_CURRENT_SOURCE_DIR}/${model}.hddm
