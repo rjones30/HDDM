@@ -15,16 +15,14 @@ namespace xstream {
 // OUTPUT
     
 ostream& ostream::operator<<(const string &s) {
-    static const char* cpad = "\0\0\0";
+    static const char pad[4] = {0,0,0,0};
     size_t len =  s.size();
-    // mudar isto XXX
-    (*this) << (static_cast<uint32_t>(len));
-    _sb->sputn(s.c_str(), len);
-    //mod 4 via bitmask (only works for powers of 2)
-    size_t pad = len & 3;
-    if (pad > 0){
-        _sb->sputn(cpad, 4 - pad);
-    }
+    if (len > UINT32_MAX) throw;
+    *this << static_cast<uint32_t>(len);
+    _sb->sputn(s.data(), len);
+    size_t padlen = (-len) & 3;
+    if (padlen > 0)
+        _sb->sputn(pad, padlen);
     return *this;
 }
 
@@ -40,35 +38,17 @@ ostream& ostream::operator<<(uint32_t _v) {
     return *this;
 }
 
-/* ostream& ostream::operator<<(unsigned int v) {
-    uint32_t n = *(reinterpret_cast<const uint32_t*>(&v));
-    return (*this << n);
-}
-*/
-
 ostream& ostream::operator<<(int32_t v) {
-    uint32_t n = *(reinterpret_cast<const uint32_t*>(&v));
+    uint32_t n;
+    std::memcpy(&n, &v, sizeof n);
     return (*this << n);
 }
-
-/*
-ostream& ostream::operator<<(int v) {
-    uint32_t n = *(reinterpret_cast<const uint32_t*>(&v));
-    return (*this << n);
-}
-*/
 
 ostream& ostream::operator<<(int64_t v) {
-    uint64_t n = *(reinterpret_cast<const uint64_t*>(&v));
+    uint64_t n;
+    std::memcpy(&n, &v, sizeof n);
     return (*this << n);
 }
-
-/*
-ostream& ostream::operator<<(const long int v) {
-    uint64_t n = *(reinterpret_cast<const uint64_t*>(&v));
-    return (*this << n);
-}
-*/
 
 ostream& ostream::operator<<(uint64_t _v) {
     uint64_t v=_v;
@@ -82,45 +62,23 @@ ostream& ostream::operator<<(uint64_t _v) {
     return *this;
 }
 
-/*
-ostream& ostream::operator<<(unsigned long int v) {
-    uint64_t n = *(reinterpret_cast<const uint64_t*>(&v));
-    return (*this << n);
-}
-*/
-
-/*
-ostream& ostream::operator<<(float v) {
-    uint32_t n = *(reinterpret_cast<const uint32_t*>(&v));
-    return (*this << n);
-}
-*/
-
 // assume floats on this platform are IEEE-754 binary32
 ostream& ostream::operator<<(float v) {
-    union jack {
-        float binary32;
-        uint32_t ui32;
-    } _v;
-    _v.binary32 = v;
-    return (*this << _v.ui32);
+    uint32_t ui32;
+    std::memcpy(&ui32, &v, sizeof ui32);
+    return (*this << ui32);
 }
-
-/*
-ostream& ostream::operator<<(double v) {
-    uint64_t n = *(reinterpret_cast<const uint64_t*>(&v));
-    return (*this << n);
-}
-*/
 
 // assume doubles on this platform are IEEE-754 binary32
 ostream& ostream::operator<<(double v) {
-    union jack {
-        float binary64;
-        uint32_t ui64;
-    } _v;
-    _v.binary64 = (float)v;
-    return (*this << _v.ui64);
+   static_assert(sizeof(double) == 8, "Non-IEEE double");
+    uint64_t bits;
+    std::memcpy(&bits, &v, sizeof bits);  // portable, preserves all bits
+    uint32_t hi = static_cast<uint32_t>(bits >> 32);
+    uint32_t lo = static_cast<uint32_t>(bits & 0xffffffff);
+    *this << hi;  // writes big-endian 32-bit word
+    *this << lo;  // writes big-endian 32-bit word
+    return *this;
 }
 
 // INPUT
@@ -133,12 +91,10 @@ istream& istream::operator>>(string &s) {
         _sb->sgetn(line, len);
         s = string(line, line + len);
         free(line);
-    
-        //mod 4 via bitmask (only works for powers of 2)
-        size_t pad = (4 - len) & 3;
-        //ignore padding zeros
+
+        size_t pad = (-static_cast<int32_t>(len)) & 3;  // correct XDR padding
         char dummy[4];
-        _sb->sgetn(dummy, pad);
+        if (pad) _sb->sgetn(dummy, pad);
     }
     return *this;
 }
@@ -153,30 +109,12 @@ istream& istream::operator>>(uint32_t &v) {
     return *this;
 }
 
-/*
-istream& ostream::operator>>(unsigned int &v) {
-    uint32_t _v;
-    (*this) >> _v;
-    v=reinterpret_cast<unsigned int>(_v);
-    return (*this);
-}
-*/
-
 istream& istream::operator>>(int32_t &v) {
     uint32_t _v;
     (*this) >> _v;
     v = static_cast<int32_t>(_v);
     return (*this);
 }
-
-/*
-istream& istream::operator>>(int &v) {
-    uint32_t _v;
-    (*this) >> _v;
-    v=reinterpret_cast<int>(_v);
-    return (*this);
-}
-*/
 
 istream& istream::operator>>(uint64_t &v) {
     v = 0;
@@ -188,15 +126,6 @@ istream& istream::operator>>(uint64_t &v) {
     return *this;
 }
 
-/*
-istream& istream::operator>>(unsigned long int &v) {
-    uint32_t _v;
-    (*this) >> _v;
-    v = reinterpret_cast<unsigned long int>(_v);
-    return (*this);
-}
-*/
-
 istream& istream::operator>>(int64_t &v) {
     uint64_t _v;
     (*this) >> _v;
@@ -204,28 +133,21 @@ istream& istream::operator>>(int64_t &v) {
     return (*this);
 }
 
-/*
-istream& istream::operator>>(long int &v) {
-    uint32_t _v;
-    (*this) >> _v;
-    v=reinterpret_cast<long int>(_v);
-    return (*this);
-}
-*/
-
 istream& istream::operator>>(float &v) {
     uint32_t n;
     (*this) >> n;
-    float* vp = reinterpret_cast<float*>(&n);
-    v = *vp;
+    std::memcpy(&v, &n, sizeof(v));  // portable, preserves bits
     return *this;
-}
 
 istream& istream::operator>>(double &v) {
-    uint64_t n;
-    (*this) >> n;
-    double* vp = reinterpret_cast<double*>(&n);
-    v = *vp;
+    uint32_t hi, lo;
+    (*this) >> hi;  // most significant 32 bits
+    (*this) >> lo;  // least significant 32 bits
+
+    uint64_t bits = (static_cast<uint64_t>(hi) << 32) |
+                     static_cast<uint64_t>(lo);
+
+    std::memcpy(&v, &bits, sizeof(v));  // safe, preserves IEEE-754 bits
     return *this;
 }
 
