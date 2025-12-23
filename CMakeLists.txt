@@ -98,7 +98,7 @@ endif()
 if(ENABLE_ISTREAM_OVER_XROOTD)
     if(WIN32)
         message(FATAL_ERROR "The XRootD library does not currently build without errors.\n"
-		"You can build HDDM on windows but you must disable http[s] streaming.")
+		"You can build HDDM on windows but you must disable xrootd streaming.")
     endif()
     add_definitions(-DENABLE_ISTREAM_OVER_XROOTD=1)
     add_subdirectory(xrootdstream)
