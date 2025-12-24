@@ -1,4 +1,5 @@
 #include <xstream/xdr.h>
+#include <cstring>
 
 
 /*
@@ -138,6 +139,7 @@ istream& istream::operator>>(float &v) {
     (*this) >> n;
     std::memcpy(&v, &n, sizeof(v));  // portable, preserves bits
     return *this;
+}
 
 istream& istream::operator>>(double &v) {
     uint32_t hi, lo;
