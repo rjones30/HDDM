@@ -735,8 +735,8 @@ int main(int argC, char* argV[])
    "                                    hddm_type *atype=0) const {\n"
    "      return 0;\n"
    "   }\n"
-   "   virtual std::string toString(int /* indent=0 */) { return ""; }
-   "   virtual std::string toXML(int /* indent=0 */) { return ""; }
+   "   virtual std::string toString(int /* indent=0 */) { return \"\"; }\n"
+   "   virtual std::string toXML(int /* indent=0 */) { return \"\"; }\n"
    "   friend class HDDM_ElementList<HDDM_Element>;\n"
    " protected:\n"
    "   HDDM_Element() : m_parent(0), m_host(0), m_owner(0) {}\n"
