@@ -730,13 +730,13 @@ int main(int argC, char* argV[])
    "class HDDM_Element: public streamable {\n"
    " public:\n"
    "   virtual ~HDDM_Element() = default;\n"
-   "   virtual void clear() = 0;\n"
+   "   virtual void clear() {}\n"
    "   virtual const void *getAttribute(const std::string &name,\n"
    "                                    hddm_type *atype=0) const {\n"
    "      return 0;\n"
    "   }\n"
-   "   virtual std::string toString(int indent=0) = 0;"
-   "   virtual std::string toXML(int indent=0) = 0;"
+   "   virtual std::string toString(int /* indent=0 */) { return ""; }
+   "   virtual std::string toXML(int /* indent=0 */) { return ""; }
    "   friend class HDDM_ElementList<HDDM_Element>;\n"
    " protected:\n"
    "   HDDM_Element() : m_parent(0), m_host(0), m_owner(0) {}\n"
