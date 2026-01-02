@@ -1835,7 +1835,7 @@ void CodeBuilder::writeMatcher()
          << "   }"                                              << std::endl
          << "   else"                                           << std::endl
          << "   {"                                              << std::endl
-         << "      strncpy_s(endTag,500,\"/>\",2);"             << std::endl
+         << "      strncpy_s(endTag,500,\"/>\",3);"             << std::endl
          << "   }"                                              << std::endl
          << "   return strstr(d,endTag);"                       << std::endl
          << "}"                                                 << std::endl
@@ -2055,7 +2055,7 @@ void CodeBuilder::constructOpenFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   int len = (int)strlen(filename);"               << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy_s(fp->filename,len+1,filename,len);"    << std::endl
+         << "   strncpy_s(fp->filename,len+1,filename,len+1);"  << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
             " = hddm_" + classPrefix + "_buffersize);"          << std::endl
@@ -2114,7 +2114,7 @@ void CodeBuilder::constructInitFunc(DOMElement* el)
          << "   }"                                              << std::endl
          << "   len = (int)strlen(filename);"                   << std::endl
          << "   fp->filename = (char*)malloc(len + 1);"         << std::endl
-         << "   strncpy_s(fp->filename,len+1,filename,len);"    << std::endl
+         << "   strncpy_s(fp->filename,len+1,filename,len+1);"  << std::endl
          << "   fp->popTop = 0;"                                << std::endl
          << "   fp->xdrs = (XDR*)malloc(sizeof(XDR));"          << std::endl
          << "   fp->iobuffer = (char*)malloc(fp->iobuffer_size"
