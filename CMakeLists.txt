@@ -142,3 +142,28 @@ write_basic_package_version_file(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/HddmConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/HddmConfigVersion.cmake
         DESTINATION ${LIB_INSTALL_DIR}/hddm/cmake )
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/HDDMConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/HDDMConfig.cmake"
+    INSTALL_DESTINATION lib/cmake/HDDM
+)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/HDDMConfigVersion.cmake"
+    VERSION 1.0.0
+    COMPATIBILITY AnyNewerVersion
+)
+
+install(EXPORT HDDMTargets
+        FILE HDDMTargets.cmake
+        NAMESPACE HDDM::
+        DESTINATION lib/cmake/HDDM)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/HDDMConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/HDDMConfigVersion.cmake"
+    DESTINATION lib/cmake/HDDM
+)
